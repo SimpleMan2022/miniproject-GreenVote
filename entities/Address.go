@@ -1,7 +1,9 @@
 package entities
 
+import "github.com/google/uuid"
+
 type Address struct {
-	Id          string
+	Id          uuid.UUID
 	Province    string
 	City        string
 	SubDistrict string
