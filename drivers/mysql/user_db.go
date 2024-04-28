@@ -7,7 +7,9 @@ type User struct {
 	Email     string    `gorm:"type:varchar(255);not null" json:"email"`
 	Fullname  string    `gorm:"type:varchar(255);not null" json:"fullname"`
 	Password  string    `gorm:"type:varchar(255);not null" json:"password"`
-	Address   *Address  `json:"address"`
+	AddressId *int      `json:"address_id"`
+	Image     *string   `gorm:"type:varchar(255);not null" json:"image"`
+	Address   Address   `gorm:"foreignKey:AddressId"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

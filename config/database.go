@@ -1,6 +1,7 @@
 package config
 
 import (
+	mysql2 "evoting/drivers/mysql"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -17,6 +18,7 @@ func LoadDb() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	db.AutoMigrate(&mysql2.Address{})
+	db.AutoMigrate(&mysql2.User{})
 	DB = db
 }
