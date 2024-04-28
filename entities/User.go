@@ -7,7 +7,7 @@ type User struct {
 	Email     string
 	Fullname  string
 	Password  string
-	Address   *string
+	Address   *Address
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
