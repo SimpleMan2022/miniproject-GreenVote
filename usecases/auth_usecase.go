@@ -71,7 +71,8 @@ func (uc *authUsecase) Login(request *dto.LoginRequest) (*dto.LoginResponse, err
 		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
 	}
 	response := &dto.LoginResponse{
-		Token: accessToken,
+		AccessToken:  accessToken,
+		RefreshToken: refreshToken,
 	}
 
 	return response, nil

@@ -12,5 +12,6 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	Token string
+	AccessToken  string
+	RefreshToken string
 }

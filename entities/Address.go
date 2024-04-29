@@ -1,6 +1,9 @@
 package entities
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
 
 type Address struct {
 	Id          uuid.UUID
@@ -11,4 +14,5 @@ type Address struct {
 	ZipCode     string
 	CreatedAt   string
 	UpdatedAt   string
+	DeletedAt   gorm.DeletedAt
 }

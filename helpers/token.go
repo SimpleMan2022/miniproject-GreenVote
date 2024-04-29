@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"errors"
 	"evoting/entities"
 	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
@@ -59,4 +60,25 @@ func GenerateRefreshToken(user *entities.User) (string, error) {
 		return "", err
 	}
 	return signedString, nil
+}
+
+func ParseJWT(tokenStr string) (*uuid.UUID, error) {
+	accessTokenSecret := []byte(viper.GetString("ACCESS_TOKEN_SECRET"))
+	token, err := jwt.ParseWithClaims(tokenStr, &JWTClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return accessTokenSecret, nil
+	})
+
+	if err != nil || !token.Valid {
+		if err == jwt.ErrSignatureInvalid {
+			return nil, errors.New("Invalid token signature")
+		}
+		return nil, errors.New("Your token is expired")
+	}
+
+	claims := token.Claims.(*JWTClaims)
+	if claims == nil {
+		return nil, errors.New("Your token is expired")
+	}
+
+	return &claims.Id, nil
 }

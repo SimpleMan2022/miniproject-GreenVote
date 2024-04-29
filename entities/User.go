@@ -2,6 +2,7 @@ package entities
 
 import (
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 	"time"
 )
 
@@ -16,4 +17,5 @@ type User struct {
 	RefreshToken string
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
+	DeletedAt    gorm.DeletedAt
 }
