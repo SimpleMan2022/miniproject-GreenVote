@@ -13,5 +13,8 @@ func main() {
 	e := echo.New()
 	auth := e.Group("/")
 	routers.AuthRouter(auth)
+
+	places := e.Group("/places")
+	routers.PlaceRouter(places)
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
 }

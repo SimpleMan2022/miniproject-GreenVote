@@ -8,6 +8,7 @@ import (
 type AuthRepository interface {
 	FindByEmail(email string) (*entities.User, error)
 	CreateUser(user *entities.User) (*entities.User, error)
+	SaveRefreshToken(user *entities.User) error
 }
 
 type authRepository struct {
@@ -32,5 +33,9 @@ func (r *authRepository) CreateUser(user *entities.User) (*entities.User, error)
 		return nil, err
 	}
 	return user, nil
+}
 
+func (r *authRepository) SaveRefreshToken(user *entities.User) error {
+	err := r.db.Save(&user).Error
+	return err
 }

@@ -42,3 +42,38 @@ func (h *authHandler) Register(ctx echo.Context) error {
 
 	return ctx.JSON(http.StatusCreated, response)
 }
+
+func (h *authHandler) Login(ctx echo.Context) error {
+	var user dto.LoginRequest
+	if err := ctx.Bind(&user); err != nil {
+		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
+	}
+	if err := helpers.ValidateRequest(user); err != nil {
+		return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+			Status:     false,
+			StatusCode: http.StatusBadRequest,
+			Message:    "Login failed, please fill input correctly",
+			Data:       err,
+		})
+	}
+
+	result, err := h.usecase.Login(&user)
+	if err != nil {
+		return errorHandlers.HandleError(ctx, err)
+	}
+	ctx.SetCookie(&http.Cookie{
+		Name:     "refreshToken",
+		Value:    result.RefreshToken,
+		Path:     "/",
+		Domain:   "",
+		MaxAge:   24 * 60 * 60,
+		Secure:   true,
+		HttpOnly: true,
+	})
+	response := helpers.Response(dto.ResponseParams{
+		StatusCode: http.StatusOK,
+		Message:    "Login successfully",
+		Data:       result.AccessToken,
+	})
+	return ctx.JSON(http.StatusOK, response)
+}
