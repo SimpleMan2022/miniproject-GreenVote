@@ -12,6 +12,7 @@ import (
 
 type AuthUsecase interface {
 	Register(request *dto.UserRequest) (*entities.User, error)
+	Login(request *dto.LoginRequest) (*dto.LoginResponse, error)
 }
 
 type authUsecase struct {
@@ -45,4 +46,15 @@ func (uc authUsecase) Register(request *dto.UserRequest) (*entities.User, error)
 		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
 	}
 	return newUser, nil
+}
+
+func (uc *authUsecase) Login(request *dto.LoginRequest) (*dto.LoginResponse, error) {
+	user, err := uc.repository.FindByEmail(request.Email)
+	if err != nil {
+		return nil, &errorHandlers.BadRequestError{Message: "Wrong email or password"}
+	}
+	if err := helpers.VerifyPassword(user.Password, request.Password); err != nil {
+		return nil, &errorHandlers.BadRequestError{Message: "Wrong email or password"}
+	}
+
 }
