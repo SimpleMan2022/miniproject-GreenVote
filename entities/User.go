@@ -10,7 +10,8 @@ type User struct {
 	Email     string
 	Fullname  string
 	Password  string
-	AddressId *Address
+	AddressId *uuid.UUID
+	Address   *Address
 	Image     *string
 	CreatedAt time.Time
 	UpdatedAt time.Time

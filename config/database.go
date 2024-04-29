@@ -18,7 +18,6 @@ func LoadDb() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	db.AutoMigrate(&mysql2.Address{})
-	db.AutoMigrate(&mysql2.User{})
+	db.AutoMigrate(&mysql2.Address{}, mysql2.User{})
 	DB = db
 }

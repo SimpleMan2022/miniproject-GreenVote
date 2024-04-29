@@ -2,17 +2,16 @@ package main
 
 import (
 	"evoting/config"
+	"evoting/routers"
 	"fmt"
 	"github.com/labstack/echo/v4"
-	"net/http"
 )
 
 func main() {
 	config.LoadConfig()
 	config.LoadDb()
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+	auth := e.Group("/")
+	routers.AuthRouter(auth)
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
 }

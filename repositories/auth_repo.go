@@ -7,6 +7,7 @@ import (
 
 type AuthRepository interface {
 	FindByEmail(email string) (*entities.User, error)
+	CreateUser(user *entities.User) (*entities.User, error)
 }
 
 type authRepository struct {
