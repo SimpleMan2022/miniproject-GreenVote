@@ -21,7 +21,14 @@ func (h *authHandler) Register(ctx echo.Context) error {
 	if err := ctx.Bind(&user); err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
 	}
-
+	if err := helpers.ValidateRequest(user); err != nil {
+		return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+			Status:     false,
+			StatusCode: http.StatusBadRequest,
+			Message:    "Register failed, please fill input correctly",
+			Data:       err,
+		})
+	}
 	newUser, err := h.usecase.Register(&user)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)

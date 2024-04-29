@@ -5,3 +5,10 @@ type ResponseParams struct {
 	Message    string
 	Data       any
 }
+
+type ResponseError struct {
+	Status     bool
+	StatusCode int
+	Message    string
+	Data       any
+}
