@@ -57,4 +57,22 @@ func (uc *authUsecase) Login(request *dto.LoginRequest) (*dto.LoginResponse, err
 		return nil, &errorHandlers.BadRequestError{Message: "Wrong email or password"}
 	}
 
+	accessToken, err := helpers.GenerateAccessToken(user)
+	if err != nil {
+		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
+	}
+	refreshToken, err := helpers.GenerateRefreshToken(user)
+	if err != nil {
+		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
+	}
+
+	user.RefreshToken = refreshToken
+	if err := uc.repository.SaveRefreshToken(user); err != nil {
+		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
+	}
+	response := &dto.LoginResponse{
+		Token: accessToken,
+	}
+
+	return response, nil
 }
