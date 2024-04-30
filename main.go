@@ -14,6 +14,9 @@ func main() {
 	auth := e.Group("/")
 	routers.AuthRouter(auth)
 
+	users := e.Group("/users")
+	routers.UserRouter(users)
+
 	places := e.Group("/places")
 	routers.PlaceRouter(places)
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))

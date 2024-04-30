@@ -1,6 +1,12 @@
 package dto
 
-type UserRequest struct {
+type CreateRequest struct {
+	Email    string `json:"email" validate:"required,email"`
+	Fullname string `json:"fullname" validate:"required,min=8"`
+	Password string `json:"password" validate:"required,min=8"`
+}
+
+type UpdateRequest struct {
 	Email    string `json:"email" validate:"required,email"`
 	Fullname string `json:"fullname" validate:"required,min=8"`
 	Password string `json:"password" validate:"required,min=8"`

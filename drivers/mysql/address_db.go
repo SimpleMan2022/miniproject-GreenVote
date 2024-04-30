@@ -3,6 +3,7 @@ package mysql
 import (
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"time"
 )
 
 type Address struct {
@@ -12,7 +13,7 @@ type Address struct {
 	SubDistrict string         `gorm:"type:varchar(255);not null" json:"sub_district"`
 	StreetName  string         `gorm:"type:varchar(255);not null" json:"street_name"`
 	ZipCode     string         `gorm:"type:char(7);not null" json:"zip_code"`
-	CreatedAt   string         `json:"created_at"`
-	UpdatedAt   string         `json:"updated_at"`
+	CreatedAt   time.Time      `json:"created_at"`
+	UpdatedAt   time.Time      `json:"updated_at"`
 	DeletedAt   gorm.DeletedAt `json:"deleted_at"`
 }
