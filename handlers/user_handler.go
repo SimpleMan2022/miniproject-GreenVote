@@ -9,14 +9,14 @@ import (
 	"net/http"
 )
 
-type authHandler struct {
-	usecase usecases.AuthUsecase
+type userHandler struct {
+	usecase usecases.UserUsecase
 }
 
-func NewAuthHandler(uc usecases.AuthUsecase) *authHandler {
-	return &authHandler{uc}
+func NewAuthHandler(uc usecases.UserUsecase) *userHandler {
+	return &userHandler{uc}
 }
-func (h *authHandler) Register(ctx echo.Context) error {
+func (h *userHandler) Register(ctx echo.Context) error {
 	var user dto.UserRequest
 	if err := ctx.Bind(&user); err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
@@ -29,7 +29,7 @@ func (h *authHandler) Register(ctx echo.Context) error {
 			Data:       err,
 		})
 	}
-	newUser, err := h.usecase.Register(&user)
+	newUser, err := h.usecase.Create(&user)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
@@ -43,7 +43,7 @@ func (h *authHandler) Register(ctx echo.Context) error {
 	return ctx.JSON(http.StatusCreated, response)
 }
 
-func (h *authHandler) Login(ctx echo.Context) error {
+func (h *userHandler) Login(ctx echo.Context) error {
 	var user dto.LoginRequest
 	if err := ctx.Bind(&user); err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})

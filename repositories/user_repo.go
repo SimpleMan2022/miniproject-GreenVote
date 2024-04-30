@@ -5,21 +5,21 @@ import (
 	"gorm.io/gorm"
 )
 
-type AuthRepository interface {
+type UserRepository interface {
 	FindByEmail(email string) (*entities.User, error)
-	CreateUser(user *entities.User) (*entities.User, error)
+	Create(user *entities.User) (*entities.User, error)
 	SaveRefreshToken(user *entities.User) error
 }
 
-type authRepository struct {
+type userRepository struct {
 	db *gorm.DB
 }
 
-func NewAuthRepository(db *gorm.DB) *authRepository {
-	return &authRepository{db}
+func NewAuthRepository(db *gorm.DB) *userRepository {
+	return &userRepository{db}
 }
 
-func (r *authRepository) FindByEmail(email string) (*entities.User, error) {
+func (r *userRepository) FindByEmail(email string) (*entities.User, error) {
 	var user *entities.User
 	if err := r.db.Where("email = ?", email).First(&user).Error; err != nil {
 		return nil, err
@@ -27,7 +27,7 @@ func (r *authRepository) FindByEmail(email string) (*entities.User, error) {
 	return user, nil
 }
 
-func (r *authRepository) CreateUser(user *entities.User) (*entities.User, error) {
+func (r *userRepository) Create(user *entities.User) (*entities.User, error) {
 
 	if err := r.db.Create(&user).Error; err != nil {
 		return nil, err
@@ -35,7 +35,7 @@ func (r *authRepository) CreateUser(user *entities.User) (*entities.User, error)
 	return user, nil
 }
 
-func (r *authRepository) SaveRefreshToken(user *entities.User) error {
+func (r *userRepository) SaveRefreshToken(user *entities.User) error {
 	err := r.db.Save(&user).Error
 	return err
 }

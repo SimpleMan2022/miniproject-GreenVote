@@ -10,20 +10,20 @@ import (
 	"github.com/google/uuid"
 )
 
-type AuthUsecase interface {
-	Register(request *dto.UserRequest) (*entities.User, error)
+type UserUsecase interface {
+	Create(request *dto.UserRequest) (*entities.User, error)
 	Login(request *dto.LoginRequest) (*dto.LoginResponse, error)
 }
 
-type authUsecase struct {
-	repository repositories.AuthRepository
+type userUsecase struct {
+	repository repositories.UserRepository
 }
 
-func NewAuthUsecase(repository repositories.AuthRepository) *authUsecase {
-	return &authUsecase{repository}
+func NewAuthUsecase(repository repositories.UserRepository) *userUsecase {
+	return &userUsecase{repository}
 }
 
-func (uc authUsecase) Register(request *dto.UserRequest) (*entities.User, error) {
+func (uc *userUsecase) Create(request *dto.UserRequest) (*entities.User, error) {
 	existingUser, _ := uc.repository.FindByEmail(request.Email)
 	if existingUser != nil {
 		return nil, &errorHandlers.BadRequestError{Message: "Register Failed: Email already used"}
@@ -41,14 +41,14 @@ func (uc authUsecase) Register(request *dto.UserRequest) (*entities.User, error)
 		Password: hash,
 	}
 	fmt.Println(user)
-	newUser, err := uc.repository.CreateUser(user)
+	newUser, err := uc.repository.Create(user)
 	if err != nil {
 		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
 	}
 	return newUser, nil
 }
 
-func (uc *authUsecase) Login(request *dto.LoginRequest) (*dto.LoginResponse, error) {
+func (uc *userUsecase) Login(request *dto.LoginRequest) (*dto.LoginResponse, error) {
 	user, err := uc.repository.FindByEmail(request.Email)
 	if err != nil {
 		return nil, &errorHandlers.BadRequestError{Message: "Wrong email or password"}
