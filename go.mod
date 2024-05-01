@@ -1,6 +1,8 @@
 module evoting
 
-go 1.20
+go 1.22.1
+
+toolchain go1.22.2
 
 require (
 	github.com/go-playground/validator/v10 v10.19.0
@@ -21,6 +23,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
+	github.com/insanXYZ/sage v1.0.5 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect

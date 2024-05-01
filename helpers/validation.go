@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/go-playground/validator/v10"
 	"mime/multipart"
+	"net/http"
 )
 
 type ApiError struct {
@@ -28,19 +29,47 @@ func errorMessage(fieldError validator.FieldError) string {
 		return fmt.Sprintf("Field %s must be  %s characters", fieldError.Field(), fieldError.Param())
 	case "email":
 		return fmt.Sprintf("Field %s must be  a valid email", fieldError.Field())
+	case "maxFileSize":
+		return fmt.Sprintf("Field %s must be  an image", fieldError.Field())
 	}
 
 	return fieldError.Error()
 }
+func IsValidImageType(fileHeader *multipart.FileHeader) bool {
+	allowedTypes := map[string]bool{
+		"image/jpeg": true,
+		"image/jpg":  true,
+		"image/png":  true,
+	}
 
-func validateImageSize(fl validator.FieldLevel) bool {
-	file, ok := fl.Field().Interface().(*multipart.FileHeader)
-	if !ok {
+	file, err := fileHeader.Open()
+	if err != nil {
+		return false
+	}
+	defer file.Close()
+
+	buffer := make([]byte, 512)
+	_, err = file.Read(buffer)
+	if err != nil {
 		return false
 	}
 
-	maxFileSize := int64(2 * 1024 * 1024)
-	return maxFileSize >= file.Size
+	fileType := http.DetectContentType(buffer)
+	if _, ok := allowedTypes[fileType]; !ok {
+		return false
+	}
+
+	return true
+}
+
+func IsValidImageSize(fileHeader *multipart.FileHeader) bool {
+	maxSize := 2 * 1024 * 1014
+	fileSize := fileHeader.Size
+	fmt.Println(fileSize, maxSize)
+	if fileSize > int64(maxSize) {
+		return false
+	}
+	return true
 }
 
 func ValidateRequest(str interface{}) interface{} {

@@ -5,7 +5,6 @@ import (
 	"evoting/errorHandlers"
 	"evoting/helpers"
 	"evoting/usecases"
-	"fmt"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 	"math"
@@ -113,6 +112,7 @@ func (h *userHandler) FindAllUsers(ctx echo.Context) error {
 	sortType := ctx.QueryParam("sort_type")
 	if sortBy == "" {
 		sortBy = "updated_at"
+		sortType = "desc"
 	}
 	if sortType == "" {
 		sortType = "asc"
@@ -141,18 +141,62 @@ func (h *userHandler) FindAllUsers(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, response)
 }
 
+func (h *userHandler) FindAllUserWithSoftDelete(ctx echo.Context) error {
+	page, _ := strconv.Atoi(ctx.QueryParam("page"))
+	if page == 0 {
+		page = 1
+	}
+	limit, _ := strconv.Atoi(ctx.QueryParam("limit"))
+	if limit == 0 {
+		limit = 10
+	}
+	sortBy := ctx.QueryParam("sort_by")
+	sortType := ctx.QueryParam("sort_type")
+	if sortBy == "" {
+		sortBy = "updated_at"
+		sortType = "desc"
+	}
+	if sortType == "" {
+		sortType = "asc"
+	}
+	users, totalPtr, err := h.usecase.FindSoftDelete(page, limit, sortBy, sortType)
+	if err != nil {
+		return errorHandlers.HandleError(ctx, err)
+	}
+	total := *totalPtr
+	lastPage := int(math.Ceil(float64(total) / float64(limit)))
+	if page > lastPage {
+		page = lastPage
+	}
+	response := helpers.Response(dto.ResponseParams{
+		StatusCode:  http.StatusOK,
+		Message:     "Successfully retrieved user data with soft delete",
+		Data:        users,
+		IsPaginate:  true,
+		Total:       total,
+		PerPage:     limit,
+		CurrentPage: page,
+		LastPage:    lastPage,
+		SortBy:      sortBy,
+		SortType:    sortType,
+	})
+	return ctx.JSON(http.StatusOK, response)
+}
+
 func (h *userHandler) UpdateUser(ctx echo.Context) error {
-	var user dto.UpdateRequest
 	id := ctx.Param("id")
 	userId, err := uuid.Parse(id)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
 	}
-	if err := ctx.Bind(&user); err != nil {
-		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
-	}
-	fmt.Println(user)
+	image, err := ctx.FormFile("image")
 
+	user := dto.UpdateRequest{
+		Email:    ctx.FormValue("email"),
+		Fullname: ctx.FormValue("fullname"),
+		Password: ctx.FormValue("password"),
+		Image:    image,
+	}
 	if err := helpers.ValidateRequest(user); err != nil {
 		return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
 			Status:     false,
@@ -161,6 +205,7 @@ func (h *userHandler) UpdateUser(ctx echo.Context) error {
 			Data:       err,
 		})
 	}
+
 	updateUser, err := h.usecase.Update(userId, &user)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)

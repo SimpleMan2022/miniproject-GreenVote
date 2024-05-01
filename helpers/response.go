@@ -30,9 +30,9 @@ type Sort struct {
 	SortType string `json:"sort_type"`
 }
 type ResponseWithoutData struct {
-	Status     bool
-	StatusCode int
-	Message    string
+	Status     bool   `json:"status"`
+	StatusCode int    `json:"status_code"`
+	Message    string `json:"message"`
 }
 
 func Response(param dto.ResponseParams) any {

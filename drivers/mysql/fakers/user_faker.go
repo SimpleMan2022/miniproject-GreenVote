@@ -18,8 +18,8 @@ func UserFaker(db *gorm.DB) *entities.User {
 		Password:     "$2a$12$YKLHrrhcR/OSnb1QVmtEBuznBIHk3trQHGYNVq3QVaA4pgb7/v7Yi",
 		Image:        nil,
 		RefreshToken: "",
-		CreatedAt:    time.Time{},
-		UpdatedAt:    time.Time{},
+		CreatedAt:    time.Now(),
+		UpdatedAt:    time.Now(),
 		DeletedAt:    gorm.DeletedAt{},
 	}
 }

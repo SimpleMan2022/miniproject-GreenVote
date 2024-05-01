@@ -15,6 +15,7 @@ type UserUsecase interface {
 	Login(request *dto.LoginRequest) (*dto.LoginResponse, error)
 	FindById(id uuid.UUID) (*entities.User, error)
 	FindAll(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error)
+	FindSoftDelete(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error)
 	Update(id uuid.UUID, request *dto.UpdateRequest) (*entities.User, error)
 	Delete(id uuid.UUID) error
 }
@@ -98,6 +99,14 @@ func (uc *userUsecase) FindAll(page, limit int, sortBy, sortType string) (*[]ent
 	return users, total, nil
 }
 
+func (uc *userUsecase) FindSoftDelete(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error) {
+	users, total, err := uc.repository.FindSoftDelete(page, limit, sortBy, sortType)
+	if err != nil {
+		return nil, nil, &errorHandlers.InternalServerError{Message: err.Error()}
+	}
+	return users, total, nil
+}
+
 func (uc *userUsecase) Update(id uuid.UUID, request *dto.UpdateRequest) (*entities.User, error) {
 	user, err := uc.repository.FindById(id)
 	if err != nil {
@@ -113,6 +122,26 @@ func (uc *userUsecase) Update(id uuid.UUID, request *dto.UpdateRequest) (*entiti
 	}
 	user.Password = password
 
+	if request.Image != nil {
+		if imageType := helpers.IsValidImageType(request.Image); !imageType {
+			return nil, &errorHandlers.BadRequestError{Message: "Invalid image format. Only JPG, JPEG and PNG are allowed."}
+		}
+
+		if size := helpers.IsValidImageSize(request.Image); !size {
+			return nil, &errorHandlers.BadRequestError{Message: "Image size exceeds the limit of 2MB."}
+		}
+		if user.Image != nil {
+			if err := helpers.DeleteImageUser(user.Image); err != nil {
+				return nil, &errorHandlers.InternalServerError{Message: err.Error()}
+			}
+		}
+		filename, err := helpers.UploadUserImage(request.Image)
+		if err != nil {
+			return nil, &errorHandlers.InternalServerError{Message: err.Error()}
+		}
+		user.Image = &filename
+	}
+
 	updateUser, err := uc.repository.Update(user)
 	if err != nil {
 		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
@@ -124,6 +153,11 @@ func (uc *userUsecase) Delete(id uuid.UUID) error {
 	user, err := uc.repository.FindById(id)
 	if err != nil {
 		return &errorHandlers.BadRequestError{Message: err.Error()}
+	}
+	if user.Image != nil {
+		if err := helpers.DeleteImageUser(user.Image); err != nil {
+			return &errorHandlers.InternalServerError{Message: err.Error()}
+		}
 	}
 	if err := uc.repository.Delete(user); err != nil {
 		return &errorHandlers.BadRequestError{Message: err.Error()}
