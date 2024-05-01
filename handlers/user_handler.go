@@ -5,9 +5,12 @@ import (
 	"evoting/errorHandlers"
 	"evoting/helpers"
 	"evoting/usecases"
+	"fmt"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
+	"math"
 	"net/http"
+	"strconv"
 )
 
 type userHandler struct {
@@ -98,14 +101,42 @@ func (h *userHandler) FindUserById(ctx echo.Context) error {
 }
 
 func (h *userHandler) FindAllUsers(ctx echo.Context) error {
-	users, err := h.usecase.FindAll()
+	page, _ := strconv.Atoi(ctx.QueryParam("page"))
+	if page == 0 {
+		page = 1
+	}
+	limit, _ := strconv.Atoi(ctx.QueryParam("limit"))
+	if limit == 0 {
+		limit = 10
+	}
+	sortBy := ctx.QueryParam("sort_by")
+	sortType := ctx.QueryParam("sort_type")
+	if sortBy == "" {
+		sortBy = "updated_at"
+	}
+	if sortType == "" {
+		sortType = "asc"
+	}
+	users, totalPtr, err := h.usecase.FindAll(page, limit, sortBy, sortType)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
+	total := *totalPtr
+	lastPage := int(math.Ceil(float64(total) / float64(limit)))
+	if page > lastPage {
+		page = lastPage
+	}
 	response := helpers.Response(dto.ResponseParams{
-		StatusCode: http.StatusOK,
-		Message:    "Successfully retrieved user data",
-		Data:       users,
+		StatusCode:  http.StatusOK,
+		Message:     "Successfully retrieved user data",
+		Data:        users,
+		IsPaginate:  true,
+		Total:       total,
+		PerPage:     limit,
+		CurrentPage: page,
+		LastPage:    lastPage,
+		SortBy:      sortBy,
+		SortType:    sortType,
 	})
 	return ctx.JSON(http.StatusOK, response)
 }
@@ -120,6 +151,7 @@ func (h *userHandler) UpdateUser(ctx echo.Context) error {
 	if err := ctx.Bind(&user); err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
 	}
+	fmt.Println(user)
 
 	if err := helpers.ValidateRequest(user); err != nil {
 		return ctx.JSON(http.StatusBadRequest, dto.ResponseError{

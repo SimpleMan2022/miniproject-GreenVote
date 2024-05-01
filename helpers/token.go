@@ -27,7 +27,7 @@ func GenerateAccessToken(user *entities.User) (string, error) {
 		Email:    user.Email,
 		Fullname: user.Fullname,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(30 * time.Second).Unix(),
+			ExpiresAt: time.Now().Add(30 * time.Minute).Unix(),
 			NotBefore: time.Now().Unix(),
 			IssuedAt:  time.Now().Unix(),
 		},

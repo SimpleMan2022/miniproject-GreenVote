@@ -7,9 +7,8 @@ import (
 )
 
 type Address struct {
-	Id     uuid.UUID `json:"id"`
-	UserId uuid.UUID `json:"user_id"`
-
+	Id          uuid.UUID      `json:"id"`
+	UserId      uuid.UUID      `json:"user_id"`
 	Province    string         `json:"province"`
 	City        string         `json:"city"`
 	SubDistrict string         `json:"sub_district"`
