@@ -9,10 +9,10 @@ import (
 )
 
 func AuthRouter(r *echo.Group) {
-	repository := repositories.NewAuthRepository(config.DB)
-	usecase := usecases.NewAuthUsecase(repository)
-	handler := handlers.NewAuthHandler(usecase)
+	repository := repositories.NewUserRepository(config.DB)
+	usecase := usecases.NewUserUsecase(repository)
+	handler := handlers.NewUserHandler(usecase)
 
-	r.POST("register", handler.Register)
+	r.POST("register", handler.Create)
 	r.POST("login", handler.Login)
 }
