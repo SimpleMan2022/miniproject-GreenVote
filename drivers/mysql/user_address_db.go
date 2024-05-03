@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type Address struct {
+type UserAddress struct {
 	ID          uuid.UUID      `gorm:"primaryKey;not null" json:"id"`
 	User        User           `gorm:"foreignKey:UserID"`
 	UserID      uuid.UUID      `gorm:"type:varchar(191);index" json:"user_id"`

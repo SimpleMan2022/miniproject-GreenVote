@@ -19,6 +19,7 @@ type userHandler struct {
 func NewUserHandler(uc usecases.UserUsecase) *userHandler {
 	return &userHandler{uc}
 }
+
 func (h *userHandler) Create(ctx echo.Context) error {
 	var user dto.CreateRequest
 	if err := ctx.Bind(&user); err != nil {
@@ -36,11 +37,12 @@ func (h *userHandler) Create(ctx echo.Context) error {
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
+	createResponse := dto.ToCreateResponse(newUser)
 
 	response := helpers.Response(dto.ResponseParams{
 		StatusCode: http.StatusCreated,
 		Message:    "Congratulations! Your registration was successful. Please login to continue",
-		Data:       newUser,
+		Data:       createResponse,
 	})
 
 	return ctx.JSON(http.StatusCreated, response)
@@ -73,10 +75,12 @@ func (h *userHandler) Login(ctx echo.Context) error {
 		Secure:   true,
 		HttpOnly: true,
 	})
+	loginResponse := dto.ToLoginResponse(result)
+
 	response := helpers.Response(dto.ResponseParams{
 		StatusCode: http.StatusOK,
 		Message:    "You have successfully logged in",
-		Data:       result.AccessToken,
+		Data:       loginResponse,
 	})
 	return ctx.JSON(http.StatusOK, response)
 }
@@ -91,10 +95,12 @@ func (h *userHandler) FindUserById(ctx echo.Context) error {
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
+
+	byIdResponse := dto.ToByIdResponse(user)
 	response := helpers.Response(dto.ResponseParams{
 		StatusCode: http.StatusOK,
 		Message:    "Successfully retrieved user data",
-		Data:       user,
+		Data:       byIdResponse,
 	})
 	return ctx.JSON(http.StatusOK, response)
 }
@@ -126,10 +132,12 @@ func (h *userHandler) FindAllUsers(ctx echo.Context) error {
 	if page > lastPage {
 		page = lastPage
 	}
+
+	usersResponse := dto.ToFindAllResponse(users)
 	response := helpers.Response(dto.ResponseParams{
 		StatusCode:  http.StatusOK,
 		Message:     "Successfully retrieved user data",
-		Data:        users,
+		Data:        usersResponse,
 		IsPaginate:  true,
 		Total:       total,
 		PerPage:     limit,
@@ -211,10 +219,11 @@ func (h *userHandler) UpdateUser(ctx echo.Context) error {
 		return errorHandlers.HandleError(ctx, err)
 	}
 
+	updateResponse := dto.ToByIdResponse(updateUser)
 	response := helpers.Response(dto.ResponseParams{
 		StatusCode: http.StatusOK,
 		Message:    "Update successful. User information has been updated.",
-		Data:       updateUser,
+		Data:       updateResponse,
 	})
 	return ctx.JSON(http.StatusOK, response)
 }

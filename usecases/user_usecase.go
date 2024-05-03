@@ -6,7 +6,6 @@ import (
 	"evoting/errorHandlers"
 	"evoting/helpers"
 	"evoting/repositories"
-	"fmt"
 	"github.com/google/uuid"
 )
 
@@ -45,7 +44,6 @@ func (uc *userUsecase) Create(request *dto.CreateRequest) (*entities.User, error
 		Fullname: request.Fullname,
 		Password: hash,
 	}
-	fmt.Println(user)
 	newUser, err := uc.repository.Create(user)
 	if err != nil {
 		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
@@ -76,6 +74,8 @@ func (uc *userUsecase) Login(request *dto.LoginRequest) (*dto.LoginResponse, err
 		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
 	}
 	response := &dto.LoginResponse{
+		Id:           user.Id,
+		Fullname:     user.Fullname,
 		AccessToken:  accessToken,
 		RefreshToken: refreshToken,
 	}
@@ -111,6 +111,12 @@ func (uc *userUsecase) Update(id uuid.UUID, request *dto.UpdateRequest) (*entiti
 	user, err := uc.repository.FindById(id)
 	if err != nil {
 		return nil, &errorHandlers.BadRequestError{Message: err.Error()}
+	}
+	if user.Email != request.Email {
+		existingUser, _ := uc.repository.FindByEmail(request.Email)
+		if existingUser != nil {
+			return nil, &errorHandlers.BadRequestError{Message: "Register Failed: Email already used"}
+		}
 	}
 
 	user.Fullname = request.Fullname
