@@ -1,4 +1,4 @@
-package routers
+package admin
 
 import (
 	"evoting/config"
@@ -20,5 +20,4 @@ func UserRouter(r *echo.Group) {
 	r.POST("/create", handler.Create)
 	r.PUT("/:id", handler.UpdateUser)
 	r.DELETE("/:id", handler.DeleteUser)
-
 }

@@ -1,11 +1,29 @@
 package dto
 
-import "mime/multipart"
+import (
+	"evoting/entities"
+	"github.com/google/uuid"
+	"mime/multipart"
+	"time"
+)
+
+type User struct {
+	Email    string `json:"email"`
+	Fullname string `json:"fullname"`
+}
 
 type CreateRequest struct {
 	Email    string `json:"email" validate:"required,email"`
 	Fullname string `json:"fullname" validate:"required,min=8"`
 	Password string `json:"password" validate:"required,min=8"`
+}
+
+type CreateResponse struct {
+	Id        uuid.UUID `json:"id"`
+	Email     string    `json:"email"`
+	Fullname  string    `json:"fullname"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type UpdateRequest struct {
@@ -21,6 +39,76 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	AccessToken  string
-	RefreshToken string
+	Id           uuid.UUID `json:"id"`
+	Fullname     string    `json:"fullname"`
+	AccessToken  string    `json:"access_token"`
+	RefreshToken string    `json:"refresh_token,omitempty"`
+}
+
+type findAllResponse struct {
+	Id        uuid.UUID   `json:"id"`
+	Email     string      `json:"email"`
+	Fullname  string      `json:"fullname"`
+	Address   UserAddress `json:"address"`
+	Image     *string     `json:"image"`
+	CreatedAt time.Time   `json:"created_at"`
+	UpdatedAt time.Time   `json:"updated_at"`
+}
+
+func ToCreateResponse(user *entities.User) *CreateResponse {
+	return &CreateResponse{
+		Id:        user.Id,
+		Email:     user.Email,
+		Fullname:  user.Fullname,
+		CreatedAt: user.CreatedAt,
+		UpdatedAt: user.UpdatedAt,
+	}
+}
+
+func ToLoginResponse(user *LoginResponse) *LoginResponse {
+	return &LoginResponse{
+		Id:          user.Id,
+		Fullname:    user.Fullname,
+		AccessToken: user.AccessToken,
+	}
+}
+func ToFindAllResponse(users *[]entities.User) *[]findAllResponse {
+	responses := make([]findAllResponse, len(*users))
+	for i, user := range *users {
+		response := findAllResponse{
+			Id:       user.Id,
+			Email:    user.Email,
+			Fullname: user.Fullname,
+			Address: UserAddress{
+				Province:    user.Address.Province,
+				City:        user.Address.City,
+				SubDistrict: user.Address.SubDistrict,
+				StreetName:  user.Address.StreetName,
+				ZipCode:     user.Address.ZipCode,
+			},
+			Image:     user.Image,
+			CreatedAt: user.CreatedAt,
+			UpdatedAt: user.UpdatedAt,
+		}
+		responses[i] = response
+	}
+	return &responses
+}
+
+func ToByIdResponse(user *entities.User) *findAllResponse {
+	return &findAllResponse{
+		Id:       user.Id,
+		Email:    user.Email,
+		Fullname: user.Fullname,
+		Address: UserAddress{
+			Province:    user.Address.Province,
+			City:        user.Address.City,
+			SubDistrict: user.Address.SubDistrict,
+			StreetName:  user.Address.StreetName,
+			ZipCode:     user.Address.ZipCode,
+		},
+		Image:     user.Image,
+		CreatedAt: user.CreatedAt,
+		UpdatedAt: user.UpdatedAt,
+	}
 }
