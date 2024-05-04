@@ -20,7 +20,8 @@ func LoadDb() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	db.AutoMigrate(&mysql2.UserAddress{}, mysql2.User{})
+	db.AutoMigrate(
+		&mysql2.UserAddress{}, mysql2.User{}, mysql2.PlaceAddress{}, mysql2.Place{})
 	//if err := seeders.DBSeed(db); err != nil {
 	//	panic(err)
 	//}
