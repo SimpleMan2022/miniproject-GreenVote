@@ -8,11 +8,11 @@ import (
 
 type UserAddressRepository interface {
 	FindAll(page, limit int, sortBy, sortType string) (*[]entities.UserAddress, *int64, error)
-	FindById(id uuid.UUID) (*entities.UserAddress, error)
+	GetDetailUser(id uuid.UUID) (*entities.User, error)
 	Create(address *entities.UserAddress) (*entities.UserAddress, error)
 	FindByUserId(id uuid.UUID) (*entities.UserAddress, error)
-	Update(user *entities.UserAddress) (*entities.UserAddress, error)
-	Delete(user *entities.UserAddress) error
+	Update(address *entities.UserAddress) (*entities.UserAddress, error)
+	Delete(address *entities.UserAddress) error
 }
 
 type userAddress struct {
@@ -28,9 +28,12 @@ func (r *userAddress) FindAll(page, limit int, sortBy, sortType string) (*[]enti
 	panic("implement me")
 }
 
-func (r *userAddress) FindById(id uuid.UUID) (*entities.UserAddress, error) {
-	//TODO implement me
-	panic("implement me")
+func (r *userAddress) GetDetailUser(id uuid.UUID) (*entities.User, error) {
+	var user entities.User
+	if err := r.db.Where("id = ?", id).Preload("Address").First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
 func (r *userAddress) Create(address *entities.UserAddress) (*entities.UserAddress, error) {
@@ -48,12 +51,16 @@ func (r *userAddress) FindByUserId(id uuid.UUID) (*entities.UserAddress, error) 
 	return address, nil
 }
 
-func (r *userAddress) Update(user *entities.UserAddress) (*entities.UserAddress, error) {
-	//TODO implement me
-	panic("implement me")
+func (r *userAddress) Update(address *entities.UserAddress) (*entities.UserAddress, error) {
+	if err := r.db.Save(&address).Error; err != nil {
+		return nil, err
+	}
+	return address, nil
 }
 
-func (r *userAddress) Delete(user *entities.UserAddress) error {
-	//TODO implement me
-	panic("implement me")
+func (r *userAddress) Delete(address *entities.UserAddress) error {
+	if err := r.db.Unscoped().Delete(&address).Error; err != nil {
+		return err
+	}
+	return nil
 }

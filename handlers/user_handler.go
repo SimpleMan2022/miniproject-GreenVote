@@ -57,7 +57,7 @@ func (h *userHandler) Login(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
 			Status:     false,
 			StatusCode: http.StatusBadRequest,
-			Message:    "Failed to login. please ensure your input correctly",
+			Message:    "Failed to login. Please ensure your input correctly",
 			Data:       err,
 		})
 	}

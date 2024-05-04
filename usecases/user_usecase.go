@@ -115,7 +115,7 @@ func (uc *userUsecase) Update(id uuid.UUID, request *dto.UpdateRequest) (*entiti
 	if user.Email != request.Email {
 		existingUser, _ := uc.repository.FindByEmail(request.Email)
 		if existingUser != nil {
-			return nil, &errorHandlers.BadRequestError{Message: "Register Failed: Email already used"}
+			return nil, &errorHandlers.BadRequestError{Message: "Update Failed: Email already used"}
 		}
 	}
 
