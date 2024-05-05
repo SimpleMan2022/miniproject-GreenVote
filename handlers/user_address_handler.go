@@ -49,7 +49,6 @@ func (h *UserAddressHandler) Create(ctx echo.Context) error {
 }
 
 func (h *UserAddressHandler) Update(ctx echo.Context) error {
-
 	var request dto.CreateUserAddressRequest
 	if err := ctx.Bind(&request); err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.InternalServerError{err.Error()})
@@ -80,7 +79,6 @@ func (h *UserAddressHandler) Update(ctx echo.Context) error {
 }
 
 func (h *UserAddressHandler) Delete(ctx echo.Context) error {
-
 	id := ctx.Get("userId")
 	userId := id.(*uuid.UUID)
 	err := h.usecaseAddress.Delete(*userId)

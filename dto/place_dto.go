@@ -43,6 +43,7 @@ func ToPlaceResponse(place *entities.Place, address *entities.PlaceAddress) *Pla
 		Latitude:    place.Latitude,
 		MapImage:    place.MapImage,
 		Address: PlaceAddress{
+			Id:          address.Id,
 			Province:    address.Province,
 			City:        address.City,
 			SubDistrict: address.SubDistrict,
@@ -60,6 +61,7 @@ func ToPlaceByIdResponse(place *entities.Place) *PlaceResponse {
 		Latitude:    place.Latitude,
 		MapImage:    place.MapImage,
 		Address: PlaceAddress{
+			Id:          place.Address.Id,
 			Province:    place.Address.Province,
 			City:        place.Address.City,
 			SubDistrict: place.Address.SubDistrict,
@@ -80,6 +82,7 @@ func ToFindAllPlacesResponse(places *[]entities.Place) *[]findAllPlacesResponse 
 			Latitude:    place.Latitude,
 			MapImage:    place.MapImage,
 			Address: PlaceAddress{
+				Id:          place.Address.Id,
 				Province:    place.Address.Province,
 				City:        place.Address.City,
 				SubDistrict: place.Address.SubDistrict,

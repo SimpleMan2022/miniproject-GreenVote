@@ -8,6 +8,7 @@ import (
 
 type PlaceAddressRepository interface {
 	FindById(id uuid.UUID) (*entities.PlaceAddress, error)
+	Create(address *entities.PlaceAddress) (*entities.PlaceAddress, error)
 	Update(address *entities.PlaceAddress) (*entities.PlaceAddress, error)
 	Delete(address *entities.PlaceAddress) error
 }
@@ -28,6 +29,13 @@ func (r *placeAddressRepository) FindById(id uuid.UUID) (*entities.PlaceAddress,
 	return &address, nil
 }
 
+func (r *placeAddressRepository) Create(address *entities.PlaceAddress) (*entities.PlaceAddress, error) {
+	if err := r.db.Create(&address).Error; err != nil {
+		return nil, err
+	}
+	return address, nil
+}
+
 func (r *placeAddressRepository) Update(address *entities.PlaceAddress) (*entities.PlaceAddress, error) {
 	if err := r.db.Save(&address).Error; err != nil {
 		return nil, err
@@ -36,7 +44,7 @@ func (r *placeAddressRepository) Update(address *entities.PlaceAddress) (*entiti
 }
 
 func (r *placeAddressRepository) Delete(address *entities.PlaceAddress) error {
-	if err := r.db.Delete(&address).Error; err != nil {
+	if err := r.db.Unscoped().Delete(&address).Error; err != nil {
 		return err
 	}
 	return nil

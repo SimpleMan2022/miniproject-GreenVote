@@ -9,6 +9,7 @@ import (
 )
 
 type PlaceAddressUsecase interface {
+	Create(request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error)
 	Update(id uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error)
 	Delete(id uuid.UUID) error
 }
@@ -19,6 +20,24 @@ type placeAddressUsecase struct {
 
 func NewPlaceAddressUsecase(repository repositories.PlaceAddressRepository) *placeAddressUsecase {
 	return &placeAddressUsecase{repository}
+}
+
+func (uc *placeAddressUsecase) Create(request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error) {
+	address := &entities.PlaceAddress{
+		Id:          uuid.New(),
+		PlaceId:     request.PlaceId,
+		Province:    request.Province,
+		City:        request.City,
+		SubDistrict: request.SubDistrict,
+		StreetName:  request.StreetName,
+		ZipCode:     request.ZipCode,
+	}
+
+	newAddress, err := uc.repository.Create(address)
+	if err != nil {
+		return nil, err
+	}
+	return newAddress, nil
 }
 
 func (uc *placeAddressUsecase) Update(id uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error) {

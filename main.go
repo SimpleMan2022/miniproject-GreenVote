@@ -15,20 +15,26 @@ func main() {
 	e := echo.New()
 
 	e.Static("/images", "public/images")
-
-	v1 := e.Group("/api/v1")
+	v1User := e.Group("/api/v1")
 	{
-		auth := v1.Group("/auth")
+		userAddress := v1User.Group("/profile")
+		user.UserAddressRouter(userAddress)
+	}
+
+	v1Admin := e.Group("/api/v1/admin")
+	{
+		auth := v1Admin.Group("/auth")
 		routers.AuthRouter(auth)
 
-		users := v1.Group("/users")
+		users := v1Admin.Group("/users")
 		admin.UserRouter(users)
 
-		places := v1.Group("/places")
+		places := v1Admin.Group("/places")
 		admin.PlaceRouter(places)
 
-		userAddress := v1.Group("/profile")
-		user.UserAddressRouter(userAddress)
+		placeAddress := v1Admin.Group("/places/address")
+		admin.PlaceAddressRouter(placeAddress)
+
 	}
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
