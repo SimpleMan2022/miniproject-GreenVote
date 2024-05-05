@@ -9,7 +9,6 @@ import (
 )
 
 type UserAddressUsecase interface {
-	FindAll(page, limit int, sortBy, sortType string) (*[]entities.UserAddress, *int64, error)
 	GetDetailUser(id uuid.UUID) (*entities.User, error)
 	Create(address *dto.CreateUserAddressRequest) (*entities.UserAddress, error)
 	FindByUserId(id uuid.UUID) (*entities.UserAddress, error)
@@ -23,11 +22,6 @@ type userAddress struct {
 
 func NewUserAddressUsecase(address repositories.UserAddressRepository) *userAddress {
 	return &userAddress{address}
-}
-
-func (uc *userAddress) FindAll(page, limit int, sortBy, sortType string) (*[]entities.UserAddress, *int64, error) {
-	//TODO implement me
-	panic("implement me")
 }
 
 func (uc *userAddress) GetDetailUser(id uuid.UUID) (*entities.User, error) {

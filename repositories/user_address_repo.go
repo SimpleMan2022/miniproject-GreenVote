@@ -7,7 +7,6 @@ import (
 )
 
 type UserAddressRepository interface {
-	FindAll(page, limit int, sortBy, sortType string) (*[]entities.UserAddress, *int64, error)
 	GetDetailUser(id uuid.UUID) (*entities.User, error)
 	Create(address *entities.UserAddress) (*entities.UserAddress, error)
 	FindByUserId(id uuid.UUID) (*entities.UserAddress, error)
@@ -21,11 +20,6 @@ type userAddress struct {
 
 func NewUserAddressRepository(db *gorm.DB) *userAddress {
 	return &userAddress{db}
-}
-
-func (r *userAddress) FindAll(page, limit int, sortBy, sortType string) (*[]entities.UserAddress, *int64, error) {
-	//TODO implement me
-	panic("implement me")
 }
 
 func (r *userAddress) GetDetailUser(id uuid.UUID) (*entities.User, error) {
