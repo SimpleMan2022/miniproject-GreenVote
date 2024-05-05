@@ -28,7 +28,7 @@ func NewPlaceRepository(db *gorm.DB) *placeRepository {
 }
 
 func (r *placeRepository) Create(place *entities.Place) (*entities.Place, error) {
-	if err := r.db.Debug().Create(&place).Error; err != nil {
+	if err := r.db.Create(&place).Error; err != nil {
 		return nil, err
 	}
 	return place, nil
