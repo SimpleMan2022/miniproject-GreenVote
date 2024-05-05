@@ -11,6 +11,8 @@ type Place struct {
 	Description string
 	Longitude   float64
 	Latitude    float64
+	Address     PlaceAddress
+	MapImage    *string
 	CreatedAt   time.Time
-	UpdateAt    time.Time
+	UpdatedAt   time.Time
 }

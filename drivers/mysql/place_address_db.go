@@ -8,7 +8,7 @@ import (
 
 type PlaceAddress struct {
 	ID          uuid.UUID      `gorm:"primaryKey;not null" json:"id"`
-	Place       Place          `gorm:"foreignKey:PlaceId"`
+	Place       Place          `gorm:"foreignKey:PlaceId;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
 	PlaceId     uuid.UUID      `gorm:"type:varchar(191);index" json:"user_id"`
 	Province    string         `gorm:"type:varchar(255);not null" json:"province"`
 	City        string         `gorm:"type:varchar(255);not null" json:"city"`

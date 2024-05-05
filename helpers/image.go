@@ -34,10 +34,32 @@ func UploadUserImage(image *multipart.FileHeader) (string, error) {
 	return fileName, nil
 }
 
-func DeleteImageUser(image *string) error {
-	imagePath := filepath.Join("public/images/users", *image)
+func DeleteImage(path string, image *string) error {
+	imagePath := filepath.Join(path, *image)
 	if err := os.Remove(imagePath); err != nil {
 		return errors.New("image not found in directory")
 	}
 	return nil
+}
+
+func UploadPlaceImage(body io.Reader) (string, error) {
+	if _, err := os.Stat("public/images/places"); os.IsNotExist(err) {
+		if err := os.MkdirAll("public/images/places", 0755); err != nil {
+			return "", err
+		}
+	}
+
+	fileName := uuid.New().String() + ".jpeg"
+	dst := filepath.Join("public/images/places", fileName)
+	outFile, err := os.Create(dst)
+	if err != nil {
+		return "", err
+	}
+	defer outFile.Close()
+
+	if _, err := io.Copy(outFile, body); err != nil {
+		return "", err
+	}
+
+	return fileName, nil
 }

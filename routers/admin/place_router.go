@@ -1,14 +1,22 @@
-package routers
+package admin
 
 import (
+	"evoting/config"
+	"evoting/handlers"
 	"evoting/middlewares"
+	"evoting/repositories"
+	"evoting/usecases"
 	"github.com/labstack/echo/v4"
-	"net/http"
 )
 
 func PlaceRouter(r *echo.Group) {
 	r.Use(middlewares.JWTMiddleware)
-	r.GET("", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+	repository := repositories.NewPlaceRepository(config.DB)
+	usecase := usecases.NewPlaceUsecase(repository)
+	handler := handlers.NewPlaceUsacase(usecase)
+	r.GET("", handler.FindAllPlaces)
+	r.GET("/:id", handler.FindPlaceById)
+	r.POST("", handler.CreatePlace)
+	r.PUT("/:id", handler.UpdatePlace)
+	r.DELETE("/:id", handler.Delete)
 }

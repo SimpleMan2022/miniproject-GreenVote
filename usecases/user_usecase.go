@@ -137,7 +137,7 @@ func (uc *userUsecase) Update(id uuid.UUID, request *dto.UpdateRequest) (*entiti
 			return nil, &errorHandlers.BadRequestError{Message: "Image size exceeds the limit of 2MB."}
 		}
 		if user.Image != nil {
-			if err := helpers.DeleteImageUser(user.Image); err != nil {
+			if err := helpers.DeleteImage("public/images/users", user.Image); err != nil {
 				return nil, &errorHandlers.InternalServerError{Message: err.Error()}
 			}
 		}
@@ -161,7 +161,7 @@ func (uc *userUsecase) Delete(id uuid.UUID) error {
 		return &errorHandlers.BadRequestError{Message: err.Error()}
 	}
 	if user.Image != nil {
-		if err := helpers.DeleteImageUser(user.Image); err != nil {
+		if err := helpers.DeleteImage("public/images/users", user.Image); err != nil {
 			return &errorHandlers.InternalServerError{Message: err.Error()}
 		}
 	}

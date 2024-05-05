@@ -13,6 +13,6 @@ func AuthRouter(r *echo.Group) {
 	usecase := usecases.NewUserUsecase(repository)
 	handler := handlers.NewUserHandler(usecase)
 
-	r.POST("register", handler.Create)
-	r.POST("login", handler.Login)
+	r.POST("/register", handler.Create)
+	r.POST("/login", handler.Login)
 }

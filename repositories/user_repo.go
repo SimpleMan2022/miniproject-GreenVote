@@ -51,7 +51,7 @@ func (r *userRepository) FindAll(page, limit int, sortBy, sortType string) (*[]e
 		db = db.Order(fmt.Sprintf("%s %s", sortBy, sortType))
 	}
 
-	if err := db.Preload("Address").
+	if err := r.db.Preload("Address").
 		Offset(offset).Limit(limit).
 		Find(&user).
 		Error; err != nil {
