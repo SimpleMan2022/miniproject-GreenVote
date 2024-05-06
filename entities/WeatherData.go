@@ -8,7 +8,7 @@ import (
 
 type WeatherData struct {
 	Id          uuid.UUID
-	PlaceId     Place
+	PlaceId     uuid.UUID
 	Temperature float64
 	WindSpeed   float64
 	Humadity    float64

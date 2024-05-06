@@ -2,11 +2,12 @@ package repositories
 
 import (
 	"evoting/entities"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
 type WeatherDataRepository interface {
-	FindByPlaceId(data *entities.WeatherData) (*entities.WeatherData, error)
+	FindByPlaceId(placeId uuid.UUID) (*entities.WeatherData, error)
 	Create(data *entities.WeatherData) (*entities.WeatherData, error)
 	Update(data *entities.WeatherData) (*entities.WeatherData, error)
 	Delete(data *entities.WeatherData) error
@@ -20,11 +21,12 @@ func NewWeatherDataRepository(db *gorm.DB) *weatherDataRepository {
 	return &weatherDataRepository{db}
 }
 
-func (r *weatherDataRepository) FindByPlaceId(data *entities.WeatherData) (*entities.WeatherData, error) {
-	if err := r.db.Where("place_id = ?", data.PlaceId).First(&data).Error; err != nil {
+func (r *weatherDataRepository) FindByPlaceId(placeId uuid.UUID) (*entities.WeatherData, error) {
+	var weather entities.WeatherData
+	if err := r.db.Where("place_id = ?", placeId).First(&weather).Error; err != nil {
 		return nil, err
 	}
-	return data, nil
+	return &weather, nil
 }
 
 func (r *weatherDataRepository) Create(data *entities.WeatherData) (*entities.WeatherData, error) {
