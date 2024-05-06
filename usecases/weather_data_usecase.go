@@ -51,6 +51,6 @@ func (uc *weatherDataUsecase) CreateOrUpdate(placeId uuid.UUID, request *dto.Wea
 		if err != nil {
 			return nil, &errorHandlers.InternalServerError{Message: err.Error()}
 		}
-		return updateWeather, nilg
+		return updateWeather, nil
 	}
 }
