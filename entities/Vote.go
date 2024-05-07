@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Votes struct {
+type Vote struct {
 	Id        uuid.UUID
 	UserId    uuid.UUID
 	PlaceId   uuid.UUID

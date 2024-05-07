@@ -22,6 +22,9 @@ func main() {
 
 		places := v1User.Group("/places")
 		user.PlaceRouter(places)
+
+		votes := v1User.Group("/votes")
+		user.VoteRouter(votes)
 	}
 
 	v1Admin := e.Group("/api/v1/admin")
