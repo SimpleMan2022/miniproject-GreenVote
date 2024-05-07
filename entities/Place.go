@@ -12,6 +12,7 @@ type Place struct {
 	Longitude   float64
 	Latitude    float64
 	Address     PlaceAddress
+	Weather     WeatherData
 	MapImage    *string
 	CreatedAt   time.Time
 	UpdatedAt   time.Time

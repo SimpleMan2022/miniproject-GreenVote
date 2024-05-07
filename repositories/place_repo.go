@@ -50,7 +50,7 @@ func (r *placeRepository) FindAll(page, limit int, sortBy, sortType string) (*[]
 		db = db.Order(fmt.Sprintf("%s %s", sortBy, sortType))
 	}
 
-	if err := r.db.Preload("Address").
+	if err := r.db.Preload("Address").Preload("Weather").
 		Offset(offset).Limit(limit).
 		Find(&places).
 		Error; err != nil {
@@ -79,7 +79,8 @@ func (r *placeRepository) Delete(place *entities.Place) error {
 
 func (r *placeRepository) FindById(id uuid.UUID) (*entities.Place, error) {
 	var place entities.Place
-	if err := r.db.Where("id = ?", id).Preload("Address").First(&place).Error; err != nil {
+	if err := r.db.Where("id = ?", id).Preload("Address").Preload("Weather").
+		First(&place).Error; err != nil {
 		return nil, err
 	}
 	return &place, nil

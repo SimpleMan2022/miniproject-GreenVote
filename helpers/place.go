@@ -78,8 +78,8 @@ func GenerateLocationDetail(request *dto.PlaceRequest) (*entities.Place, *entiti
 
 	place := &entities.Place{
 		Name:      res.Name,
-		Longitude: res.Point.Coordinates[0],
-		Latitude:  res.Point.Coordinates[1],
+		Longitude: res.Point.Coordinates[1],
+		Latitude:  res.Point.Coordinates[0],
 	}
 	address := &entities.PlaceAddress{
 		Province:    res.Address.AdminDistrict,
@@ -90,7 +90,7 @@ func GenerateLocationDetail(request *dto.PlaceRequest) (*entities.Place, *entiti
 }
 
 func GenerateImageLocation(place *dto.PlaceRequest) string {
-	longLat := fmt.Sprintf("%.8f,%.8f", place.Longitude, place.Latitude)
+	longLat := fmt.Sprintf("%.8f,%.8f", place.Latitude, place.Longitude)
 	apikey := viper.GetString("MAPS_API_KEY")
 	imageryUrl := viper.GetString("MAPS_IMAGERY_URL")
 	url := fmt.Sprintf(imageryUrl, longLat, longLat, apikey)
