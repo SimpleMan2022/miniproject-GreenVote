@@ -1,4 +1,4 @@
-package admin
+package user
 
 import (
 	"evoting/config"
@@ -16,7 +16,4 @@ func PlaceRouter(r *echo.Group) {
 	handler := handlers.NewPlaceHandler(usecase)
 	r.GET("", handler.FindAllPlaces)
 	r.GET("/:id", handler.FindPlaceById)
-	r.POST("", handler.CreatePlace)
-	r.PUT("/:id", handler.UpdatePlace)
-	r.DELETE("/:id", handler.Delete)
 }

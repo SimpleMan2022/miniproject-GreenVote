@@ -16,7 +16,7 @@ type placeHandler struct {
 	usecase usecases.PlaceUsecase
 }
 
-func NewPlaceUsacase(uc usecases.PlaceUsecase) *placeHandler {
+func NewPlaceHandler(uc usecases.PlaceUsecase) *placeHandler {
 	return &placeHandler{uc}
 }
 

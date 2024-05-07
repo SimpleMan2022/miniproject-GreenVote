@@ -17,7 +17,7 @@ type commentRepository struct {
 	db *gorm.DB
 }
 
-func NewCommentRepositories(db *gorm.DB) *commentRepository {
+func NewCommentRepository(db *gorm.DB) *commentRepository {
 	return &commentRepository{db}
 }
 

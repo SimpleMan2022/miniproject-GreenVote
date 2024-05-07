@@ -21,9 +21,6 @@ func LoadDb() {
 		log.Fatal(err)
 	}
 	db.AutoMigrate(
-<<<<<<< Updated upstream
-		&mysql2.UserAddress{}, mysql2.User{}, mysql2.PlaceAddress{}, mysql2.Place{})
-=======
 		mysql2.UserAddress{},
 		mysql2.User{},
 		mysql2.PlaceAddress{},
@@ -31,7 +28,7 @@ func LoadDb() {
 		mysql2.WeatherData{},
 		mysql2.Vote{},
 		mysql2.Comment{})
->>>>>>> Stashed changes
+
 	//if err := seeders.DBSeed(db); err != nil {
 	//	panic(err)
 	//}
