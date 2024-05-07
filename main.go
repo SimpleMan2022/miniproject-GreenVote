@@ -19,6 +19,9 @@ func main() {
 	{
 		userAddress := v1User.Group("/profile")
 		user.UserAddressRouter(userAddress)
+
+		places := v1User.Group("/places")
+		user.PlaceRouter(places)
 	}
 
 	v1Admin := e.Group("/api/v1/admin")
@@ -31,6 +34,9 @@ func main() {
 
 		places := v1Admin.Group("/places")
 		admin.PlaceRouter(places)
+
+		weather := v1Admin.Group("/places")
+		admin.WeatherRouter(weather)
 
 		placeAddress := v1Admin.Group("/places/address")
 		admin.PlaceAddressRouter(placeAddress)

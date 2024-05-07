@@ -3,7 +3,6 @@ package dto
 import (
 	"evoting/entities"
 	"github.com/google/uuid"
-	"time"
 )
 
 type PlaceRequest struct {
@@ -15,24 +14,24 @@ type PlaceRequest struct {
 }
 
 type PlaceResponse struct {
-	Name        string       `json:"name"`
-	Description string       `json:"description"`
-	Longitude   float64      `json:"longitude"`
-	Latitude    float64      `json:"latitude"`
-	MapImage    *string      `json:"map_image"`
-	Address     PlaceAddress `json:"address"`
+	Name        string           `json:"name"`
+	Description string           `json:"description"`
+	Longitude   float64          `json:"longitude"`
+	Latitude    float64          `json:"latitude"`
+	MapImage    *string          `json:"map_image"`
+	Address     PlaceAddress     `json:"address"`
+	Weather     WeatherDataPlace `json:"weather"`
 }
 
 type findAllPlacesResponse struct {
-	Id          uuid.UUID    `json:"id"`
-	Name        string       `json:"name"`
-	Description string       `json:"description"`
-	Longitude   float64      `json:"longitude"`
-	Latitude    float64      `json:"latitude"`
-	MapImage    *string      `json:"map_image"`
-	Address     PlaceAddress `json:"address"`
-	CreatedAt   time.Time    `json:"created_at"`
-	UpdatedAt   time.Time    `json:"updated_at"`
+	Id          uuid.UUID        `json:"id"`
+	Name        string           `json:"name"`
+	Description string           `json:"description"`
+	Longitude   float64          `json:"longitude"`
+	Latitude    float64          `json:"latitude"`
+	MapImage    *string          `json:"map_image"`
+	Address     PlaceAddress     `json:"address"`
+	Weather     WeatherDataPlace `json:"weather"`
 }
 
 func ToPlaceResponse(place *entities.Place, address *entities.PlaceAddress) *PlaceResponse {
@@ -68,6 +67,14 @@ func ToPlaceByIdResponse(place *entities.Place) *PlaceResponse {
 			StreetName:  place.Address.StreetName,
 			ZipCode:     place.Address.ZipCode,
 		},
+		Weather: WeatherDataPlace{
+			PlaceId:     place.Weather.PlaceId,
+			Temperature: place.Weather.Temperature,
+			WindSpeed:   place.Weather.WindSpeed,
+			Humadity:    place.Weather.Humadity,
+			Condition:   place.Weather.Condition,
+			RecordedAt:  place.Weather.RecordedAt,
+		},
 	}
 }
 
@@ -89,8 +96,14 @@ func ToFindAllPlacesResponse(places *[]entities.Place) *[]findAllPlacesResponse 
 				StreetName:  place.Address.StreetName,
 				ZipCode:     place.Address.ZipCode,
 			},
-			CreatedAt: place.CreatedAt,
-			UpdatedAt: place.UpdatedAt,
+			Weather: WeatherDataPlace{
+				PlaceId:     place.Weather.PlaceId,
+				Temperature: place.Weather.Temperature,
+				WindSpeed:   place.Weather.WindSpeed,
+				Humadity:    place.Weather.Humadity,
+				Condition:   place.Weather.Condition,
+				RecordedAt:  place.Weather.RecordedAt,
+			},
 		}
 		responses[i] = response
 	}

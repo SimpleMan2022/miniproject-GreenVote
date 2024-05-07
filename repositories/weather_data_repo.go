@@ -7,6 +7,7 @@ import (
 )
 
 type WeatherDataRepository interface {
+	FindPlace(placeId uuid.UUID) (*entities.Place, error)
 	FindByPlaceId(placeId uuid.UUID) (*entities.WeatherData, error)
 	Create(data *entities.WeatherData) (*entities.WeatherData, error)
 	Update(data *entities.WeatherData) (*entities.WeatherData, error)
@@ -19,6 +20,14 @@ type weatherDataRepository struct {
 
 func NewWeatherDataRepository(db *gorm.DB) *weatherDataRepository {
 	return &weatherDataRepository{db}
+}
+
+func (r *weatherDataRepository) FindPlace(placeId uuid.UUID) (*entities.Place, error) {
+	var place entities.Place
+	if err := r.db.Where("id = ?", placeId).First(&place).Error; err != nil {
+		return nil, err
+	}
+	return &place, nil
 }
 
 func (r *weatherDataRepository) FindByPlaceId(placeId uuid.UUID) (*entities.WeatherData, error) {
@@ -44,7 +53,7 @@ func (r *weatherDataRepository) Update(data *entities.WeatherData) (*entities.We
 }
 
 func (r *weatherDataRepository) Delete(data *entities.WeatherData) error {
-	if err := r.db.Delete(&data).Error; err != nil {
+	if err := r.db.Unscoped().Delete(&data).Error; err != nil {
 		return err
 	}
 	return nil

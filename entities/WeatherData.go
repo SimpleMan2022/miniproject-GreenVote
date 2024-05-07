@@ -9,10 +9,10 @@ import (
 type WeatherData struct {
 	Id          uuid.UUID
 	PlaceId     uuid.UUID
-	Temperature float64
+	Temperature int
 	WindSpeed   float64
 	Humadity    float64
-	Summary     string
+	Condition   string
 	RecordedAt  time.Time
 	CreatedAt   time.Time
 	UpdatedAt   time.Time

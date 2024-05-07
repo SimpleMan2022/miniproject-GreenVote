@@ -1,11 +1,52 @@
 package dto
 
-import "github.com/google/uuid"
+import (
+	"evoting/entities"
+	"github.com/google/uuid"
+	"time"
+)
 
 type WeatherDataRequest struct {
 	PlaceId     uuid.UUID `json:"place_id"`
-	Temperature float64   `json:"temperature"`
+	Temperature int       `json:"temperature"`
 	WindSpeed   float64   `json:"wind_speed"`
 	Humadity    float64   `json:"humadity"`
-	Summary     string    `json:"summary"`
+	Condition   string    `json:"condition"`
+}
+
+type WeatherDataResponse struct {
+	PlaceId     uuid.UUID    `json:"place_id"`
+	Place       PlaceRequest `json:"place"`
+	Temperature int          `json:"temperature"`
+	WindSpeed   float64      `json:"wind_speed"`
+	Humadity    float64      `json:"humadity"`
+	Condition   string       `json:"condition"`
+	RecordedAt  time.Time    `json:"recorded_at"`
+}
+
+type WeatherDataPlace struct {
+	PlaceId     uuid.UUID `json:"place_id"`
+	Temperature int       `json:"temperature"`
+	WindSpeed   float64   `json:"wind_speed"`
+	Humadity    float64   `json:"humadity"`
+	Condition   string    `json:"condition"`
+	RecordedAt  time.Time `json:"recorded_at"`
+}
+
+func ToWeatherDataResponse(data *entities.WeatherData, place *entities.Place) *WeatherDataResponse {
+	return &WeatherDataResponse{
+		PlaceId: data.PlaceId,
+		Place: PlaceRequest{
+			Name:        place.Name,
+			Description: place.Description,
+			Longitude:   place.Longitude,
+			Latitude:    place.Latitude,
+			MapImage:    place.MapImage,
+		},
+		Temperature: data.Temperature,
+		WindSpeed:   data.WindSpeed,
+		Humadity:    data.Humadity,
+		Condition:   data.Condition,
+		RecordedAt:  data.RecordedAt,
+	}
 }
