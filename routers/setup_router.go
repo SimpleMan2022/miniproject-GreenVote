@@ -17,6 +17,9 @@ func SetupRouter(e *echo.Echo) {
 
 		votes := v1User.Group("/votes")
 		user.VoteRouter(votes)
+
+		comments := v1User.Group("/places")
+		user.CommentRouter(comments)
 	}
 
 	v1Admin := e.Group("/api/v1/admin")

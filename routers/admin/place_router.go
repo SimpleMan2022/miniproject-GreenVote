@@ -13,7 +13,7 @@ func PlaceRouter(r *echo.Group) {
 	r.Use(middlewares.JWTMiddleware)
 	repository := repositories.NewPlaceRepository(config.DB)
 	usecase := usecases.NewPlaceUsecase(repository)
-	handler := handlers.NewPlaceUsacase(usecase)
+	handler := handlers.NewPlaceHandler(usecase)
 	r.GET("", handler.FindAllPlaces)
 	r.GET("/:id", handler.FindPlaceById)
 	r.POST("", handler.CreatePlace)

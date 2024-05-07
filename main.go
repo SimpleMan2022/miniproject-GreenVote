@@ -15,6 +15,4 @@ func main() {
 	e.Static("/images", "public/images")
 	routers.SetupRouter(e)
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
-
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
 }

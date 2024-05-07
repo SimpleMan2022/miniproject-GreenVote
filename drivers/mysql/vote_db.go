@@ -6,7 +6,7 @@ import (
 )
 
 type Vote struct {
-	Id        uuid.UUID `json:"id"`
+	Id        uuid.UUID `gorm:"primaryKey;not null" json:"id"`
 	UserID    uuid.UUID `gorm:"type:varchar(191);index" json:"user_id"`
 	User      User      `gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
 	PlaceId   uuid.UUID `gorm:"type:varchar(191);index" json:"place_id"`
