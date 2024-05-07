@@ -38,6 +38,4 @@ func main() {
 	}
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
-
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
 }
