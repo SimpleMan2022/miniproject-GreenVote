@@ -7,7 +7,7 @@ import (
 )
 
 type CommentRequest struct {
-	Body string `json:"body"`
+	Body string `json:"body" validate:"required"`
 }
 
 type CommentCreateResponse struct {
@@ -19,6 +19,7 @@ type CommentCreateResponse struct {
 
 type CommentData struct {
 	CommentId uuid.UUID `json:"comment_id"`
+	UserId    uuid.UUID `json:"user_id"`
 	Fullname  string    `json:"fullname"`
 	Body      string    `json:"body"`
 	CreatedAt time.Time `json:"created_at"`
@@ -38,7 +39,7 @@ type CommentFindAllResponse struct {
 	Comments    *[]CommentData `json:"comments"`
 }
 
-func ToCommentCreateResponse(comment *entities.Comment) *CommentCreateResponse {
+func ToCommentResponse(comment *entities.Comment) *CommentCreateResponse {
 	return &CommentCreateResponse{
 		Id:      comment.Id,
 		UserId:  comment.UserId,

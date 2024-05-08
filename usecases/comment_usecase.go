@@ -11,6 +11,7 @@ import (
 type CommentUsecase interface {
 	Create(userId uuid.UUID, placeId uuid.UUID, request *dto.CommentRequest) (*entities.Comment, error)
 	GetAllCommentInPlace(placeId uuid.UUID) (*[]dto.CommentData, *dto.CommentDetail, error)
+	Update(commentId, userId, placeId uuid.UUID, request *dto.CommentRequest) (*entities.Comment, error)
 	Delete(commentId, userId, placeId uuid.UUID) error
 }
 
@@ -65,4 +66,25 @@ func (uc *commentUsecase) Delete(commentId, userId, placeId uuid.UUID) error {
 		return &errorHandlers.InternalServerError{Message: err.Error()}
 	}
 	return nil
+}
+
+func (uc *commentUsecase) Update(commentId, userId, placeId uuid.UUID, request *dto.CommentRequest) (*entities.Comment, error) {
+	comment, err := uc.repository.FindById(commentId)
+	if err != nil {
+		return nil, &errorHandlers.BadRequestError{Message: err.Error()}
+	}
+	if comment.PlaceId != placeId {
+		return nil, &errorHandlers.NotFoundError{Message: "comment does not belong to this post"}
+	}
+
+	if comment.UserId != userId {
+		return nil, &errorHandlers.UnAuthorizedError{Message: "You are not allowed to delete this comment"}
+	}
+	comment.Body = request.Body
+
+	update, err := uc.repository.Update(comment)
+	if err != nil {
+		return nil, &errorHandlers.InternalServerError{err.Error()}
+	}
+	return update, nil
 }

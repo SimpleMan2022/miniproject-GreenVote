@@ -16,5 +16,6 @@ func CommentRouter(r *echo.Group) {
 	handler := handlers.NewCommentHandler(usecase)
 	r.GET("/:id/comments", handler.GetAllCommentsInPlace)
 	r.POST("/:id/comments", handler.CreateComment)
+	r.PUT("/:placeId/comments/:commentId", handler.UpdateComment)
 	r.DELETE("/:placeId/comments/:commentId", handler.DeleteComment)
 }

@@ -50,7 +50,7 @@ func (r *commentRepository) FindByPlaceId(id uuid.UUID) (*[]dto.CommentData, err
 	var comments []dto.CommentData
 	if err := r.db.
 		Table("comments").
-		Select("comments.id as comment_id, users.fullname, comments.body, comments.created_at,comments.updated_at").
+		Select("comments.id as comment_id,users.id as user_id, users.fullname, comments.body, comments.created_at,comments.updated_at").
 		Joins("INNER JOIN users ON comments.user_id = users.id").
 		Where("comments.place_id = ?", id).
 		Scan(&comments).
@@ -68,8 +68,10 @@ func (r *commentRepository) Create(comment *entities.Comment) (*entities.Comment
 }
 
 func (r *commentRepository) Update(comment *entities.Comment) (*entities.Comment, error) {
-	//TODO implement me
-	panic("implement me")
+	if err := r.db.Save(&comment).Error; err != nil {
+		return nil, err
+	}
+	return comment, nil
 }
 
 func (r *commentRepository) Delete(comment *entities.Comment) error {
