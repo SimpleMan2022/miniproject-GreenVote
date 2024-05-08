@@ -3,6 +3,7 @@ package dto
 import (
 	"evoting/entities"
 	"github.com/google/uuid"
+	"time"
 )
 
 type CommentRequest struct {
@@ -14,6 +15,27 @@ type CommentCreateResponse struct {
 	UserId  uuid.UUID `json:"user_id"`
 	PlaceId uuid.UUID `json:"place_id"`
 	Body    string    `json:"body"`
+}
+
+type CommentData struct {
+	CommentId uuid.UUID `json:"comment_id"`
+	Fullname  string    `json:"fullname"`
+	Body      string    `json:"body"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+type CommentDetail struct {
+	PlaceName   string `json:"place_name"`
+	Province    string `json:"province"`
+	City        string `json:"city"`
+	SubDistrict string `json:"sub_district"`
+	StreetName  string `json:"street_name"`
+}
+
+type CommentFindAllResponse struct {
+	PlaceDetail CommentDetail  `json:"place_detail"`
+	Comments    *[]CommentData `json:"comments"`
 }
 
 func ToCommentCreateResponse(comment *entities.Comment) *CommentCreateResponse {
