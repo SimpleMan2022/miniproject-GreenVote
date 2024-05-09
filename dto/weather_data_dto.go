@@ -25,7 +25,6 @@ type WeatherDataResponse struct {
 }
 
 type WeatherDataPlace struct {
-	PlaceId     uuid.UUID `json:"place_id"`
 	Temperature int       `json:"temperature"`
 	WindSpeed   float64   `json:"wind_speed"`
 	Humadity    float64   `json:"humadity"`

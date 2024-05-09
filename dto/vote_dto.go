@@ -15,9 +15,10 @@ type VoteResponse struct {
 }
 
 type GetPlaceWithTotalVotes struct {
-	PlaceName  string  `json:"place_name"`
-	TotalVote  int     `json:"total_vote"`
-	Percentage float64 `json:"percentage"`
+	PlaceId    uuid.UUID `json:"place_id"`
+	PlaceName  string    `json:"place_name"`
+	TotalVote  int       `json:"total_vote"`
+	Percentage float64   `json:"percentage"`
 }
 
 type Detail struct {
