@@ -36,7 +36,7 @@ func SetupRouter(e *echo.Echo) {
 		weather := v1Admin.Group("/places")
 		admin.WeatherRouter(weather)
 
-		placeAddress := v1Admin.Group("/places/address")
+		placeAddress := v1Admin.Group("/places")
 		admin.PlaceAddressRouter(placeAddress)
 
 	}

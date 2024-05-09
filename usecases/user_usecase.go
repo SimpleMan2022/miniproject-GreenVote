@@ -13,7 +13,7 @@ type UserUsecase interface {
 	Create(request *dto.CreateRequest) (*entities.User, error)
 	Login(request *dto.LoginRequest) (*dto.LoginResponse, error)
 	FindById(id uuid.UUID) (*entities.User, error)
-	FindAll(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error)
+	FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error)
 	FindSoftDelete(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error)
 	Update(id uuid.UUID, request *dto.UpdateRequest) (*entities.User, error)
 	Delete(id uuid.UUID) error
@@ -91,8 +91,8 @@ func (uc *userUsecase) FindById(id uuid.UUID) (*entities.User, error) {
 	return user, nil
 }
 
-func (uc *userUsecase) FindAll(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error) {
-	users, total, err := uc.repository.FindAll(page, limit, sortBy, sortType)
+func (uc *userUsecase) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error) {
+	users, total, err := uc.repository.FindAll(page, limit, sortBy, sortType, searchQuery)
 	if err != nil {
 		return nil, nil, &errorHandlers.InternalServerError{Message: err.Error()}
 	}

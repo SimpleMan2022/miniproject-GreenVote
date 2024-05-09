@@ -38,7 +38,13 @@ func (h *placeHandler) FindAllPlaces(ctx echo.Context) error {
 	if sortType == "" {
 		sortType = "asc"
 	}
-	places, totalPtr, err := h.usecase.FindAll(page, limit, sortBy, sortType)
+
+	searchQuery := ctx.QueryParam("search")
+	if searchQuery == "" {
+		searchQuery = ""
+	}
+
+	places, totalPtr, err := h.usecase.FindAll(page, limit, sortBy, sortType, searchQuery)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}

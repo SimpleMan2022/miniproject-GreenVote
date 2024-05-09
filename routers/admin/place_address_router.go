@@ -14,7 +14,7 @@ func PlaceAddressRouter(r *echo.Group) {
 	repository := repositories.NewPlaceAddressRepository(config.DB)
 	usecase := usecases.NewPlaceAddressUsecase(repository)
 	handler := handlers.NewPlaceAddressHandler(usecase)
-	r.POST("", handler.CreateAddress)
-	r.PUT("/:id", handler.UpdateAddress)
-	r.DELETE("/:id", handler.DeleteAddress)
+	r.POST("/:placeId/address", handler.CreateAddress)
+	r.PUT("/:placeId/address/:addressId", handler.UpdateAddress)
+	r.DELETE("/:placeId/address/:addressId", handler.DeleteAddress)
 }

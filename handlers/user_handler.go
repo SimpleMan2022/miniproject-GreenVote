@@ -5,7 +5,6 @@ import (
 	"evoting/errorHandlers"
 	"evoting/helpers"
 	"evoting/usecases"
-	"fmt"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 	"math"
@@ -124,7 +123,12 @@ func (h *userHandler) FindAllUsers(ctx echo.Context) error {
 	if sortType == "" {
 		sortType = "asc"
 	}
-	users, totalPtr, err := h.usecase.FindAll(page, limit, sortBy, sortType)
+	searchQuery := ctx.QueryParam("search")
+	if searchQuery == "" {
+		searchQuery = ""
+	}
+	
+	users, totalPtr, err := h.usecase.FindAll(page, limit, sortBy, sortType, searchQuery)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
@@ -133,7 +137,6 @@ func (h *userHandler) FindAllUsers(ctx echo.Context) error {
 	if page > lastPage {
 		page = lastPage
 	}
-	fmt.Println(total, limit, page, lastPage, sortBy, sortType)
 	usersResponse := dto.ToFindAllResponse(users)
 	response := helpers.Response(dto.ResponseParams{
 		StatusCode:  http.StatusOK,

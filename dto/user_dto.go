@@ -46,22 +46,18 @@ type LoginResponse struct {
 }
 
 type findAllResponse struct {
-	Id        uuid.UUID   `json:"id"`
-	Email     string      `json:"email"`
-	Fullname  string      `json:"fullname"`
-	Address   UserAddress `json:"address"`
-	Image     *string     `json:"image"`
-	CreatedAt time.Time   `json:"created_at"`
-	UpdatedAt time.Time   `json:"updated_at"`
+	Id       uuid.UUID   `json:"id"`
+	Email    string      `json:"email"`
+	Fullname string      `json:"fullname"`
+	Address  UserAddress `json:"address"`
+	Image    *string     `json:"image"`
 }
 
 func ToCreateResponse(user *entities.User) *CreateResponse {
 	return &CreateResponse{
-		Id:        user.Id,
-		Email:     user.Email,
-		Fullname:  user.Fullname,
-		CreatedAt: user.CreatedAt,
-		UpdatedAt: user.UpdatedAt,
+		Id:       user.Id,
+		Email:    user.Email,
+		Fullname: user.Fullname,
 	}
 }
 
@@ -86,9 +82,7 @@ func ToFindAllResponse(users *[]entities.User) *[]findAllResponse {
 				StreetName:  user.Address.StreetName,
 				ZipCode:     user.Address.ZipCode,
 			},
-			Image:     user.Image,
-			CreatedAt: user.CreatedAt,
-			UpdatedAt: user.UpdatedAt,
+			Image: user.Image,
 		}
 		responses[i] = response
 	}
@@ -107,8 +101,6 @@ func ToByIdResponse(user *entities.User) *findAllResponse {
 			StreetName:  user.Address.StreetName,
 			ZipCode:     user.Address.ZipCode,
 		},
-		Image:     user.Image,
-		CreatedAt: user.CreatedAt,
-		UpdatedAt: user.UpdatedAt,
+		Image: user.Image,
 	}
 }
