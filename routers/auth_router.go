@@ -15,6 +15,8 @@ func AuthUserRouter(r *echo.Group) {
 
 	r.POST("/register", handler.Create)
 	r.POST("/login", handler.Login)
+	r.DELETE("/logout", handler.Logout)
+	
 }
 
 func AuthAdminRouter(r *echo.Group) {

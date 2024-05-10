@@ -17,6 +17,7 @@ type UserRepository interface {
 	SaveRefreshToken(user *entities.User) error
 	Update(user *entities.User) (*entities.User, error)
 	Delete(user *entities.User) error
+	GetUserByRefreshToken(token string) (*entities.User, error)
 }
 
 type userRepository struct {
@@ -115,4 +116,10 @@ func (r *userRepository) Delete(user *entities.User) error {
 		return err
 	}
 	return nil
+}
+
+func (r *userRepository) GetUserByRefreshToken(token string) (*entities.User, error) {
+	var user *entities.User
+	err := r.db.Where("refresh_token = ?", token).First(&user).Error
+	return user, err
 }

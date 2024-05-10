@@ -127,7 +127,7 @@ func (h *userHandler) FindAllUsers(ctx echo.Context) error {
 	if searchQuery == "" {
 		searchQuery = ""
 	}
-	
+
 	users, totalPtr, err := h.usecase.FindAll(page, limit, sortBy, sortType, searchQuery)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
@@ -246,6 +246,30 @@ func (h *userHandler) DeleteUser(ctx echo.Context) error {
 		StatusCode: http.StatusOK,
 		Message:    "Delete successful. User information has been deleted.",
 		Data:       nil,
+	})
+	return ctx.JSON(http.StatusOK, response)
+}
+
+func (h *userHandler) Logout(ctx echo.Context) error {
+	cookie, err := ctx.Cookie("refreshToken")
+	if err != nil {
+		return errorHandlers.HandleError(ctx, &errorHandlers.ForbiddenError{Message: err.Error()})
+	}
+	if err := h.usecase.Logout(cookie.Value); err != nil {
+		return &errorHandlers.ForbiddenError{Message: err.Error()}
+	}
+	ctx.SetCookie(&http.Cookie{
+		Name:     "refreshToken",
+		Value:    "",
+		Path:     "/",
+		Domain:   "",
+		MaxAge:   0,
+		Secure:   true,
+		HttpOnly: true,
+	})
+	response := helpers.Response(dto.ResponseParams{
+		StatusCode: http.StatusOK,
+		Message:    "You have been successfully logged out.",
 	})
 	return ctx.JSON(http.StatusOK, response)
 }

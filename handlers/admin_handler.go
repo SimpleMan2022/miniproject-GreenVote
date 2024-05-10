@@ -73,7 +73,7 @@ func (h *adminHandler) Logout(ctx echo.Context) error {
 	})
 	response := helpers.Response(dto.ResponseParams{
 		StatusCode: http.StatusOK,
-		Message:    "Logout Success",
+		Message:    "You have been successfully logged out.",
 	})
 	return ctx.JSON(http.StatusOK, response)
 }

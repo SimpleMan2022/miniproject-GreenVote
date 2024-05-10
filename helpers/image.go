@@ -2,63 +2,74 @@ package helpers
 
 import (
 	"context"
-	"errors"
+	"fmt"
 	"github.com/cloudinary/cloudinary-go"
 	"github.com/cloudinary/cloudinary-go/api/uploader"
-	"github.com/google/uuid"
 	"github.com/spf13/viper"
-	"io"
 	"mime/multipart"
-	"os"
 	"path/filepath"
+	"strings"
 )
 
-func UploadUserImage(image *multipart.FileHeader) (string, error) {
+func DeleteImage(imageURL string) error {
+	parts := strings.Split(imageURL, "/")
+	publicIDWithExtension := parts[len(parts)-2] + "/" + parts[len(parts)-1]
+	publicID := strings.TrimSuffix(publicIDWithExtension, filepath.Ext(publicIDWithExtension))
 
-	if _, err := os.Stat("public/images/users"); os.IsNotExist(err) {
-		if err := os.MkdirAll("public/images/users", 0755); err != nil {
-			return "", err
-		}
-	}
-	fileName := uuid.New().String() + filepath.Ext(image.Filename)
-	dst := filepath.Join("public/images/users", filepath.Base(fileName))
-	outFile, err := os.Create(dst)
+	cloudinaryUrl := viper.GetString("CLOUDINARY_URL")
+	c, err := cloudinary.NewFromURL(cloudinaryUrl)
 	if err != nil {
-		return "", err
+		return err
 	}
-	defer outFile.Close()
-	src, err := image.Open()
+	fmt.Println(publicID)
+	_, err = c.Upload.Destroy(context.Background(), uploader.DestroyParams{
+		PublicID: publicID,
+	})
 	if err != nil {
-		return "", err
+		return fmt.Errorf("failed to delete image with public ID '%s': %w", publicID, err)
 	}
-	defer src.Close()
-	if _, err := io.Copy(outFile, src); err != nil {
-		return "", err
-	}
-	return fileName, nil
-}
 
-func DeleteImage(path string, image *string) error {
-	imagePath := filepath.Join(path, *image)
-	if err := os.Remove(imagePath); err != nil {
-		return errors.New("image not found in directory")
-	}
 	return nil
+
 }
 
-func UploadPlaceImage(body io.Reader) (string, error) {
+func UploadImageToCloudinary(body interface{}, path string) (string, error) {
 	cloudinaryUrl := viper.GetString("CLOUDINARY_URL")
 	c, err := cloudinary.NewFromURL(cloudinaryUrl)
 	if err != nil {
 		return "", err
 	}
-	uploadResult, err := c.Upload.Upload(
-		context.Background(),
-		body,
-		uploader.UploadParams{},
-	)
-	if err != nil {
-		return "", err
+
+	var uploadResult *uploader.UploadResult
+	switch v := body.(type) {
+	case multipart.FileHeader:
+		file, err := v.Open()
+		if err != nil {
+			return "", err
+		}
+		defer file.Close()
+
+		uploadResult, err = c.Upload.Upload(
+			context.Background(),
+			file,
+			uploader.UploadParams{
+				Folder: path,
+			},
+		)
+		if err != nil {
+			return "", err
+		}
+	default:
+		uploadResult, err = c.Upload.Upload(
+			context.Background(),
+			body,
+			uploader.UploadParams{
+				Folder: path,
+			},
+		)
+		if err != nil {
+			return "", err
+		}
 	}
 
 	return uploadResult.SecureURL, nil

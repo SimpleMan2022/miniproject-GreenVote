@@ -97,7 +97,7 @@ func (uc *placeUsecase) Update(id uuid.UUID, request *dto.PlaceRequest) (*entiti
 	}
 	var location string
 	if place.MapImage != nil {
-		if err := helpers.DeleteImage("public/images/places", place.MapImage); err != nil {
+		if err := helpers.DeleteImage(*place.MapImage); err != nil {
 			return nil, &errorHandlers.InternalServerError{err.Error()}
 		}
 		location = helpers.GenerateImageLocation(request)
@@ -121,7 +121,7 @@ func (uc *placeUsecase) Delete(id uuid.UUID) error {
 		return &errorHandlers.BadRequestError{err.Error()}
 	}
 	if place.MapImage != nil {
-		if err := helpers.DeleteImage("public/images/places", place.MapImage); err != nil {
+		if err := helpers.DeleteImage(*place.MapImage); err != nil {
 			return &errorHandlers.InternalServerError{err.Error()}
 		}
 	}
