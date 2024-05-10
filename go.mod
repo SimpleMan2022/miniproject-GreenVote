@@ -25,6 +25,7 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/gorilla/schema v1.3.0 // indirect
+	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/insanXYZ/sage v1.0.5 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
