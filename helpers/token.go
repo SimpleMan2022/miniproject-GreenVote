@@ -10,9 +10,9 @@ import (
 )
 
 type JWTClaims struct {
-	Id       uuid.UUID
-	Email    string
-	Fullname string
+	Id      uuid.UUID
+	Email   string
+	IsAdmin bool
 	jwt.StandardClaims
 }
 
@@ -20,12 +20,37 @@ func init() {
 	viper.AutomaticEnv()
 }
 
-func GenerateAccessToken(user *entities.User) (string, error) {
+func GenerateAccessToken(user interface{}) (string, error) {
 	accessTokenSecret := []byte(viper.GetString("ACCESS_TOKEN_SECRET"))
+	var isAdmin bool
+
+	switch user.(type) {
+	case *entities.User:
+		isAdmin = false
+	case *entities.Admin:
+		isAdmin = true
+	default:
+		return "", errors.New("invalid user type")
+	}
+
+	var userID uuid.UUID
+	var userEmail string
+
+	switch u := user.(type) {
+	case *entities.User:
+		userID = u.Id
+		userEmail = u.Email
+	case *entities.Admin:
+		userID = u.Id
+		userEmail = u.Email
+	default:
+		return "", errors.New("invalid user type")
+	}
+
 	claims := JWTClaims{
-		Id:       user.Id,
-		Email:    user.Email,
-		Fullname: user.Fullname,
+		Id:      userID,
+		Email:   userEmail,
+		IsAdmin: isAdmin,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(30 * time.Minute).Unix(),
 			NotBefore: time.Now().Unix(),
@@ -41,12 +66,37 @@ func GenerateAccessToken(user *entities.User) (string, error) {
 	return signedString, nil
 }
 
-func GenerateRefreshToken(user *entities.User) (string, error) {
-	accessTokenSecret := []byte(viper.GetString("REFRESH_TOKEN_SECRET"))
+func GenerateRefreshToken(user interface{}) (string, error) {
+	refreshTokenSecret := []byte(viper.GetString("REFRESH_TOKEN_SECRET"))
+	var isAdmin bool
+
+	switch user.(type) {
+	case *entities.User:
+		isAdmin = false
+	case *entities.Admin:
+		isAdmin = true
+	default:
+		return "", errors.New("invalid user type")
+	}
+
+	var userID uuid.UUID
+	var userEmail string
+
+	switch u := user.(type) {
+	case *entities.User:
+		userID = u.Id
+		userEmail = u.Email
+	case *entities.Admin:
+		userID = u.Id
+		userEmail = u.Email
+	default:
+		return "", errors.New("invalid user type")
+	}
+
 	claims := JWTClaims{
-		Id:       user.Id,
-		Email:    user.Email,
-		Fullname: user.Fullname,
+		Id:      userID,
+		Email:   userEmail,
+		IsAdmin: isAdmin,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(24 * time.Hour).Unix(),
 			NotBefore: time.Now().Unix(),
@@ -55,14 +105,14 @@ func GenerateRefreshToken(user *entities.User) (string, error) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	signedString, err := token.SignedString(accessTokenSecret)
+	signedString, err := token.SignedString(refreshTokenSecret)
 	if err != nil {
 		return "", err
 	}
 	return signedString, nil
 }
 
-func ParseJWT(tokenStr string) (*uuid.UUID, error) {
+func ParseJWT(tokenStr string) (*JWTClaims, error) {
 	accessTokenSecret := []byte(viper.GetString("ACCESS_TOKEN_SECRET"))
 	token, err := jwt.ParseWithClaims(tokenStr, &JWTClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return accessTokenSecret, nil
@@ -80,5 +130,5 @@ func ParseJWT(tokenStr string) (*uuid.UUID, error) {
 		return nil, errors.New("Your token is expired")
 	}
 
-	return &claims.Id, nil
+	return claims, nil
 }

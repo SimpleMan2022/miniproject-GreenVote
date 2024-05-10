@@ -14,6 +14,7 @@ func UserRouter(r *echo.Group) {
 	usecase := usecases.NewUserUsecase(repository)
 	handler := handlers.NewUserHandler(usecase)
 	r.Use(middlewares.JWTMiddleware)
+	r.Use(middlewares.AdminOnlyMiddleware)
 	r.GET("", handler.FindAllUsers)
 	r.GET("/soft-deleted", handler.FindAllUserWithSoftDelete)
 	r.GET("/:id", handler.FindUserById)

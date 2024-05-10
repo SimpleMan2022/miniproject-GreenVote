@@ -11,6 +11,7 @@ import (
 
 func PlaceAddressRouter(r *echo.Group) {
 	r.Use(middlewares.JWTMiddleware)
+	r.Use(middlewares.AdminOnlyMiddleware)
 	repository := repositories.NewPlaceAddressRepository(config.DB)
 	usecase := usecases.NewPlaceAddressUsecase(repository)
 	handler := handlers.NewPlaceAddressHandler(usecase)

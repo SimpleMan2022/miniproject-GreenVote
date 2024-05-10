@@ -9,6 +9,9 @@ import (
 func SetupRouter(e *echo.Echo) {
 	v1User := e.Group("/api/v1")
 	{
+		auth := v1User.Group("/auth")
+		AuthUserRouter(auth)
+
 		userAddress := v1User.Group("/profile")
 		user.UserAddressRouter(userAddress)
 
@@ -25,7 +28,7 @@ func SetupRouter(e *echo.Echo) {
 	v1Admin := e.Group("/api/v1/admin")
 	{
 		auth := v1Admin.Group("/auth")
-		AuthRouter(auth)
+		AuthAdminRouter(auth)
 
 		users := v1Admin.Group("/users")
 		admin.UserRouter(users)

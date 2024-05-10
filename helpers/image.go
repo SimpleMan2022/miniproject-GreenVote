@@ -1,8 +1,12 @@
 package helpers
 
 import (
+	"context"
 	"errors"
+	"github.com/cloudinary/cloudinary-go"
+	"github.com/cloudinary/cloudinary-go/api/uploader"
 	"github.com/google/uuid"
+	"github.com/spf13/viper"
 	"io"
 	"mime/multipart"
 	"os"
@@ -43,23 +47,19 @@ func DeleteImage(path string, image *string) error {
 }
 
 func UploadPlaceImage(body io.Reader) (string, error) {
-	if _, err := os.Stat("public/images/places"); os.IsNotExist(err) {
-		if err := os.MkdirAll("public/images/places", 0755); err != nil {
-			return "", err
-		}
-	}
-
-	fileName := uuid.New().String() + ".jpeg"
-	dst := filepath.Join("public/images/places", fileName)
-	outFile, err := os.Create(dst)
+	cloudinaryUrl := viper.GetString("CLOUDINARY_URL")
+	c, err := cloudinary.NewFromURL(cloudinaryUrl)
 	if err != nil {
 		return "", err
 	}
-	defer outFile.Close()
-
-	if _, err := io.Copy(outFile, body); err != nil {
+	uploadResult, err := c.Upload.Upload(
+		context.Background(),
+		body,
+		uploader.UploadParams{},
+	)
+	if err != nil {
 		return "", err
 	}
 
-	return fileName, nil
+	return uploadResult.SecureURL, nil
 }
