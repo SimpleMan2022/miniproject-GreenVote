@@ -2,12 +2,13 @@ package middlewares
 
 import (
 	"evoting/helpers"
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"net/http"
 	"strings"
 )
 
-func JWTMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+func AdminOnlyMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		authHeader := c.Request().Header.Get("Authorization")
 		if authHeader == "" {
@@ -20,12 +21,15 @@ func JWTMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 		tokenStr := strings.TrimPrefix(authHeader, "bearer ")
 
 		claims, err := helpers.ParseJWT(tokenStr)
-		id := &claims.Id
 		if err != nil {
 			return echo.NewHTTPError(http.StatusInternalServerError, err)
 		}
+		isAdmin := claims.IsAdmin
+		fmt.Println(isAdmin)
+		if !isAdmin {
+			return echo.NewHTTPError(http.StatusForbidden, "Only admins are allowed")
+		}
 
-		c.Set("userId", id)
 		return next(c)
 	}
 }

@@ -35,7 +35,7 @@ func (r *voteRepository) GetTotalVotes() (*[]dto.GetPlaceWithTotalVotes, error) 
 	var votes *[]dto.GetPlaceWithTotalVotes
 
 	err := r.db.Table("places").
-		Select("places.name as place_name, COUNT(votes.id) as total_vote," +
+		Select("places.id as place_id, places.name as place_name, COUNT(votes.id) as total_vote," +
 			"ROUND(COUNT(votes.id) * 100.0 / (SELECT COUNT(DISTINCT user_id) FROM votes), 2) as percentage").
 		Joins("LEFT JOIN votes ON places.id = votes.place_id").
 		Group("places.id").

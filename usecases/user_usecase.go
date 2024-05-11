@@ -13,10 +13,11 @@ type UserUsecase interface {
 	Create(request *dto.CreateRequest) (*entities.User, error)
 	Login(request *dto.LoginRequest) (*dto.LoginResponse, error)
 	FindById(id uuid.UUID) (*entities.User, error)
-	FindAll(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error)
+	FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error)
 	FindSoftDelete(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error)
 	Update(id uuid.UUID, request *dto.UpdateRequest) (*entities.User, error)
 	Delete(id uuid.UUID) error
+	Logout(token string) error
 }
 
 type userUsecase struct {
@@ -91,8 +92,8 @@ func (uc *userUsecase) FindById(id uuid.UUID) (*entities.User, error) {
 	return user, nil
 }
 
-func (uc *userUsecase) FindAll(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error) {
-	users, total, err := uc.repository.FindAll(page, limit, sortBy, sortType)
+func (uc *userUsecase) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error) {
+	users, total, err := uc.repository.FindAll(page, limit, sortBy, sortType, searchQuery)
 	if err != nil {
 		return nil, nil, &errorHandlers.InternalServerError{Message: err.Error()}
 	}
@@ -137,11 +138,11 @@ func (uc *userUsecase) Update(id uuid.UUID, request *dto.UpdateRequest) (*entiti
 			return nil, &errorHandlers.BadRequestError{Message: "Image size exceeds the limit of 2MB."}
 		}
 		if user.Image != nil {
-			if err := helpers.DeleteImage("public/images/users", user.Image); err != nil {
+			if err := helpers.DeleteImage(*user.Image); err != nil {
 				return nil, &errorHandlers.InternalServerError{Message: err.Error()}
 			}
 		}
-		filename, err := helpers.UploadUserImage(request.Image)
+		filename, err := helpers.UploadImageToCloudinary(*request.Image, "users")
 		if err != nil {
 			return nil, &errorHandlers.InternalServerError{Message: err.Error()}
 		}
@@ -161,12 +162,26 @@ func (uc *userUsecase) Delete(id uuid.UUID) error {
 		return &errorHandlers.BadRequestError{Message: err.Error()}
 	}
 	if user.Image != nil {
-		if err := helpers.DeleteImage("public/images/users", user.Image); err != nil {
+		if err := helpers.DeleteImage(*user.Image); err != nil {
 			return &errorHandlers.InternalServerError{Message: err.Error()}
 		}
 	}
 	if err := uc.repository.Delete(user); err != nil {
 		return &errorHandlers.BadRequestError{Message: err.Error()}
 	}
+	return nil
+}
+
+func (uc *userUsecase) Logout(token string) error {
+	user, err := uc.repository.GetUserByRefreshToken(token)
+	if err != nil {
+		return &errorHandlers.UnAuthorizedError{Message: "Token is not valid"}
+	}
+
+	user.RefreshToken = ""
+	if err := uc.repository.SaveRefreshToken(user); err != nil {
+		return &errorHandlers.InternalServerError{Message: err.Error()}
+	}
+
 	return nil
 }

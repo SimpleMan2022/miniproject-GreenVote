@@ -11,7 +11,7 @@ import (
 )
 
 type PlaceUsecase interface {
-	FindAll(page, limit int, sortBy, sortType string) (*[]entities.Place, *int64, error)
+	FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.Place, *int64, error)
 	FindById(id uuid.UUID) (*entities.Place, error)
 	Create(request *dto.PlaceRequest) (*entities.Place, error)
 	CreateAddress(place *entities.PlaceAddress) (*entities.PlaceAddress, error)
@@ -28,8 +28,8 @@ func NewPlaceUsecase(uc repositories.PlaceRepository) *placeUsecase {
 	return &placeUsecase{uc}
 }
 
-func (uc *placeUsecase) FindAll(page, limit int, sortBy, sortType string) (*[]entities.Place, *int64, error) {
-	places, total, err := uc.repository.FindAll(page, limit, sortBy, sortType)
+func (uc *placeUsecase) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.Place, *int64, error) {
+	places, total, err := uc.repository.FindAll(page, limit, sortBy, sortType, searchQuery)
 	if err != nil {
 		return nil, nil, &errorHandlers.InternalServerError{Message: err.Error()}
 	}
@@ -97,7 +97,7 @@ func (uc *placeUsecase) Update(id uuid.UUID, request *dto.PlaceRequest) (*entiti
 	}
 	var location string
 	if place.MapImage != nil {
-		if err := helpers.DeleteImage("public/images/places", place.MapImage); err != nil {
+		if err := helpers.DeleteImage(*place.MapImage); err != nil {
 			return nil, &errorHandlers.InternalServerError{err.Error()}
 		}
 		location = helpers.GenerateImageLocation(request)
@@ -121,7 +121,7 @@ func (uc *placeUsecase) Delete(id uuid.UUID) error {
 		return &errorHandlers.BadRequestError{err.Error()}
 	}
 	if place.MapImage != nil {
-		if err := helpers.DeleteImage("public/images/places", place.MapImage); err != nil {
+		if err := helpers.DeleteImage(*place.MapImage); err != nil {
 			return &errorHandlers.InternalServerError{err.Error()}
 		}
 	}

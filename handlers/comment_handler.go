@@ -42,7 +42,7 @@ func (h *commentHandler) CreateComment(ctx echo.Context) error {
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
-	createResponse := dto.ToCommentCreateResponse(newComment)
+	createResponse := dto.ToCommentResponse(newComment)
 	response := helpers.Response(dto.ResponseParams{
 		StatusCode: http.StatusCreated,
 		Message:    "Create successful. Comment has been created.",
@@ -50,4 +50,82 @@ func (h *commentHandler) CreateComment(ctx echo.Context) error {
 	})
 
 	return ctx.JSON(http.StatusCreated, response)
+}
+
+func (h *commentHandler) GetAllCommentsInPlace(ctx echo.Context) error {
+	idPlace := ctx.Param("id")
+	placeId, err := uuid.Parse(idPlace)
+	if err != nil {
+		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
+	}
+	comments, placeDetail, err := h.usecase.GetAllCommentInPlace(placeId)
+
+	allResponse := dto.CommentFindAllResponse{
+		PlaceDetail: dto.CommentDetail{
+			PlaceName:   placeDetail.PlaceName,
+			Province:    placeDetail.Province,
+			City:        placeDetail.City,
+			SubDistrict: placeDetail.SubDistrict,
+			StreetName:  placeDetail.StreetName,
+		},
+		Comments: comments,
+	}
+	response := helpers.Response(dto.ResponseParams{
+		StatusCode: http.StatusOK,
+		Message:    "Successfully retrieved place comments",
+		Data:       allResponse,
+	})
+	return ctx.JSON(http.StatusOK, response)
+}
+
+func (h *commentHandler) UpdateComment(ctx echo.Context) error {
+	var request dto.CommentRequest
+	if err := ctx.Bind(&request); err != nil {
+		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
+	}
+	idPlace := ctx.Param("placeId")
+	placeId, err := uuid.Parse(idPlace)
+
+	idComment := ctx.Param("commentId")
+	commentId, err := uuid.Parse(idComment)
+
+	idUser := ctx.Get("userId")
+	userId := idUser.(*uuid.UUID)
+	if err != nil {
+		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
+	}
+	update, err := h.usecase.Update(commentId, *userId, placeId, &request)
+	if err != nil {
+		return errorHandlers.HandleError(ctx, err)
+	}
+	createResponse := dto.ToCommentResponse(update)
+	response := helpers.Response(dto.ResponseParams{
+		StatusCode: http.StatusOK,
+		Message:    "Update successful. Comment has been updated.",
+		Data:       createResponse,
+	})
+
+	return ctx.JSON(http.StatusOK, response)
+}
+
+func (h *commentHandler) DeleteComment(ctx echo.Context) error {
+	idPlace := ctx.Param("placeId")
+	placeId, err := uuid.Parse(idPlace)
+
+	idComment := ctx.Param("commentId")
+	commentId, err := uuid.Parse(idComment)
+
+	idUser := ctx.Get("userId")
+	userId := idUser.(*uuid.UUID)
+	if err != nil {
+		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
+	}
+	if err := h.usecase.Delete(commentId, *userId, placeId); err != nil {
+		return errorHandlers.HandleError(ctx, err)
+	}
+	response := helpers.Response(dto.ResponseParams{
+		StatusCode: http.StatusOK,
+		Message:    "Delete successful. Comment has been deleted",
+	})
+	return ctx.JSON(http.StatusOK, response)
 }

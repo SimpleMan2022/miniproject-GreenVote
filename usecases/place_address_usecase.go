@@ -9,9 +9,9 @@ import (
 )
 
 type PlaceAddressUsecase interface {
-	Create(request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error)
-	Update(id uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error)
-	Delete(id uuid.UUID) error
+	Create(placeId uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error)
+	Update(id, placeId uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error)
+	Delete(id, placeId uuid.UUID) error
 }
 
 type placeAddressUsecase struct {
@@ -22,10 +22,10 @@ func NewPlaceAddressUsecase(repository repositories.PlaceAddressRepository) *pla
 	return &placeAddressUsecase{repository}
 }
 
-func (uc *placeAddressUsecase) Create(request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error) {
+func (uc *placeAddressUsecase) Create(placeId uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error) {
 	address := &entities.PlaceAddress{
 		Id:          uuid.New(),
-		PlaceId:     request.PlaceId,
+		PlaceId:     placeId,
 		Province:    request.Province,
 		City:        request.City,
 		SubDistrict: request.SubDistrict,
@@ -40,9 +40,12 @@ func (uc *placeAddressUsecase) Create(request *dto.PlaceAddressRequest) (*entiti
 	return newAddress, nil
 }
 
-func (uc *placeAddressUsecase) Update(id uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error) {
+func (uc *placeAddressUsecase) Update(id, placeId uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error) {
 	address, err := uc.repository.FindById(id)
 	if err != nil {
+		return nil, &errorHandlers.BadRequestError{err.Error()}
+	}
+	if address.PlaceId != placeId {
 		return nil, &errorHandlers.BadRequestError{err.Error()}
 	}
 	address.Province = request.Province
@@ -58,12 +61,15 @@ func (uc *placeAddressUsecase) Update(id uuid.UUID, request *dto.PlaceAddressReq
 	return updateAddress, nil
 }
 
-func (uc *placeAddressUsecase) Delete(id uuid.UUID) error {
-	addres, err := uc.repository.FindById(id)
+func (uc *placeAddressUsecase) Delete(id, placeId uuid.UUID) error {
+	address, err := uc.repository.FindById(id)
+	if address.PlaceId != placeId {
+		return &errorHandlers.BadRequestError{Message: err.Error()}
+	}
 	if err != nil {
 		return &errorHandlers.BadRequestError{Message: err.Error()}
 	}
-	if err := uc.repository.Delete(addres); err != nil {
+	if err := uc.repository.Delete(address); err != nil {
 		return &errorHandlers.InternalServerError{Message: err.Error()}
 	}
 	return nil

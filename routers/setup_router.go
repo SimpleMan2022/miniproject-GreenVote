@@ -9,6 +9,9 @@ import (
 func SetupRouter(e *echo.Echo) {
 	v1User := e.Group("/api/v1")
 	{
+		auth := v1User.Group("/auth")
+		AuthUserRouter(auth)
+
 		userAddress := v1User.Group("/profile")
 		user.UserAddressRouter(userAddress)
 
@@ -20,12 +23,15 @@ func SetupRouter(e *echo.Echo) {
 
 		comments := v1User.Group("/places")
 		user.CommentRouter(comments)
+
+		chatbot := v1User.Group("/ws/chatbot")
+		user.ChatbotRouter(chatbot)
 	}
 
 	v1Admin := e.Group("/api/v1/admin")
 	{
 		auth := v1Admin.Group("/auth")
-		AuthRouter(auth)
+		AuthAdminRouter(auth)
 
 		users := v1Admin.Group("/users")
 		admin.UserRouter(users)
@@ -36,7 +42,7 @@ func SetupRouter(e *echo.Echo) {
 		weather := v1Admin.Group("/places")
 		admin.WeatherRouter(weather)
 
-		placeAddress := v1Admin.Group("/places/address")
+		placeAddress := v1Admin.Group("/places")
 		admin.PlaceAddressRouter(placeAddress)
 
 	}

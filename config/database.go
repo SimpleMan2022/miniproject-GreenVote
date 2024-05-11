@@ -27,7 +27,8 @@ func LoadDb() {
 		mysql2.Place{},
 		mysql2.WeatherData{},
 		mysql2.Vote{},
-		mysql2.Comment{})
+		mysql2.Comment{},
+		mysql2.Admin{})
 
 	//if err := seeders.DBSeed(db); err != nil {
 	//	panic(err)

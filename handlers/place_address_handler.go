@@ -23,6 +23,8 @@ func (h *placeAddressHandler) CreateAddress(ctx echo.Context) error {
 	if err := ctx.Bind(&request); err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
 	}
+	idPlace := ctx.Param("placeId")
+	placeId, err := uuid.Parse(idPlace)
 
 	if err := helpers.ValidateRequest(request); err != nil {
 		return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
@@ -33,7 +35,7 @@ func (h *placeAddressHandler) CreateAddress(ctx echo.Context) error {
 		})
 	}
 
-	newAddress, err := h.usecase.Create(&request)
+	newAddress, err := h.usecase.Create(placeId, &request)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
@@ -52,8 +54,11 @@ func (h *placeAddressHandler) UpdateAddress(ctx echo.Context) error {
 	if err := ctx.Bind(&request); err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
 	}
-	id := ctx.Param("id")
-	placeId, err := uuid.Parse(id)
+	idPlace := ctx.Param("placeId")
+	placeId, err := uuid.Parse(idPlace)
+
+	idAddress := ctx.Param("addressId")
+	addressId, err := uuid.Parse(idAddress)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
 	}
@@ -67,7 +72,7 @@ func (h *placeAddressHandler) UpdateAddress(ctx echo.Context) error {
 		})
 	}
 
-	updateAddress, err := h.usecase.Update(placeId, &request)
+	updateAddress, err := h.usecase.Update(addressId, placeId, &request)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
@@ -86,13 +91,17 @@ func (h *placeAddressHandler) DeleteAddress(ctx echo.Context) error {
 	if err := ctx.Bind(&request); err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
 	}
-	id := ctx.Param("id")
-	placeId, err := uuid.Parse(id)
+	idPlace := ctx.Param("placeId")
+	placeId, err := uuid.Parse(idPlace)
 	if err != nil {
 		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
 	}
-
-	if err := h.usecase.Delete(placeId); err != nil {
+	idAddress := ctx.Param("addressId")
+	addressId, err := uuid.Parse(idAddress)
+	if err != nil {
+		return errorHandlers.HandleError(ctx, &errorHandlers.BadRequestError{err.Error()})
+	}
+	if err := h.usecase.Delete(addressId, placeId); err != nil {
 		return errorHandlers.HandleError(ctx, err)
 	}
 

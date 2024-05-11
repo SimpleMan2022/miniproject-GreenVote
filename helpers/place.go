@@ -101,7 +101,7 @@ func GenerateImageLocation(place *dto.PlaceRequest) string {
 		return ""
 	}
 	defer resp.Body.Close()
-	image, err := UploadPlaceImage(resp.Body)
+	image, err := UploadImageToCloudinary(resp.Body, "places")
 	if err != nil {
 		return ""
 	}

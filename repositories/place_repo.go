@@ -5,12 +5,13 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"strings"
 )
 
 type PlaceRepository interface {
 	Create(place *entities.Place) (*entities.Place, error)
 	CreateAddress(place *entities.PlaceAddress) (*entities.PlaceAddress, error)
-	FindAll(page, limit int, sortBy, sortType string) (*[]entities.Place, *int64, error)
+	FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.Place, *int64, error)
 	FindByName(place string) (*entities.Place, error)
 	FindById(id uuid.UUID) (*entities.Place, error)
 	FindAddress(id uuid.UUID) (*entities.PlaceAddress, error)
@@ -41,7 +42,7 @@ func (r *placeRepository) CreateAddress(placeAddress *entities.PlaceAddress) (*e
 	return placeAddress, nil
 }
 
-func (r *placeRepository) FindAll(page, limit int, sortBy, sortType string) (*[]entities.Place, *int64, error) {
+func (r *placeRepository) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.Place, *int64, error) {
 	var places []entities.Place
 	var total int64
 	offset := (page - 1) * limit
@@ -49,8 +50,11 @@ func (r *placeRepository) FindAll(page, limit int, sortBy, sortType string) (*[]
 	if sortBy != "" {
 		db = db.Order(fmt.Sprintf("%s %s", sortBy, sortType))
 	}
+	if searchQuery != "" {
+		db = db.Where("LOWER(name) LIKE ?", "%"+strings.ToLower(searchQuery)+"%")
+	}
 
-	if err := r.db.Preload("Address").Preload("Weather").
+	if err := db.Debug().Preload("Address").Preload("Weather").
 		Offset(offset).Limit(limit).
 		Find(&places).
 		Error; err != nil {

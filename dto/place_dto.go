@@ -68,7 +68,6 @@ func ToPlaceByIdResponse(place *entities.Place) *PlaceResponse {
 			ZipCode:     place.Address.ZipCode,
 		},
 		Weather: WeatherDataPlace{
-			PlaceId:     place.Weather.PlaceId,
 			Temperature: place.Weather.Temperature,
 			WindSpeed:   place.Weather.WindSpeed,
 			Humadity:    place.Weather.Humadity,
@@ -97,7 +96,6 @@ func ToFindAllPlacesResponse(places *[]entities.Place) *[]findAllPlacesResponse 
 				ZipCode:     place.Address.ZipCode,
 			},
 			Weather: WeatherDataPlace{
-				PlaceId:     place.Weather.PlaceId,
 				Temperature: place.Weather.Temperature,
 				WindSpeed:   place.Weather.WindSpeed,
 				Humadity:    place.Weather.Humadity,

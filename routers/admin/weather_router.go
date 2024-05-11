@@ -11,6 +11,7 @@ import (
 
 func WeatherRouter(r *echo.Group) {
 	r.Use(middlewares.JWTMiddleware)
+	r.Use(middlewares.AdminOnlyMiddleware)
 	repository := repositories.NewWeatherDataRepository(config.DB)
 	usecase := usecases.NewWeatherDataUsecase(repository)
 	handler := handlers.NewWeatherDataHandler(usecase)

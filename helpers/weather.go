@@ -28,6 +28,7 @@ func GenerateWeatherData(latitude, longitude float64) (*entities.WeatherData, er
 
 	url := fmt.Sprintf(apiUrl, latitude, longitude, apiKey)
 	resp, err := http.Get(url)
+
 	if err != nil {
 		return nil, err
 	}
