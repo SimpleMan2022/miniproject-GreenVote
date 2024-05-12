@@ -5,7 +5,6 @@ import (
 	"evoting/middlewares"
 	"evoting/routers"
 	"evoting/schedulers"
-	"fmt"
 	"github.com/labstack/echo/v4"
 )
 
@@ -18,5 +17,5 @@ func main() {
 	go schedulers.StartScheduler()
 	e.Static("/images", "public/images")
 	routers.SetupRouter(e)
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
+	e.Logger.Fatal(e.Start(":1323"))
 }
