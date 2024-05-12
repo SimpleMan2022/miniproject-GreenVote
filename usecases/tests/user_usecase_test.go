@@ -414,3 +414,42 @@ func TestUserUsecase_Logout(t *testing.T) {
 	})
 
 }
+
+func TestUserUsecase_GetNewAccessToken(t *testing.T) {
+	mockRepo := new(mocks.MockUserRepository)
+	usecase := usecases.NewUserUsecase(mockRepo)
+
+	t.Run("Test Token is not valid", func(t *testing.T) {
+		tokenOld := "invalid_token"
+		mockRepo.On("GetUserByRefreshToken", tokenOld).Return(nil, errors.New("Token is not valid"))
+
+		newToken, err := usecase.GetNewAccessToken(tokenOld)
+
+		assert.Error(t, err)
+		assert.Nil(t, newToken)
+		assert.EqualError(t, err, "Token is not valid")
+	})
+
+	t.Run("Test Token is empty", func(t *testing.T) {
+		tokenOld := "empty_token"
+		mockRepo.On("GetUserByRefreshToken", tokenOld).Return(&entities.User{RefreshToken: ""}, nil)
+
+		newToken, err := usecase.GetNewAccessToken(tokenOld)
+
+		assert.Error(t, err)
+		assert.Nil(t, newToken)
+		assert.EqualError(t, err, "Token is empty")
+	})
+
+	t.Run("Test GetNewAccessToken success", func(t *testing.T) {
+		tokenOld := "valid_token"
+		user := &entities.User{RefreshToken: "valid_token"}
+		mockRepo.On("GetUserByRefreshToken", tokenOld).Return(user, nil)
+
+		newToken, err := usecase.GetNewAccessToken(tokenOld)
+
+		assert.NoError(t, err)
+		assert.NotNil(t, newToken)
+
+	})
+}
