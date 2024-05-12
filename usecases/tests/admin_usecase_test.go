@@ -2,7 +2,7 @@ package tests
 
 import (
 	"errors"
-	"evoting/drivers/mysql/mocks"
+	"evoting/drivers/mocks"
 	"evoting/dto"
 	"evoting/entities"
 	"evoting/helpers"
