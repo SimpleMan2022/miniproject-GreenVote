@@ -52,18 +52,18 @@ jobs:
             docker pull aditnugroho/greenvote:latest
             docker run -d --name greenvote -p 80:1323 aditnugroho/greenvote:latest
             touch .env && \
-            echo "DB_HOST=${{ secrets.DB_HOST }}" > .env && \
-            echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env && \
-            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env && \
-            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env && \
-            echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env && \
-            echo "ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }}" >> .env && \
-            echo "REFRESH_TOKEN_SECRET=${{ secrets.REFRESH_TOKEN_SECRET }}" >> .env && \
-            echo "MAPS_GEOCODING_URL=${{ secrets.MAPS_GEOCODING_URL }}" >> .env && \
-            echo "MAPS_IMAGERY_URL=${{ secrets.MAPS_IMAGERY_URL }}" >> .env && \
-            echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> .env && \
-            echo "WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}" >> .env && \
-            echo "WEATHER_API_URL=${{ secrets.WEATHER_API_URL }}" >> .env && \
-            echo "CLOUDINARY_URL=${{ secrets.CLOUDINARY_URL }}" >> .env
+            echo ${{ secrets.DB_HOST }} > .env && \
+            echo ${{ secrets.DB_NAME }} >> .env && \
+            echo ${{ secrets.DB_USERNAME }} >> .env && \
+            echo ${{ secrets.DB_PASSWORD }} >> .env && \
+            echo ${{ secrets.DB_PORT }} >> .env && \
+            echo ${{ secrets.ACCESS_TOKEN_SECRET }} >> .env && \
+            echo ${{ secrets.REFRESH_TOKEN_SECRET }} >> .env && \
+            echo ${{ secrets.MAPS_GEOCODING_URL }} >> .env && \
+            echo ${{ secrets.MAPS_IMAGERY_URL }} >> .env && \
+            echo ${{ secrets.MAPS_API_KEY }} >> .env && \
+            echo ${{ secrets.WEATHER_API_KEY }} >> .env && \
+            echo ${{ secrets.WEATHER_API_URL }} >> .env && \
+            echo ${{ secrets.CLOUDINARY_URL }} >> .env
             docker cp .env greenvote:/
             docker restart greenvote
