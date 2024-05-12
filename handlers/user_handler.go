@@ -153,48 +153,6 @@ func (h *userHandler) FindAllUsers(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, response)
 }
 
-func (h *userHandler) FindAllUserWithSoftDelete(ctx echo.Context) error {
-	page, _ := strconv.Atoi(ctx.QueryParam("page"))
-	if page == 0 {
-		page = 1
-	}
-	limit, _ := strconv.Atoi(ctx.QueryParam("limit"))
-	if limit == 0 {
-		limit = 10
-	}
-	sortBy := ctx.QueryParam("sort_by")
-	sortType := ctx.QueryParam("sort_type")
-	if sortBy == "" {
-		sortBy = "updated_at"
-		sortType = "desc"
-	}
-	if sortType == "" {
-		sortType = "asc"
-	}
-	users, totalPtr, err := h.usecase.FindSoftDelete(page, limit, sortBy, sortType)
-	if err != nil {
-		return errorHandlers.HandleError(ctx, err)
-	}
-	total := *totalPtr
-	lastPage := int(math.Ceil(float64(total) / float64(limit)))
-	if page > lastPage {
-		page = lastPage
-	}
-	response := helpers.Response(dto.ResponseParams{
-		StatusCode:  http.StatusOK,
-		Message:     "Successfully retrieved user data with soft delete",
-		Data:        users,
-		IsPaginate:  true,
-		Total:       total,
-		PerPage:     limit,
-		CurrentPage: page,
-		LastPage:    lastPage,
-		SortBy:      sortBy,
-		SortType:    sortType,
-	})
-	return ctx.JSON(http.StatusOK, response)
-}
-
 func (h *userHandler) UpdateUser(ctx echo.Context) error {
 	id := ctx.Param("id")
 	userId, err := uuid.Parse(id)

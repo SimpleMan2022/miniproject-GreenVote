@@ -1,0 +1,4658 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>config: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">evoting/config/config.go (0.0%)</option>
+				
+				<option value="file1">evoting/config/database.go (0.0%)</option>
+				
+				<option value="file2">evoting/drivers/mysql/fakers/user_faker.go (0.0%)</option>
+				
+				<option value="file3">evoting/drivers/mysql/mocks/admin_mock.go (100.0%)</option>
+				
+				<option value="file4">evoting/drivers/mysql/mocks/auth_mock.go (96.9%)</option>
+				
+				<option value="file5">evoting/drivers/mysql/seeders/user_seed.go (0.0%)</option>
+				
+				<option value="file6">evoting/dto/admin_dto.go (0.0%)</option>
+				
+				<option value="file7">evoting/dto/comment_dto.go (0.0%)</option>
+				
+				<option value="file8">evoting/dto/place_address_dto.go (0.0%)</option>
+				
+				<option value="file9">evoting/dto/place_dto.go (0.0%)</option>
+				
+				<option value="file10">evoting/dto/user_address_dto.go (0.0%)</option>
+				
+				<option value="file11">evoting/dto/user_dto.go (0.0%)</option>
+				
+				<option value="file12">evoting/dto/vote_dto.go (0.0%)</option>
+				
+				<option value="file13">evoting/dto/weather_data_dto.go (0.0%)</option>
+				
+				<option value="file14">evoting/errorHandlers/error_handler.go (0.0%)</option>
+				
+				<option value="file15">evoting/errorHandlers/types.go (60.0%)</option>
+				
+				<option value="file16">evoting/handlers/admin_handler.go (0.0%)</option>
+				
+				<option value="file17">evoting/handlers/chatbot_handler.go (0.0%)</option>
+				
+				<option value="file18">evoting/handlers/comment_handler.go (0.0%)</option>
+				
+				<option value="file19">evoting/handlers/place_address_handler.go (0.0%)</option>
+				
+				<option value="file20">evoting/handlers/place_handler.go (0.0%)</option>
+				
+				<option value="file21">evoting/handlers/user_address_handler.go (0.0%)</option>
+				
+				<option value="file22">evoting/handlers/user_handler.go (0.0%)</option>
+				
+				<option value="file23">evoting/handlers/vote_handler.go (0.0%)</option>
+				
+				<option value="file24">evoting/handlers/weather_data_handler.go (0.0%)</option>
+				
+				<option value="file25">evoting/helpers/image.go (0.0%)</option>
+				
+				<option value="file26">evoting/helpers/password.go (100.0%)</option>
+				
+				<option value="file27">evoting/helpers/place.go (2.7%)</option>
+				
+				<option value="file28">evoting/helpers/response.go (0.0%)</option>
+				
+				<option value="file29">evoting/helpers/token.go (67.3%)</option>
+				
+				<option value="file30">evoting/helpers/validation.go (10.8%)</option>
+				
+				<option value="file31">evoting/helpers/weather.go (0.0%)</option>
+				
+				<option value="file32">evoting/main.go (0.0%)</option>
+				
+				<option value="file33">evoting/middlewares/admin_middleware.go (0.0%)</option>
+				
+				<option value="file34">evoting/middlewares/auth_middleware.go (0.0%)</option>
+				
+				<option value="file35">evoting/middlewares/log_middleware.go (0.0%)</option>
+				
+				<option value="file36">evoting/repositories/admin_repo.go (0.0%)</option>
+				
+				<option value="file37">evoting/repositories/comment_repo.go (0.0%)</option>
+				
+				<option value="file38">evoting/repositories/place_address_repo.go (0.0%)</option>
+				
+				<option value="file39">evoting/repositories/place_repo.go (0.0%)</option>
+				
+				<option value="file40">evoting/repositories/user_address_repo.go (0.0%)</option>
+				
+				<option value="file41">evoting/repositories/user_repo.go (0.0%)</option>
+				
+				<option value="file42">evoting/repositories/vote_repo.go (0.0%)</option>
+				
+				<option value="file43">evoting/repositories/weather_data_repo.go (0.0%)</option>
+				
+				<option value="file44">evoting/routers/admin/place_address_router.go (0.0%)</option>
+				
+				<option value="file45">evoting/routers/admin/place_router.go (0.0%)</option>
+				
+				<option value="file46">evoting/routers/admin/user_router.go (0.0%)</option>
+				
+				<option value="file47">evoting/routers/admin/weather_router.go (0.0%)</option>
+				
+				<option value="file48">evoting/routers/auth_router.go (0.0%)</option>
+				
+				<option value="file49">evoting/routers/setup_router.go (0.0%)</option>
+				
+				<option value="file50">evoting/routers/user/chatbot_router.go (0.0%)</option>
+				
+				<option value="file51">evoting/routers/user/comment_router.go (0.0%)</option>
+				
+				<option value="file52">evoting/routers/user/place_router.go (0.0%)</option>
+				
+				<option value="file53">evoting/routers/user/user_address_router.go (0.0%)</option>
+				
+				<option value="file54">evoting/routers/user/vote_router.go (0.0%)</option>
+				
+				<option value="file55">evoting/schedulers/weather_cron.go (0.0%)</option>
+				
+				<option value="file56">evoting/usecases/admin_usecase.go (87.5%)</option>
+				
+				<option value="file57">evoting/usecases/chatbot_usecase.go (82.1%)</option>
+				
+				<option value="file58">evoting/usecases/comment_usecase.go (0.0%)</option>
+				
+				<option value="file59">evoting/usecases/place_address_usecase.go (0.0%)</option>
+				
+				<option value="file60">evoting/usecases/place_usecase.go (0.0%)</option>
+				
+				<option value="file61">evoting/usecases/user_address_usecase.go (0.0%)</option>
+				
+				<option value="file62">evoting/usecases/user_usecase.go (79.0%)</option>
+				
+				<option value="file63">evoting/usecases/vote_usecase.go (0.0%)</option>
+				
+				<option value="file64">evoting/usecases/weather_data_usecase.go (0.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package config
+
+import (
+        "github.com/spf13/viper"
+        "log"
+)
+
+type Config struct {
+        DB_PORT     string
+        DB_NAME     string
+        DB_USERNAME string
+        DB_PASSWORD string
+        DB_HOST     string
+        PORT        string
+}
+
+var ENV *Config
+
+func LoadConfig() <span class="cov0" title="0">{
+        viper.AddConfigPath(".")
+        viper.SetConfigType("env")
+        viper.SetConfigName(".env")
+
+        if err := viper.ReadInConfig(); err != nil </span><span class="cov0" title="0">{
+                log.Fatal(err)
+        }</span>
+
+        <span class="cov0" title="0">if err := viper.Unmarshal(&amp;ENV); err != nil </span><span class="cov0" title="0">{
+                log.Fatal(err)
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package config
+
+import (
+        mysql2 "evoting/drivers/mysql"
+        "fmt"
+        "gorm.io/driver/mysql"
+        "gorm.io/gorm"
+        "log"
+)
+
+var DB *gorm.DB
+
+func LoadDb() <span class="cov0" title="0">{
+        dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%s",
+                ENV.DB_USERNAME, ENV.DB_PASSWORD, ENV.DB_HOST, ENV.DB_PORT, ENV.DB_NAME, "utf8mb4&amp;parseTime=True&amp;loc=Local")
+        db, err := gorm.Open(mysql.Open(dsn), &amp;gorm.Config{
+                //Logger: logger.Default.LogMode(logger.Info),
+        })
+
+        if err != nil </span><span class="cov0" title="0">{
+                log.Fatal(err)
+        }</span>
+        <span class="cov0" title="0">db.AutoMigrate(
+                mysql2.UserAddress{},
+                mysql2.User{},
+                mysql2.PlaceAddress{},
+                mysql2.Place{},
+                mysql2.WeatherData{},
+                mysql2.Vote{},
+                mysql2.Comment{},
+                mysql2.Admin{})
+
+        //if err := seeders.DBSeed(db); err != nil {
+        //        panic(err)
+        //}
+        DB = db</span>
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package fakers
+
+import (
+        "evoting/entities"
+        "fmt"
+        "github.com/go-faker/faker/v4"
+        "github.com/google/uuid"
+        "gorm.io/gorm"
+        "time"
+)
+
+func UserFaker(db *gorm.DB) *entities.User <span class="cov0" title="0">{
+        return &amp;entities.User{
+                Id:           uuid.New(),
+                Email:        faker.Email(),
+                Fullname:     fmt.Sprintf("%s %s", faker.FirstName(), faker.LastName()),
+                Address:      entities.UserAddress{},
+                Password:     "$2a$12$YKLHrrhcR/OSnb1QVmtEBuznBIHk3trQHGYNVq3QVaA4pgb7/v7Yi",
+                Image:        nil,
+                RefreshToken: "",
+                CreatedAt:    time.Now(),
+                UpdatedAt:    time.Now(),
+                DeletedAt:    gorm.DeletedAt{},
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package mocks
+
+import (
+        "evoting/entities"
+        "github.com/stretchr/testify/mock"
+)
+
+type MockAdminRepository struct {
+        mock.Mock
+}
+
+func (m *MockAdminRepository) FindByEmail(email string) (*entities.Admin, error) <span class="cov8" title="1">{
+        args := m.Called(email)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil, args.Error(1)
+        }</span>
+        <span class="cov8" title="1">return args.Get(0).(*entities.Admin), nil</span>
+}
+
+func (m *MockAdminRepository) SaveRefreshToken(admin *entities.Admin) error <span class="cov8" title="1">{
+        args := m.Called(admin)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil
+        }</span>
+        <span class="cov8" title="1">return args.Error(0)</span>
+}
+
+func (m *MockAdminRepository) GetUserByRefreshToken(token string) (*entities.Admin, error) <span class="cov8" title="1">{
+        args := m.Called(token)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil, args.Error(1)
+        }</span>
+        <span class="cov8" title="1">return args.Get(0).(*entities.Admin), nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package mocks
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+        "github.com/stretchr/testify/mock"
+)
+
+type MockUserRepository struct {
+        mock.Mock
+}
+
+func (m *MockUserRepository) FindByEmail(email string) (*entities.User, error) <span class="cov8" title="1">{
+        args := m.Called(email)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil, args.Error(1)
+        }</span>
+        <span class="cov8" title="1">return args.Get(0).(*entities.User), nil</span>
+}
+
+func (m *MockUserRepository) FindById(id uuid.UUID) (*entities.User, error) <span class="cov8" title="1">{
+        args := m.Called(id)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil, args.Error(1)
+        }</span>
+        <span class="cov8" title="1">return args.Get(0).(*entities.User), nil</span>
+
+}
+
+func (m *MockUserRepository) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error) <span class="cov8" title="1">{
+        args := m.Called(page, limit, sortBy, sortType, searchQuery)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil, nil, args.Error(2)
+        }</span>
+        <span class="cov8" title="1">return args.Get(0).(*[]entities.User), args.Get(1).(*int64), nil</span>
+
+}
+
+func (m *MockUserRepository) Create(user *entities.User) (*entities.User, error) <span class="cov8" title="1">{
+        args := m.Called(user)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil, args.Error(1) // Mengembalikan error yang sesuai dari mock jika tidak ada hasil yang dikembalikan
+        }</span>
+        <span class="cov8" title="1">return args.Get(0).(*entities.User), nil</span>
+
+}
+
+func (m *MockUserRepository) SaveRefreshToken(user *entities.User) error <span class="cov8" title="1">{
+        args := m.Called(user)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil
+        }</span>
+        <span class="cov0" title="0">return args.Error(0)</span>
+
+}
+
+func (m *MockUserRepository) Update(user *entities.User) (*entities.User, error) <span class="cov8" title="1">{
+        args := m.Called(user)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil, args.Error(1)
+        }</span>
+        <span class="cov8" title="1">return args.Get(0).(*entities.User), nil</span>
+
+}
+
+func (m *MockUserRepository) Delete(user *entities.User) error <span class="cov8" title="1">{
+        args := m.Called(user)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil
+        }</span>
+        <span class="cov8" title="1">return args.Error(0)</span>
+
+}
+
+func (m *MockUserRepository) GetUserByRefreshToken(token string) (*entities.User, error) <span class="cov8" title="1">{
+        args := m.Called(token)
+        if args.Get(0) == nil </span><span class="cov8" title="1">{
+                return nil, args.Error(1)
+        }</span>
+        <span class="cov8" title="1">return args.Get(0).(*entities.User), nil</span>
+
+}
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package seeders
+
+import (
+        "evoting/drivers/mysql/fakers"
+        "gorm.io/gorm"
+)
+
+type Seeder struct {
+        Faker any
+}
+
+func RegisterSeeder(db *gorm.DB) []Seeder <span class="cov0" title="0">{
+        var seeders []Seeder
+        for i := 0; i &lt; 20; i++ </span><span class="cov0" title="0">{
+                seeders = append(seeders, Seeder{Faker: fakers.UserFaker(db)})
+        }</span>
+        <span class="cov0" title="0">return seeders</span>
+}
+
+func DBSeed(db *gorm.DB) error <span class="cov0" title="0">{
+        seeders := RegisterSeeder(db)
+        for _, seeder := range seeders </span><span class="cov0" title="0">{
+                if err := db.Create(seeder.Faker).Error; err != nil </span><span class="cov0" title="0">{
+                        return err
+                }</span>
+        }
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package dto
+
+import "github.com/google/uuid"
+
+type LoginAdminRequest struct {
+        Email    string `json:"email" validate:"required,email"`
+        Password string `json:"password" validate:"required,min=8"`
+}
+
+type LoginAdminResponse struct {
+        Id           uuid.UUID `json:"id"`
+        Username     string    `json:"username"`
+        AccessToken  string    `json:"access_token"`
+        RefreshToken string    `json:"refresh_token,omitempty"`
+}
+
+func ToLoginAdminResponse(admin *LoginAdminResponse) *LoginAdminResponse <span class="cov0" title="0">{
+        return &amp;LoginAdminResponse{
+                Id:          admin.Id,
+                Username:    admin.Username,
+                AccessToken: admin.AccessToken,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package dto
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+        "time"
+)
+
+type CommentRequest struct {
+        Body string `json:"body" validate:"required"`
+}
+
+type CommentCreateResponse struct {
+        Id      uuid.UUID `json:"id"`
+        UserId  uuid.UUID `json:"user_id"`
+        PlaceId uuid.UUID `json:"place_id"`
+        Body    string    `json:"body"`
+}
+
+type CommentData struct {
+        CommentId uuid.UUID `json:"comment_id"`
+        UserId    uuid.UUID `json:"user_id"`
+        Fullname  string    `json:"fullname"`
+        Body      string    `json:"body"`
+        CreatedAt time.Time `json:"created_at"`
+        UpdatedAt time.Time `json:"updated_at"`
+}
+
+type CommentDetail struct {
+        PlaceName   string `json:"place_name"`
+        Province    string `json:"province"`
+        City        string `json:"city"`
+        SubDistrict string `json:"sub_district"`
+        StreetName  string `json:"street_name"`
+}
+
+type CommentFindAllResponse struct {
+        PlaceDetail CommentDetail  `json:"place_detail"`
+        Comments    *[]CommentData `json:"comments"`
+}
+
+func ToCommentResponse(comment *entities.Comment) *CommentCreateResponse <span class="cov0" title="0">{
+        return &amp;CommentCreateResponse{
+                Id:      comment.Id,
+                UserId:  comment.UserId,
+                PlaceId: comment.PlaceId,
+                Body:    comment.Body,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package dto
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+)
+
+type PlaceAddress struct {
+        Id          uuid.UUID `json:"id"`
+        Province    string    `json:"province"`
+        City        string    `json:"city"`
+        SubDistrict string    `json:"sub_district"`
+        StreetName  string    `json:"street_name"`
+        ZipCode     string    `json:"zip_code"`
+}
+
+type PlaceAddressRequest struct {
+        PlaceId     uuid.UUID `json:"place_id"`
+        Province    string    `json:"province" validate:"required,min=5"`
+        City        string    `json:"city" validate:"required"`
+        SubDistrict string    `json:"sub_district" validate:"required"`
+        StreetName  string    `json:"street_name" validate:"required"`
+        ZipCode     string    `json:"zip_code" validate:"required"`
+}
+
+type PlaceAddressResponse struct {
+        Id          uuid.UUID `json:"id"`
+        Province    string    `json:"province"`
+        City        string    `json:"city"`
+        SubDistrict string    `json:"sub_district"`
+        StreetName  string    `json:"street_name"`
+        ZipCode     string    `json:"zip_code"`
+}
+
+func ToPlaceAddressResponse(address *entities.PlaceAddress) *PlaceAddressResponse <span class="cov0" title="0">{
+        return &amp;PlaceAddressResponse{
+                Id:          address.Id,
+                Province:    address.Province,
+                City:        address.City,
+                SubDistrict: address.SubDistrict,
+                StreetName:  address.StreetName,
+                ZipCode:     address.ZipCode,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package dto
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+)
+
+type PlaceRequest struct {
+        Name        string  `json:"name" validate:"required,min=5"`
+        Description string  `json:"description" validate:"required"`
+        Longitude   float64 `json:"longitude" validate:"numeric"`
+        Latitude    float64 `json:"latitude" validate:"numeric"`
+        MapImage    *string `json:"map_image"`
+}
+
+type PlaceResponse struct {
+        Name        string           `json:"name"`
+        Description string           `json:"description"`
+        Longitude   float64          `json:"longitude"`
+        Latitude    float64          `json:"latitude"`
+        MapImage    *string          `json:"map_image"`
+        Address     PlaceAddress     `json:"address"`
+        Weather     WeatherDataPlace `json:"weather"`
+}
+
+type findAllPlacesResponse struct {
+        Id          uuid.UUID        `json:"id"`
+        Name        string           `json:"name"`
+        Description string           `json:"description"`
+        Longitude   float64          `json:"longitude"`
+        Latitude    float64          `json:"latitude"`
+        MapImage    *string          `json:"map_image"`
+        Address     PlaceAddress     `json:"address"`
+        Weather     WeatherDataPlace `json:"weather"`
+}
+
+func ToPlaceResponse(place *entities.Place, address *entities.PlaceAddress) *PlaceResponse <span class="cov0" title="0">{
+        return &amp;PlaceResponse{
+                Name:        place.Name,
+                Description: place.Description,
+                Longitude:   place.Longitude,
+                Latitude:    place.Latitude,
+                MapImage:    place.MapImage,
+                Address: PlaceAddress{
+                        Id:          address.Id,
+                        Province:    address.Province,
+                        City:        address.City,
+                        SubDistrict: address.SubDistrict,
+                        StreetName:  address.StreetName,
+                        ZipCode:     address.ZipCode,
+                },
+        }
+}</span>
+
+func ToPlaceByIdResponse(place *entities.Place) *PlaceResponse <span class="cov0" title="0">{
+        return &amp;PlaceResponse{
+                Name:        place.Name,
+                Description: place.Description,
+                Longitude:   place.Longitude,
+                Latitude:    place.Latitude,
+                MapImage:    place.MapImage,
+                Address: PlaceAddress{
+                        Id:          place.Address.Id,
+                        Province:    place.Address.Province,
+                        City:        place.Address.City,
+                        SubDistrict: place.Address.SubDistrict,
+                        StreetName:  place.Address.StreetName,
+                        ZipCode:     place.Address.ZipCode,
+                },
+                Weather: WeatherDataPlace{
+                        Temperature: place.Weather.Temperature,
+                        WindSpeed:   place.Weather.WindSpeed,
+                        Humadity:    place.Weather.Humadity,
+                        Condition:   place.Weather.Condition,
+                        RecordedAt:  place.Weather.RecordedAt,
+                },
+        }
+}</span>
+
+func ToFindAllPlacesResponse(places *[]entities.Place) *[]findAllPlacesResponse <span class="cov0" title="0">{
+        responses := make([]findAllPlacesResponse, len(*places))
+        for i, place := range *places </span><span class="cov0" title="0">{
+                response := findAllPlacesResponse{
+                        Id:          place.Id,
+                        Name:        place.Name,
+                        Description: place.Description,
+                        Longitude:   place.Longitude,
+                        Latitude:    place.Latitude,
+                        MapImage:    place.MapImage,
+                        Address: PlaceAddress{
+                                Id:          place.Address.Id,
+                                Province:    place.Address.Province,
+                                City:        place.Address.City,
+                                SubDistrict: place.Address.SubDistrict,
+                                StreetName:  place.Address.StreetName,
+                                ZipCode:     place.Address.ZipCode,
+                        },
+                        Weather: WeatherDataPlace{
+                                Temperature: place.Weather.Temperature,
+                                WindSpeed:   place.Weather.WindSpeed,
+                                Humadity:    place.Weather.Humadity,
+                                Condition:   place.Weather.Condition,
+                                RecordedAt:  place.Weather.RecordedAt,
+                        },
+                }
+                responses[i] = response
+        }</span>
+        <span class="cov0" title="0">return &amp;responses</span>
+}
+</pre>
+		
+		<pre class="file" id="file10" style="display: none">package dto
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+)
+
+type UserAddress struct {
+        Province    string `json:"province"`
+        City        string `json:"city"`
+        SubDistrict string `json:"sub_district"`
+        StreetName  string `json:"street_name"`
+        ZipCode     string `json:"zip_code"`
+}
+
+type CreateUserAddressRequest struct {
+        UserId      uuid.UUID `json:"user_id"`
+        Province    string    `validate:"required" json:"province"`
+        City        string    `validate:"required" json:"city"`
+        SubDistrict string    `validate:"required" json:"sub_district"`
+        StreetName  string    `validate:"required" json:"street_name"`
+        ZipCode     string    `validate:"required,number" json:"zip_code"`
+}
+
+type CreateUserAddressResponse struct {
+        Id          uuid.UUID `json:"id"`
+        Province    string    `json:"province"`
+        City        string    `json:"city"`
+        SubDistrict string    `json:"sub_district"`
+        StreetName  string    `json:"street_name"`
+        ZipCode     string    `json:"zip_code"`
+}
+
+func ToUserAddressResponse(address *entities.UserAddress) *CreateUserAddressResponse <span class="cov0" title="0">{
+        return &amp;CreateUserAddressResponse{
+                Id:          address.Id,
+                Province:    address.Province,
+                City:        address.City,
+                SubDistrict: address.SubDistrict,
+                StreetName:  address.StreetName,
+                ZipCode:     address.ZipCode,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file11" style="display: none">package dto
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+        "mime/multipart"
+        "time"
+)
+
+type User struct {
+        Email    string `json:"email"`
+        Fullname string `json:"fullname"`
+}
+
+type CreateRequest struct {
+        Email    string `json:"email" validate:"required,email"`
+        Fullname string `json:"fullname" validate:"required,min=8"`
+        Password string `json:"password" validate:"required,min=8"`
+}
+
+type CreateResponse struct {
+        Id        uuid.UUID `json:"id"`
+        Email     string    `json:"email"`
+        Fullname  string    `json:"fullname"`
+        CreatedAt time.Time `json:"created_at"`
+        UpdatedAt time.Time `json:"updated_at"`
+}
+
+type UpdateRequest struct {
+        Email    string                `form:"email" validate:"required,email"`
+        Fullname string                `form:"fullname" validate:"required,min=8"`
+        Password string                `form:"password" validate:"required,min=8"`
+        Image    *multipart.FileHeader `form:"image,maxFileSize"`
+}
+
+type LoginRequest struct {
+        Email    string `json:"email" validate:"required,email"`
+        Password string `json:"password" validate:"required,min=8"`
+}
+
+type LoginResponse struct {
+        Id           uuid.UUID `json:"id"`
+        Fullname     string    `json:"fullname"`
+        AccessToken  string    `json:"access_token"`
+        RefreshToken string    `json:"refresh_token,omitempty"`
+}
+
+type findAllResponse struct {
+        Id       uuid.UUID   `json:"id"`
+        Email    string      `json:"email"`
+        Fullname string      `json:"fullname"`
+        Address  UserAddress `json:"address"`
+        Image    *string     `json:"image"`
+}
+
+func ToCreateResponse(user *entities.User) *CreateResponse <span class="cov0" title="0">{
+        return &amp;CreateResponse{
+                Id:       user.Id,
+                Email:    user.Email,
+                Fullname: user.Fullname,
+        }
+}</span>
+
+func ToLoginResponse(user *LoginResponse) *LoginResponse <span class="cov0" title="0">{
+        return &amp;LoginResponse{
+                Id:          user.Id,
+                Fullname:    user.Fullname,
+                AccessToken: user.AccessToken,
+        }
+}</span>
+func ToFindAllResponse(users *[]entities.User) *[]findAllResponse <span class="cov0" title="0">{
+        responses := make([]findAllResponse, len(*users))
+        for i, user := range *users </span><span class="cov0" title="0">{
+                response := findAllResponse{
+                        Id:       user.Id,
+                        Email:    user.Email,
+                        Fullname: user.Fullname,
+                        Address: UserAddress{
+                                Province:    user.Address.Province,
+                                City:        user.Address.City,
+                                SubDistrict: user.Address.SubDistrict,
+                                StreetName:  user.Address.StreetName,
+                                ZipCode:     user.Address.ZipCode,
+                        },
+                        Image: user.Image,
+                }
+                responses[i] = response
+        }</span>
+        <span class="cov0" title="0">return &amp;responses</span>
+}
+
+func ToByIdResponse(user *entities.User) *findAllResponse <span class="cov0" title="0">{
+        return &amp;findAllResponse{
+                Id:       user.Id,
+                Email:    user.Email,
+                Fullname: user.Fullname,
+                Address: UserAddress{
+                        Province:    user.Address.Province,
+                        City:        user.Address.City,
+                        SubDistrict: user.Address.SubDistrict,
+                        StreetName:  user.Address.StreetName,
+                        ZipCode:     user.Address.ZipCode,
+                },
+                Image: user.Image,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file12" style="display: none">package dto
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+)
+
+type VoteRequest struct {
+        PlaceId uuid.UUID `json:"place_id" validate:"required"`
+}
+
+type VoteResponse struct {
+        UserId  uuid.UUID `json:"user_id"`
+        PlaceId uuid.UUID `json:"place_id"`
+}
+
+type GetPlaceWithTotalVotes struct {
+        PlaceId    uuid.UUID `json:"place_id"`
+        PlaceName  string    `json:"place_name"`
+        TotalVote  int       `json:"total_vote"`
+        Percentage float64   `json:"percentage"`
+}
+
+type Detail struct {
+        TotalVoters        int64 `json:"total_voters"`
+        TotalVotesReceived int64 `json:"total_votes_received"`
+}
+
+type VoteData struct {
+        Votes      *[]GetPlaceWithTotalVotes `json:"votes"`
+        DetailVote Detail                    `json:"detail_vote"`
+}
+
+func ToVoteResponse(vote *entities.Vote) *VoteResponse <span class="cov0" title="0">{
+        return &amp;VoteResponse{
+                UserId:  vote.UserId,
+                PlaceId: vote.PlaceId,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file13" style="display: none">package dto
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+        "time"
+)
+
+type WeatherDataRequest struct {
+        PlaceId     uuid.UUID `json:"place_id"`
+        Temperature int       `json:"temperature"`
+        WindSpeed   float64   `json:"wind_speed"`
+        Humadity    float64   `json:"humadity"`
+        Condition   string    `json:"condition"`
+}
+
+type WeatherDataResponse struct {
+        PlaceId     uuid.UUID    `json:"place_id"`
+        Place       PlaceRequest `json:"place"`
+        Temperature int          `json:"temperature"`
+        WindSpeed   float64      `json:"wind_speed"`
+        Humadity    float64      `json:"humadity"`
+        Condition   string       `json:"condition"`
+        RecordedAt  time.Time    `json:"recorded_at"`
+}
+
+type WeatherDataPlace struct {
+        Temperature int       `json:"temperature"`
+        WindSpeed   float64   `json:"wind_speed"`
+        Humadity    float64   `json:"humadity"`
+        Condition   string    `json:"condition"`
+        RecordedAt  time.Time `json:"recorded_at"`
+}
+
+func ToWeatherDataResponse(data *entities.WeatherData, place *entities.Place) *WeatherDataResponse <span class="cov0" title="0">{
+        return &amp;WeatherDataResponse{
+                PlaceId: data.PlaceId,
+                Place: PlaceRequest{
+                        Name:        place.Name,
+                        Description: place.Description,
+                        Longitude:   place.Longitude,
+                        Latitude:    place.Latitude,
+                        MapImage:    place.MapImage,
+                },
+                Temperature: data.Temperature,
+                WindSpeed:   data.WindSpeed,
+                Humadity:    data.Humadity,
+                Condition:   data.Condition,
+                RecordedAt:  data.RecordedAt,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file14" style="display: none">package errorHandlers
+
+import (
+        "evoting/dto"
+        "evoting/helpers"
+        "github.com/labstack/echo/v4"
+        "net/http"
+)
+
+func HandleError(c echo.Context, err error) error <span class="cov0" title="0">{
+        var statusCode int
+        switch err.(type) </span>{
+        case *BadRequestError:<span class="cov0" title="0">
+                statusCode = http.StatusBadRequest</span>
+        case *InternalServerError:<span class="cov0" title="0">
+                statusCode = http.StatusInternalServerError</span>
+        case *NotFoundError:<span class="cov0" title="0">
+                statusCode = http.StatusNotFound</span>
+        case *UnAuthorizedError:<span class="cov0" title="0">
+                statusCode = http.StatusUnauthorized</span>
+        case *ForbiddenError:<span class="cov0" title="0">
+                statusCode = http.StatusForbidden</span>
+        default:<span class="cov0" title="0">
+                statusCode = http.StatusInternalServerError</span>
+        }
+
+        <span class="cov0" title="0">response := helpers.Response(dto.ResponseParams{
+                StatusCode: statusCode,
+                Message:    err.Error(),
+        })
+
+        return c.JSON(statusCode, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file15" style="display: none">package errorHandlers
+
+type BadRequestError struct {
+        Message string
+}
+
+type InternalServerError struct {
+        Message string
+}
+
+type UnAuthorizedError struct {
+        Message string
+}
+type NotFoundError struct {
+        Message string
+}
+
+type ForbiddenError struct {
+        Message string
+}
+
+func (err *BadRequestError) Error() string <span class="cov8" title="1">{
+        return err.Message
+}</span>
+
+func (err *InternalServerError) Error() string <span class="cov8" title="1">{
+        return err.Message
+}</span>
+
+func (err *NotFoundError) Error() string <span class="cov0" title="0">{
+        return err.Message
+}</span>
+
+func (err *UnAuthorizedError) Error() string <span class="cov8" title="1">{
+        return err.Message
+}</span>
+func (err *ForbiddenError) Error() string <span class="cov0" title="0">{
+        return err.Message
+}</span>
+</pre>
+		
+		<pre class="file" id="file16" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+        "net/http"
+)
+
+type adminHandler struct {
+        usecase usecases.AdminUsecase
+}
+
+func NewAdminHandle(uc usecases.AdminUsecase) *adminHandler <span class="cov0" title="0">{
+        return &amp;adminHandler{uc}
+}</span>
+
+func (h *adminHandler) Login(ctx echo.Context) error <span class="cov0" title="0">{
+        var admin dto.LoginAdminRequest
+        if err := ctx.Bind(&amp;admin); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(admin); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to login. Please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+
+        <span class="cov0" title="0">result, err := h.usecase.Login(&amp;admin)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">ctx.SetCookie(&amp;http.Cookie{
+                Name:     "refreshToken",
+                Value:    result.RefreshToken,
+                Path:     "/",
+                Domain:   "",
+                MaxAge:   24 * 60 * 60,
+                Secure:   true,
+                HttpOnly: true,
+        })
+        loginResponse := dto.ToLoginAdminResponse(result)
+
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "You have successfully logged in",
+                Data:       loginResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *adminHandler) Logout(ctx echo.Context) error <span class="cov0" title="0">{
+        cookie, err := ctx.Cookie("refreshToken")
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.ForbiddenError{Message: err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := h.usecase.Logout(cookie.Value); err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.ForbiddenError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">ctx.SetCookie(&amp;http.Cookie{
+                Name:     "refreshToken",
+                Value:    "",
+                Path:     "/",
+                Domain:   "",
+                MaxAge:   0,
+                Secure:   true,
+                HttpOnly: true,
+        })
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "You have been successfully logged out.",
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file17" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/usecases"
+        "fmt"
+        "github.com/gorilla/websocket"
+        "github.com/labstack/echo/v4"
+        "log"
+        "net/http"
+)
+
+var (
+        upgrader = websocket.Upgrader{
+                CheckOrigin: func(r *http.Request) bool <span class="cov0" title="0">{
+                        return true
+                }</span>,
+        }
+)
+
+type chatbotHandler struct {
+        ChatbotUseCase usecases.ChatbotUsecase
+        PlaceUsecae    usecases.PlaceUsecase
+}
+
+func NewChatbotHandler(usecase usecases.ChatbotUsecase, place usecases.PlaceUsecase) *chatbotHandler <span class="cov0" title="0">{
+        return &amp;chatbotHandler{usecase, place}
+}</span>
+
+func (h *chatbotHandler) HandleWebSocket(c echo.Context) error <span class="cov0" title="0">{
+        ws, err := upgrader.Upgrade(c.Response(), c.Request(), nil)
+        if err != nil </span><span class="cov0" title="0">{
+                log.Println("upgrade:", err)
+                return err
+        }</span>
+        <span class="cov0" title="0">defer ws.Close()
+
+        allPlaces, _, err := h.PlaceUsecae.FindAll(1, 10, "", "", "")
+        if err != nil </span><span class="cov0" title="0">{
+                log.Println("read:", err)
+                return err
+        }</span>
+
+        <span class="cov0" title="0">var chatHistory []dto.ChatHistory
+        for </span><span class="cov0" title="0">{
+                _, msg, err := ws.ReadMessage()
+                if err != nil </span><span class="cov0" title="0">{
+                        log.Println("read:", err)
+                        break</span>
+                }
+
+                <span class="cov0" title="0">chatHistory = append(chatHistory, dto.ChatHistory{PreviousMessages: string(msg)})
+                fmt.Println("msg:", string(msg))
+
+                recommendation, err := h.ChatbotUseCase.GetRecommendation(string(msg), chatHistory, allPlaces)
+                if err != nil </span><span class="cov0" title="0">{
+                        log.Println("get recommendation:", err)
+                        break</span>
+                }
+
+                <span class="cov0" title="0">if err := ws.WriteMessage(websocket.TextMessage, []byte(recommendation)); err != nil </span><span class="cov0" title="0">{
+                        log.Println("write:", err)
+                        break</span>
+                }
+        }
+
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file18" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/usecases"
+        "github.com/google/uuid"
+        "github.com/labstack/echo/v4"
+        "net/http"
+)
+
+type commentHandler struct {
+        usecase usecases.CommentUsecase
+}
+
+func NewCommentHandler(usecase usecases.CommentUsecase) *commentHandler <span class="cov0" title="0">{
+        return &amp;commentHandler{usecase}
+}</span>
+
+func (h *commentHandler) CreateComment(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.CommentRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">idPlace := ctx.Param("id")
+        placeId, err := uuid.Parse(idPlace)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(request); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to create comment. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+        <span class="cov0" title="0">idUser := ctx.Get("userId")
+        userId := idUser.(*uuid.UUID)
+        newComment, err := h.usecase.Create(*userId, placeId, &amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">createResponse := dto.ToCommentResponse(newComment)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusCreated,
+                Message:    "Create successful. Comment has been created.",
+                Data:       createResponse,
+        })
+
+        return ctx.JSON(http.StatusCreated, response)</span>
+}
+
+func (h *commentHandler) GetAllCommentsInPlace(ctx echo.Context) error <span class="cov0" title="0">{
+        idPlace := ctx.Param("id")
+        placeId, err := uuid.Parse(idPlace)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">comments, placeDetail, err := h.usecase.GetAllCommentInPlace(placeId)
+
+        allResponse := dto.CommentFindAllResponse{
+                PlaceDetail: dto.CommentDetail{
+                        PlaceName:   placeDetail.PlaceName,
+                        Province:    placeDetail.Province,
+                        City:        placeDetail.City,
+                        SubDistrict: placeDetail.SubDistrict,
+                        StreetName:  placeDetail.StreetName,
+                },
+                Comments: comments,
+        }
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Successfully retrieved place comments",
+                Data:       allResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *commentHandler) UpdateComment(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.CommentRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">idPlace := ctx.Param("placeId")
+        placeId, err := uuid.Parse(idPlace)
+
+        idComment := ctx.Param("commentId")
+        commentId, err := uuid.Parse(idComment)
+
+        idUser := ctx.Get("userId")
+        userId := idUser.(*uuid.UUID)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">update, err := h.usecase.Update(commentId, *userId, placeId, &amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">createResponse := dto.ToCommentResponse(update)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Update successful. Comment has been updated.",
+                Data:       createResponse,
+        })
+
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *commentHandler) DeleteComment(ctx echo.Context) error <span class="cov0" title="0">{
+        idPlace := ctx.Param("placeId")
+        placeId, err := uuid.Parse(idPlace)
+
+        idComment := ctx.Param("commentId")
+        commentId, err := uuid.Parse(idComment)
+
+        idUser := ctx.Get("userId")
+        userId := idUser.(*uuid.UUID)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := h.usecase.Delete(commentId, *userId, placeId); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Delete successful. Comment has been deleted",
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file19" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/usecases"
+        "github.com/google/uuid"
+        "github.com/labstack/echo/v4"
+        "net/http"
+)
+
+type placeAddressHandler struct {
+        usecase usecases.PlaceAddressUsecase
+}
+
+func NewPlaceAddressHandler(usecase usecases.PlaceAddressUsecase) *placeAddressHandler <span class="cov0" title="0">{
+        return &amp;placeAddressHandler{usecase}
+}</span>
+
+func (h *placeAddressHandler) CreateAddress(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.PlaceAddressRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">idPlace := ctx.Param("placeId")
+        placeId, err := uuid.Parse(idPlace)
+
+        if err := helpers.ValidateRequest(request); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to create place address. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+
+        <span class="cov0" title="0">newAddress, err := h.usecase.Create(placeId, &amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">addressResponse := dto.ToPlaceAddressResponse(newAddress)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusCreated,
+                Message:    "Create successful. place address information has been created.",
+                Data:       addressResponse,
+        })
+        return ctx.JSON(http.StatusCreated, response)</span>
+
+}
+
+func (h *placeAddressHandler) UpdateAddress(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.PlaceAddressRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">idPlace := ctx.Param("placeId")
+        placeId, err := uuid.Parse(idPlace)
+
+        idAddress := ctx.Param("addressId")
+        addressId, err := uuid.Parse(idAddress)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(request); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to update place address. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+
+        <span class="cov0" title="0">updateAddress, err := h.usecase.Update(addressId, placeId, &amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">addressResponse := dto.ToPlaceAddressResponse(updateAddress)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Update successful. place address information has been updated.",
+                Data:       addressResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+
+}
+
+func (h *placeAddressHandler) DeleteAddress(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.PlaceAddressRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">idPlace := ctx.Param("placeId")
+        placeId, err := uuid.Parse(idPlace)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">idAddress := ctx.Param("addressId")
+        addressId, err := uuid.Parse(idAddress)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := h.usecase.Delete(addressId, placeId); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Delete successful. place address information has been deleted.",
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file20" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/usecases"
+        "github.com/google/uuid"
+        "github.com/labstack/echo/v4"
+        "math"
+        "net/http"
+        "strconv"
+)
+
+type placeHandler struct {
+        usecase usecases.PlaceUsecase
+}
+
+func NewPlaceHandler(uc usecases.PlaceUsecase) *placeHandler <span class="cov0" title="0">{
+        return &amp;placeHandler{uc}
+}</span>
+
+func (h *placeHandler) FindAllPlaces(ctx echo.Context) error <span class="cov0" title="0">{
+        page, _ := strconv.Atoi(ctx.QueryParam("page"))
+        if page == 0 </span><span class="cov0" title="0">{
+                page = 1
+        }</span>
+        <span class="cov0" title="0">limit, _ := strconv.Atoi(ctx.QueryParam("limit"))
+        if limit == 0 </span><span class="cov0" title="0">{
+                limit = 10
+        }</span>
+        <span class="cov0" title="0">sortBy := ctx.QueryParam("sort_by")
+        sortType := ctx.QueryParam("sort_type")
+        if sortBy == "" </span><span class="cov0" title="0">{
+                sortBy = "updated_at"
+                sortType = "desc"
+        }</span>
+        <span class="cov0" title="0">if sortType == "" </span><span class="cov0" title="0">{
+                sortType = "asc"
+        }</span>
+
+        <span class="cov0" title="0">searchQuery := ctx.QueryParam("search")
+        if searchQuery == "" </span><span class="cov0" title="0">{
+                searchQuery = ""
+        }</span>
+
+        <span class="cov0" title="0">places, totalPtr, err := h.usecase.FindAll(page, limit, sortBy, sortType, searchQuery)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">total := *totalPtr
+        lastPage := int(math.Ceil(float64(total) / float64(limit)))
+        if page &gt; lastPage </span><span class="cov0" title="0">{
+                page = lastPage
+        }</span>
+
+        <span class="cov0" title="0">usersResponse := dto.ToFindAllPlacesResponse(places)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode:  http.StatusOK,
+                Message:     "Successfully retrieved places data",
+                Data:        usersResponse,
+                IsPaginate:  true,
+                Total:       total,
+                PerPage:     limit,
+                CurrentPage: page,
+                LastPage:    lastPage,
+                SortBy:      sortBy,
+                SortType:    sortType,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *placeHandler) FindPlaceById(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+        placeId, err := uuid.Parse(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">place, err := h.usecase.FindById(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">byIdResponse := dto.ToPlaceByIdResponse(place)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Successfully retrieved user data",
+                Data:       byIdResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *placeHandler) CreatePlace(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.PlaceRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(request); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to create place. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+        <span class="cov0" title="0">place, address, err := helpers.GenerateLocationDetail(&amp;request)
+        request.Latitude = place.Latitude
+        request.Longitude = place.Longitude
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">newPlace, err := h.usecase.Create(&amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">address.PlaceId = newPlace.Id
+
+        newAddress, err := h.usecase.CreateAddress(address)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">placeResponse := dto.ToPlaceResponse(newPlace, newAddress)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusCreated,
+                Message:    "Create successful. Place information has been created.",
+                Data:       placeResponse,
+        })
+        return ctx.JSON(http.StatusCreated, response)</span>
+}
+
+func (h *placeHandler) Delete(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+        placeId, err := uuid.Parse(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+
+        <span class="cov0" title="0">if err := h.usecase.Delete(placeId); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Delete successful. User information has been deleted.",
+                Data:       nil,
+        })
+
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *placeHandler) UpdatePlace(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+        placeId, err := uuid.Parse(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">var request dto.PlaceRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(request); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to create place. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+        <span class="cov0" title="0">place, address, err := helpers.GenerateLocationDetail(&amp;request)
+        request.Latitude = place.Latitude
+        request.Longitude = place.Longitude
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">newPlace, err := h.usecase.Update(placeId, &amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">address.PlaceId = newPlace.Id
+
+        newAddress, err := h.usecase.UpdateAddress(address)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">placeResponse := dto.ToPlaceResponse(newPlace, newAddress)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Update successful. Place information has been updated.",
+                Data:       placeResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file21" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/usecases"
+        "github.com/google/uuid"
+        "github.com/labstack/echo/v4"
+        "net/http"
+)
+
+type UserAddressHandler struct {
+        usecaseAddress usecases.UserAddressUsecase
+}
+
+func NewUserAddressHandler(usecaseAddress usecases.UserAddressUsecase) *UserAddressHandler <span class="cov0" title="0">{
+        return &amp;UserAddressHandler{usecaseAddress}
+}</span>
+
+func (h *UserAddressHandler) Create(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.CreateUserAddressRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.InternalServerError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(request); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to create address. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+
+        <span class="cov0" title="0">id := ctx.Get("userId")
+        userId := id.(*uuid.UUID)
+        request.UserId = *userId
+        newAddress, err := h.usecaseAddress.Create(&amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">addressResponse := dto.ToUserAddressResponse(newAddress)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusCreated,
+                Message:    "Create successful. User address information has been created.",
+                Data:       addressResponse,
+        })
+        return ctx.JSON(http.StatusCreated, response)</span>
+}
+
+func (h *UserAddressHandler) Update(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.CreateUserAddressRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.InternalServerError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(request); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to update address. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+
+        <span class="cov0" title="0">id := ctx.Get("userId")
+        userId := id.(*uuid.UUID)
+        request.UserId = *userId
+        newAddress, err := h.usecaseAddress.Update(&amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">addressResponse := dto.ToUserAddressResponse(newAddress)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Update successful. User address information has been updated.",
+                Data:       addressResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *UserAddressHandler) Delete(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Get("userId")
+        userId := id.(*uuid.UUID)
+        err := h.usecaseAddress.Delete(*userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Delete successful. User address information has been deleted.",
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *UserAddressHandler) GetDetailUser(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Get("userId")
+        userId := id.(*uuid.UUID)
+        user, err := h.usecaseAddress.GetDetailUser(*userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">byIdResponse := dto.ToByIdResponse(user)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Successfully retrieved user data",
+                Data:       byIdResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file22" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/usecases"
+        "github.com/google/uuid"
+        "github.com/labstack/echo/v4"
+        "math"
+        "net/http"
+        "strconv"
+)
+
+type userHandler struct {
+        usecase usecases.UserUsecase
+}
+
+func NewUserHandler(uc usecases.UserUsecase) *userHandler <span class="cov0" title="0">{
+        return &amp;userHandler{uc}
+}</span>
+
+func (h *userHandler) Create(ctx echo.Context) error <span class="cov0" title="0">{
+        var user dto.CreateRequest
+        if err := ctx.Bind(&amp;user); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(user); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to register. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+        <span class="cov0" title="0">newUser, err := h.usecase.Create(&amp;user)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">createResponse := dto.ToCreateResponse(newUser)
+
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusCreated,
+                Message:    "Congratulations! Your registration was successful. Please login to continue",
+                Data:       createResponse,
+        })
+
+        return ctx.JSON(http.StatusCreated, response)</span>
+}
+
+func (h *userHandler) Login(ctx echo.Context) error <span class="cov0" title="0">{
+        var user dto.LoginRequest
+        if err := ctx.Bind(&amp;user); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(user); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to login. Please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+
+        <span class="cov0" title="0">result, err := h.usecase.Login(&amp;user)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">ctx.SetCookie(&amp;http.Cookie{
+                Name:     "refreshToken",
+                Value:    result.RefreshToken,
+                Path:     "/",
+                Domain:   "",
+                MaxAge:   24 * 60 * 60,
+                Secure:   true,
+                HttpOnly: true,
+        })
+        loginResponse := dto.ToLoginResponse(result)
+
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "You have successfully logged in",
+                Data:       loginResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *userHandler) FindUserById(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+        userId, err := uuid.Parse(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">user, err := h.usecase.FindById(userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">byIdResponse := dto.ToByIdResponse(user)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Successfully retrieved user data",
+                Data:       byIdResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *userHandler) FindAllUsers(ctx echo.Context) error <span class="cov0" title="0">{
+        page, _ := strconv.Atoi(ctx.QueryParam("page"))
+        if page == 0 </span><span class="cov0" title="0">{
+                page = 1
+        }</span>
+        <span class="cov0" title="0">limit, _ := strconv.Atoi(ctx.QueryParam("limit"))
+        if limit == 0 </span><span class="cov0" title="0">{
+                limit = 10
+        }</span>
+        <span class="cov0" title="0">sortBy := ctx.QueryParam("sort_by")
+        sortType := ctx.QueryParam("sort_type")
+        if sortBy == "" </span><span class="cov0" title="0">{
+                sortBy = "updated_at"
+                sortType = "desc"
+        }</span>
+        <span class="cov0" title="0">if sortType == "" </span><span class="cov0" title="0">{
+                sortType = "asc"
+        }</span>
+        <span class="cov0" title="0">searchQuery := ctx.QueryParam("search")
+        if searchQuery == "" </span><span class="cov0" title="0">{
+                searchQuery = ""
+        }</span>
+
+        <span class="cov0" title="0">users, totalPtr, err := h.usecase.FindAll(page, limit, sortBy, sortType, searchQuery)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">total := *totalPtr
+        lastPage := int(math.Ceil(float64(total) / float64(limit)))
+        if page &gt; lastPage </span><span class="cov0" title="0">{
+                page = lastPage
+        }</span>
+        <span class="cov0" title="0">usersResponse := dto.ToFindAllResponse(users)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode:  http.StatusOK,
+                Message:     "Successfully retrieved user data",
+                Data:        usersResponse,
+                IsPaginate:  true,
+                Total:       total,
+                PerPage:     limit,
+                CurrentPage: page,
+                LastPage:    lastPage,
+                SortBy:      sortBy,
+                SortType:    sortType,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *userHandler) UpdateUser(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+        userId, err := uuid.Parse(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">image, err := ctx.FormFile("image")
+
+        user := dto.UpdateRequest{
+                Email:    ctx.FormValue("email"),
+                Fullname: ctx.FormValue("fullname"),
+                Password: ctx.FormValue("password"),
+                Image:    image,
+        }
+        if err := helpers.ValidateRequest(user); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to update user. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+
+        <span class="cov0" title="0">updateUser, err := h.usecase.Update(userId, &amp;user)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+
+        <span class="cov0" title="0">updateResponse := dto.ToByIdResponse(updateUser)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Update successful. User information has been updated.",
+                Data:       updateResponse,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *userHandler) DeleteUser(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+        userId, err := uuid.Parse(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+
+        <span class="cov0" title="0">if err := h.usecase.Delete(userId); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Delete successful. User information has been deleted.",
+                Data:       nil,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *userHandler) Logout(ctx echo.Context) error <span class="cov0" title="0">{
+        cookie, err := ctx.Cookie("refreshToken")
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.ForbiddenError{Message: err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := h.usecase.Logout(cookie.Value); err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.ForbiddenError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">ctx.SetCookie(&amp;http.Cookie{
+                Name:     "refreshToken",
+                Value:    "",
+                Path:     "/",
+                Domain:   "",
+                MaxAge:   0,
+                Secure:   true,
+                HttpOnly: true,
+        })
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "You have been successfully logged out.",
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file23" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/usecases"
+        "github.com/google/uuid"
+        "github.com/labstack/echo/v4"
+        "net/http"
+)
+
+type voteHandler struct {
+        usecase usecases.VoteUsecase
+}
+
+func NewVoteHandler(usecase usecases.VoteUsecase) *voteHandler <span class="cov0" title="0">{
+        return &amp;voteHandler{usecase}
+}</span>
+
+func (h *voteHandler) GetPlaceWithTotalVotes(ctx echo.Context) error <span class="cov0" title="0">{
+        votes, slice, err := h.usecase.GetPlaceWithTotalVotes()
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+
+        <span class="cov0" title="0">voteData := dto.VoteData{
+                Votes: votes,
+                DetailVote: dto.Detail{
+                        TotalVoters:        slice[0],
+                        TotalVotesReceived: slice[1],
+                },
+        }
+
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "success",
+                Data:       voteData,
+        })
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *voteHandler) CreateVote(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.VoteRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.InternalServerError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := helpers.ValidateRequest(request); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(http.StatusBadRequest, dto.ResponseError{
+                        Status:     false,
+                        StatusCode: http.StatusBadRequest,
+                        Message:    "Failed to create vote. please ensure your input correctly",
+                        Data:       err,
+                })
+        }</span>
+        <span class="cov0" title="0">id := ctx.Get("userId")
+        userId := id.(*uuid.UUID)
+        newVote, err := h.usecase.Create(*userId, &amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">voteResponse := dto.ToVoteResponse(newVote)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusCreated,
+                Message:    "Your vote has been recorded successfully. Thank you!",
+                Data:       voteResponse,
+        })
+        return ctx.JSON(http.StatusCreated, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file24" style="display: none">package handlers
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/usecases"
+        "github.com/google/uuid"
+        "github.com/labstack/echo/v4"
+        "net/http"
+)
+
+type weatherDataHandler struct {
+        usecase usecases.WeatherDataUsecase
+}
+
+func NewWeatherDataHandler(usecase usecases.WeatherDataUsecase) *weatherDataHandler <span class="cov0" title="0">{
+        return &amp;weatherDataHandler{usecase}
+}</span>
+
+func (h *weatherDataHandler) Create(ctx echo.Context) error <span class="cov0" title="0">{
+        var request dto.WeatherDataRequest
+        if err := ctx.Bind(&amp;request); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">weatherData, err := h.usecase.Create(&amp;request)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">place, err := h.usecase.GetPlace(weatherData.PlaceId)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.InternalServerError{Message: err.Error()})
+        }</span>
+
+        <span class="cov0" title="0">weatherResponse := dto.ToWeatherDataResponse(weatherData, place)
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusCreated,
+                Message:    "Create successful. Weather information has been created.",
+                Data:       weatherResponse,
+        })
+
+        return ctx.JSON(http.StatusCreated, response)</span>
+}
+
+func (h *weatherDataHandler) Update(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+        placeId, err := uuid.Parse(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">weatherData, err := h.usecase.Update(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">place, err := h.usecase.GetPlace(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.InternalServerError{Message: err.Error()})
+        }</span>
+
+        <span class="cov0" title="0">weatherResponse := dto.ToWeatherDataResponse(weatherData, place)
+
+        response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Update successful. Weather information has been updated.",
+                Data:       weatherResponse,
+        })
+
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+
+func (h *weatherDataHandler) Delete(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+        placeId, err := uuid.Parse(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, &amp;errorHandlers.BadRequestError{err.Error()})
+        }</span>
+        <span class="cov0" title="0">if err := h.usecase.Delete(placeId); err != nil </span><span class="cov0" title="0">{
+                return errorHandlers.HandleError(ctx, err)
+        }</span>
+        <span class="cov0" title="0">response := helpers.Response(dto.ResponseParams{
+                StatusCode: http.StatusOK,
+                Message:    "Delete successful. Weather information has been deleted.",
+        })
+
+        return ctx.JSON(http.StatusOK, response)</span>
+}
+</pre>
+		
+		<pre class="file" id="file25" style="display: none">package helpers
+
+import (
+        "context"
+        "fmt"
+        "github.com/cloudinary/cloudinary-go"
+        "github.com/cloudinary/cloudinary-go/api/uploader"
+        "github.com/spf13/viper"
+        "mime/multipart"
+        "path/filepath"
+        "strings"
+)
+
+func DeleteImage(imageURL string) error <span class="cov0" title="0">{
+        parts := strings.Split(imageURL, "/")
+        publicIDWithExtension := parts[len(parts)-2] + "/" + parts[len(parts)-1]
+        publicID := strings.TrimSuffix(publicIDWithExtension, filepath.Ext(publicIDWithExtension))
+
+        cloudinaryUrl := viper.GetString("CLOUDINARY_URL")
+        c, err := cloudinary.NewFromURL(cloudinaryUrl)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">fmt.Println(publicID)
+        _, err = c.Upload.Destroy(context.Background(), uploader.DestroyParams{
+                PublicID: publicID,
+        })
+        if err != nil </span><span class="cov0" title="0">{
+                return fmt.Errorf("failed to delete image with public ID '%s': %w", publicID, err)
+        }</span>
+
+        <span class="cov0" title="0">return nil</span>
+
+}
+
+func UploadImageToCloudinary(body interface{}, path string) (string, error) <span class="cov0" title="0">{
+        cloudinaryUrl := viper.GetString("CLOUDINARY_URL")
+        c, err := cloudinary.NewFromURL(cloudinaryUrl)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+
+        <span class="cov0" title="0">var uploadResult *uploader.UploadResult
+        switch v := body.(type) </span>{
+        case multipart.FileHeader:<span class="cov0" title="0">
+                file, err := v.Open()
+                if err != nil </span><span class="cov0" title="0">{
+                        return "", err
+                }</span>
+                <span class="cov0" title="0">defer file.Close()
+
+                uploadResult, err = c.Upload.Upload(
+                        context.Background(),
+                        file,
+                        uploader.UploadParams{
+                                Folder: path,
+                        },
+                )
+                if err != nil </span><span class="cov0" title="0">{
+                        return "", err
+                }</span>
+        default:<span class="cov0" title="0">
+                uploadResult, err = c.Upload.Upload(
+                        context.Background(),
+                        body,
+                        uploader.UploadParams{
+                                Folder: path,
+                        },
+                )
+                if err != nil </span><span class="cov0" title="0">{
+                        return "", err
+                }</span>
+        }
+
+        <span class="cov0" title="0">return uploadResult.SecureURL, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file26" style="display: none">package helpers
+
+import "golang.org/x/crypto/bcrypt"
+
+func HashPassword(request string) (string, error) <span class="cov8" title="1">{
+        hashPass, err := bcrypt.GenerateFromPassword([]byte(request), bcrypt.DefaultCost)
+        return string(hashPass), err
+}</span>
+
+func VerifyPassword(hashPass string, password string) error <span class="cov8" title="1">{
+        err := bcrypt.CompareHashAndPassword([]byte(hashPass), []byte(password))
+        return err
+}</span>
+</pre>
+		
+		<pre class="file" id="file27" style="display: none">package helpers
+
+import (
+        "encoding/json"
+        "evoting/dto"
+        "evoting/entities"
+        "fmt"
+        "github.com/spf13/viper"
+        "net/http"
+)
+
+type ResponseMapsApi struct {
+        ResourceSets []struct {
+                Resources []struct {
+                        Name    string `json:"name"`
+                        Address struct {
+                                AdminDistrict    string `json:"adminDistrict"`
+                                AdminDistrict2   string `json:"adminDistrict2"`
+                                CountryRegion    string `json:"countryRegion"`
+                                FormattedAddress string `json:"formattedAddress"`
+                                Locality         string `json:"locality"`
+                        } `json:"address"`
+                        Point struct {
+                                Coordinates []float64 `json:"coordinates"`
+                        } `json:"point"`
+                } `json:"resources"`
+        } `json:"resourceSets"`
+}
+
+func init() <span class="cov8" title="1">{
+        viper.AutomaticEnv()
+}</span>
+
+func GenerateLocationDetail(request *dto.PlaceRequest) (*entities.Place, *entities.PlaceAddress, error) <span class="cov0" title="0">{
+        apikey := viper.GetString("MAPS_API_KEY")
+        geocodingUrl := viper.GetString("MAPS_GEOCODING_URL")
+        query := request.Name
+
+        url := fmt.Sprintf(geocodingUrl, query, apikey)
+        resp, err := http.Get(url)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+
+        var response ResponseMapsApi
+        if err := json.NewDecoder(resp.Body).Decode(&amp;response); err != nil </span><span class="cov0" title="0">{
+                return nil, nil, err
+        }</span>
+
+        <span class="cov0" title="0">var res *struct {
+                Name    string `json:"name"`
+                Address struct {
+                        AdminDistrict    string `json:"adminDistrict"`
+                        AdminDistrict2   string `json:"adminDistrict2"`
+                        CountryRegion    string `json:"countryRegion"`
+                        FormattedAddress string `json:"formattedAddress"`
+                        Locality         string `json:"locality"`
+                } `json:"address"`
+                Point struct {
+                        Coordinates []float64 `json:"coordinates"`
+                } `json:"point"`
+        }
+        for _, r := range response.ResourceSets[0].Resources </span><span class="cov0" title="0">{
+                if r.Address.AdminDistrict2 != "" &amp;&amp; r.Address.Locality != "" </span><span class="cov0" title="0">{
+                        res = &amp;r
+                        break</span>
+                }
+        }
+
+        <span class="cov0" title="0">if res == nil </span><span class="cov0" title="0">{
+                if len(response.ResourceSets) &gt; 0 &amp;&amp; len(response.ResourceSets[0].Resources) &gt; 0 </span><span class="cov0" title="0">{
+                        res = &amp;response.ResourceSets[0].Resources[0]
+                }</span> else<span class="cov0" title="0"> {
+                        return nil, nil, fmt.Errorf("no address data found")
+                }</span>
+        }
+
+        <span class="cov0" title="0">place := &amp;entities.Place{
+                Name:      res.Name,
+                Longitude: res.Point.Coordinates[1],
+                Latitude:  res.Point.Coordinates[0],
+        }
+        address := &amp;entities.PlaceAddress{
+                Province:    res.Address.AdminDistrict,
+                City:        res.Address.AdminDistrict2,
+                SubDistrict: res.Address.Locality,
+        }
+        return place, address, nil</span>
+}
+
+func GenerateImageLocation(place *dto.PlaceRequest) string <span class="cov0" title="0">{
+        longLat := fmt.Sprintf("%.8f,%.8f", place.Latitude, place.Longitude)
+        apikey := viper.GetString("MAPS_API_KEY")
+        imageryUrl := viper.GetString("MAPS_IMAGERY_URL")
+        url := fmt.Sprintf(imageryUrl, longLat, longLat, apikey)
+
+        fmt.Println(url)
+        resp, err := http.Get(url)
+        if err != nil </span><span class="cov0" title="0">{
+                return ""
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+        image, err := UploadImageToCloudinary(resp.Body, "places")
+        if err != nil </span><span class="cov0" title="0">{
+                return ""
+        }</span>
+        <span class="cov0" title="0">return image</span>
+}
+</pre>
+		
+		<pre class="file" id="file28" style="display: none">package helpers
+
+import "evoting/dto"
+
+type ResponseWithData struct {
+        Status     bool   `json:"status"`
+        StatusCode int    `json:"status_code"`
+        Message    string `json:"message"`
+        Data       any    `json:"data"`
+}
+
+type ResponseWithPaginate struct {
+        Status     bool     `json:"status"`
+        StatusCode int      `json:"status_code"`
+        Message    string   `json:"message"`
+        Data       any      `json:"data"`
+        Pagination Paginate `json:"pagination"`
+        Sorting    Sort     `json:"sorting"`
+}
+
+type Paginate struct {
+        Total       int64 `json:"total"`
+        PerPage     int   `json:"per_page"`
+        CurrentPage int   `json:"current_page"`
+        LastPage    int   `json:"last_page"`
+}
+
+type Sort struct {
+        SortBy   string `json:"sort_by"`
+        SortType string `json:"sort_type"`
+}
+type ResponseWithoutData struct {
+        Status     bool   `json:"status"`
+        StatusCode int    `json:"status_code"`
+        Message    string `json:"message"`
+}
+
+func Response(param dto.ResponseParams) any <span class="cov0" title="0">{
+        var status bool
+        var response any
+        if param.StatusCode &gt;= 200 &amp;&amp; param.StatusCode &lt; 300 </span><span class="cov0" title="0">{
+                status = true
+        }</span> else<span class="cov0" title="0"> {
+                status = false
+        }</span>
+
+        <span class="cov0" title="0">if param.Data != nil </span><span class="cov0" title="0">{
+                if param.IsPaginate == true </span><span class="cov0" title="0">{
+                        response = ResponseWithPaginate{
+                                Status:     status,
+                                StatusCode: param.StatusCode,
+                                Message:    param.Message,
+                                Data:       param.Data,
+                                Pagination: Paginate{
+                                        Total:       param.Total,
+                                        PerPage:     param.PerPage,
+                                        CurrentPage: param.CurrentPage,
+                                        LastPage:    param.LastPage,
+                                },
+                                Sorting: Sort{
+                                        SortBy:   param.SortBy,
+                                        SortType: param.SortType,
+                                },
+                        }
+
+                }</span> else<span class="cov0" title="0"> {
+                        response = ResponseWithData{
+                                Status:     status,
+                                StatusCode: param.StatusCode,
+                                Message:    param.Message,
+                                Data:       param.Data,
+                        }
+                }</span>
+        } else<span class="cov0" title="0"> {
+                response = ResponseWithoutData{
+                        Status:     status,
+                        StatusCode: param.StatusCode,
+                        Message:    param.Message,
+                }
+        }</span>
+        <span class="cov0" title="0">return response</span>
+
+}
+</pre>
+		
+		<pre class="file" id="file29" style="display: none">package helpers
+
+import (
+        "errors"
+        "evoting/entities"
+        "github.com/golang-jwt/jwt"
+        "github.com/google/uuid"
+        "github.com/spf13/viper"
+        "time"
+)
+
+type JWTClaims struct {
+        Id      uuid.UUID
+        Email   string
+        IsAdmin bool
+        jwt.StandardClaims
+}
+
+func init() <span class="cov8" title="1">{
+        viper.AutomaticEnv()
+}</span>
+
+func GenerateAccessToken(user interface{}) (string, error) <span class="cov8" title="1">{
+        accessTokenSecret := []byte(viper.GetString("ACCESS_TOKEN_SECRET"))
+        var isAdmin bool
+
+        switch user.(type) </span>{
+        case *entities.User:<span class="cov8" title="1">
+                isAdmin = false</span>
+        case *entities.Admin:<span class="cov8" title="1">
+                isAdmin = true</span>
+        default:<span class="cov0" title="0">
+                return "", errors.New("invalid user type")</span>
+        }
+
+        <span class="cov8" title="1">var userID uuid.UUID
+        var userEmail string
+
+        switch u := user.(type) </span>{
+        case *entities.User:<span class="cov8" title="1">
+                userID = u.Id
+                userEmail = u.Email</span>
+        case *entities.Admin:<span class="cov8" title="1">
+                userID = u.Id
+                userEmail = u.Email</span>
+        default:<span class="cov0" title="0">
+                return "", errors.New("invalid user type")</span>
+        }
+
+        <span class="cov8" title="1">claims := JWTClaims{
+                Id:      userID,
+                Email:   userEmail,
+                IsAdmin: isAdmin,
+                StandardClaims: jwt.StandardClaims{
+                        ExpiresAt: time.Now().Add(30 * time.Minute).Unix(),
+                        NotBefore: time.Now().Unix(),
+                        IssuedAt:  time.Now().Unix(),
+                },
+        }
+
+        token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+        signedString, err := token.SignedString(accessTokenSecret)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov8" title="1">return signedString, nil</span>
+}
+
+func GenerateRefreshToken(user interface{}) (string, error) <span class="cov8" title="1">{
+        refreshTokenSecret := []byte(viper.GetString("REFRESH_TOKEN_SECRET"))
+        var isAdmin bool
+
+        switch user.(type) </span>{
+        case *entities.User:<span class="cov8" title="1">
+                isAdmin = false</span>
+        case *entities.Admin:<span class="cov8" title="1">
+                isAdmin = true</span>
+        default:<span class="cov0" title="0">
+                return "", errors.New("invalid user type")</span>
+        }
+
+        <span class="cov8" title="1">var userID uuid.UUID
+        var userEmail string
+
+        switch u := user.(type) </span>{
+        case *entities.User:<span class="cov8" title="1">
+                userID = u.Id
+                userEmail = u.Email</span>
+        case *entities.Admin:<span class="cov8" title="1">
+                userID = u.Id
+                userEmail = u.Email</span>
+        default:<span class="cov0" title="0">
+                return "", errors.New("invalid user type")</span>
+        }
+
+        <span class="cov8" title="1">claims := JWTClaims{
+                Id:      userID,
+                Email:   userEmail,
+                IsAdmin: isAdmin,
+                StandardClaims: jwt.StandardClaims{
+                        ExpiresAt: time.Now().Add(24 * time.Hour).Unix(),
+                        NotBefore: time.Now().Unix(),
+                        IssuedAt:  time.Now().Unix(),
+                },
+        }
+
+        token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+        signedString, err := token.SignedString(refreshTokenSecret)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov8" title="1">return signedString, nil</span>
+}
+
+func ParseJWT(tokenStr string) (*JWTClaims, error) <span class="cov0" title="0">{
+        accessTokenSecret := []byte(viper.GetString("ACCESS_TOKEN_SECRET"))
+        token, err := jwt.ParseWithClaims(tokenStr, &amp;JWTClaims{}, func(token *jwt.Token) (interface{}, error) </span><span class="cov0" title="0">{
+                return accessTokenSecret, nil
+        }</span>)
+
+        <span class="cov0" title="0">if err != nil || !token.Valid </span><span class="cov0" title="0">{
+                if err == jwt.ErrSignatureInvalid </span><span class="cov0" title="0">{
+                        return nil, errors.New("Invalid token signature")
+                }</span>
+                <span class="cov0" title="0">return nil, errors.New("Your token is expired")</span>
+        }
+
+        <span class="cov0" title="0">claims := token.Claims.(*JWTClaims)
+        if claims == nil </span><span class="cov0" title="0">{
+                return nil, errors.New("Your token is expired")
+        }</span>
+
+        <span class="cov0" title="0">return claims, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file30" style="display: none">package helpers
+
+import (
+        "fmt"
+        "github.com/go-playground/validator/v10"
+        "mime/multipart"
+        "net/http"
+)
+
+type ApiError struct {
+        Field   string
+        Message string
+}
+
+func errorMessage(fieldError validator.FieldError) string <span class="cov0" title="0">{
+        switch fieldError.Tag() </span>{
+        case "required":<span class="cov0" title="0">
+                return fmt.Sprintf("Field %s is required", fieldError.Field())</span>
+        case "number":<span class="cov0" title="0">
+                return fmt.Sprintf("Field %s must be a number", fieldError.Field())</span>
+        case "startswith":<span class="cov0" title="0">
+                //tagValue := fieldError.Param()
+                return fmt.Sprintf("Field %s must start with %s", fieldError.Field(), fieldError.Param())</span>
+        case "min":<span class="cov0" title="0">
+                return fmt.Sprintf("Field %s must greater than  %s", fieldError.Field(), fieldError.Param())</span>
+        case "max":<span class="cov0" title="0">
+                return fmt.Sprintf("Field %s must less than  %s", fieldError.Field(), fieldError.Param())</span>
+        case "len":<span class="cov0" title="0">
+                return fmt.Sprintf("Field %s must be  %s characters", fieldError.Field(), fieldError.Param())</span>
+        case "email":<span class="cov0" title="0">
+                return fmt.Sprintf("Field %s must be  a valid email", fieldError.Field())</span>
+        case "maxFileSize":<span class="cov0" title="0">
+                return fmt.Sprintf("Field %s must be  an image", fieldError.Field())</span>
+        }
+
+        <span class="cov0" title="0">return fieldError.Error()</span>
+}
+func IsValidImageType(fileHeader *multipart.FileHeader) bool <span class="cov8" title="1">{
+        allowedTypes := map[string]bool{
+                "image/jpeg": true,
+                "image/jpg":  true,
+                "image/png":  true,
+        }
+
+        file, err := fileHeader.Open()
+        if err != nil </span><span class="cov8" title="1">{
+                return false
+        }</span>
+        <span class="cov0" title="0">defer file.Close()
+
+        buffer := make([]byte, 512)
+        _, err = file.Read(buffer)
+        if err != nil </span><span class="cov0" title="0">{
+                return false
+        }</span>
+
+        <span class="cov0" title="0">fileType := http.DetectContentType(buffer)
+        if _, ok := allowedTypes[fileType]; !ok </span><span class="cov0" title="0">{
+                return false
+        }</span>
+
+        <span class="cov0" title="0">return true</span>
+}
+
+func IsValidImageSize(fileHeader *multipart.FileHeader) bool <span class="cov0" title="0">{
+        maxSize := 2 * 1024 * 1014
+        fileSize := fileHeader.Size
+        fmt.Println(fileSize, maxSize)
+        if fileSize &gt; int64(maxSize) </span><span class="cov0" title="0">{
+                return false
+        }</span>
+        <span class="cov0" title="0">return true</span>
+}
+
+func ValidateRequest(str interface{}) interface{} <span class="cov0" title="0">{
+        validate := validator.New()
+
+        if err := validate.Struct(str); err != nil </span><span class="cov0" title="0">{
+                ve := err.(validator.ValidationErrors)
+                errors := make([]ApiError, len(ve))
+                for i, fieldError := range ve </span><span class="cov0" title="0">{
+                        errors[i] = ApiError{fieldError.Field(), errorMessage(fieldError)}
+                }</span>
+                <span class="cov0" title="0">return errors</span>
+        }
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file31" style="display: none">package helpers
+
+import (
+        "encoding/json"
+        "evoting/entities"
+        "fmt"
+        "github.com/spf13/viper"
+        "math"
+        "net/http"
+)
+
+type ResponseWeatherApi struct {
+        Main struct {
+                Temp     float64 `json:"temp"`
+                Humidity float64 `json:"humidity"`
+        } `json:"main"`
+        Wind struct {
+                Speed float64 `json:"speed"`
+        } `json:"wind"`
+        Weather []struct {
+                Main string `json:"main"`
+        } `json:"weather"`
+}
+
+func GenerateWeatherData(latitude, longitude float64) (*entities.WeatherData, error) <span class="cov0" title="0">{
+        apiKey := viper.GetString("WEATHER_API_KEY")
+        apiUrl := viper.GetString("WEATHER_API_URL")
+
+        url := fmt.Sprintf(apiUrl, latitude, longitude, apiKey)
+        resp, err := http.Get(url)
+
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">defer resp.Body.Close()
+
+        var response ResponseWeatherApi
+        if err := json.NewDecoder(resp.Body).Decode(&amp;response); err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">celcius := response.Main.Temp - 273.15
+
+        weatherData := &amp;entities.WeatherData{
+                Temperature: int(math.Round(celcius)),
+                WindSpeed:   response.Wind.Speed,
+                Humadity:    response.Main.Humidity,
+                Condition:   response.Weather[0].Main,
+        }
+
+        return weatherData, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file32" style="display: none">package main
+
+import (
+        "evoting/config"
+        "evoting/middlewares"
+        "evoting/routers"
+        "evoting/schedulers"
+        "fmt"
+        "github.com/labstack/echo/v4"
+)
+
+func main() <span class="cov0" title="0">{
+        config.LoadConfig()
+        config.LoadDb()
+        e := echo.New()
+        middlewares.LogMiddleware(e)
+
+        go schedulers.StartScheduler()
+        e.Static("/images", "public/images")
+        routers.SetupRouter(e)
+        e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", config.ENV.PORT)))
+}</span>
+</pre>
+		
+		<pre class="file" id="file33" style="display: none">package middlewares
+
+import (
+        "evoting/helpers"
+        "fmt"
+        "github.com/labstack/echo/v4"
+        "net/http"
+        "strings"
+)
+
+func AdminOnlyMiddleware(next echo.HandlerFunc) echo.HandlerFunc <span class="cov0" title="0">{
+        return func(c echo.Context) error </span><span class="cov0" title="0">{
+                authHeader := c.Request().Header.Get("Authorization")
+                if authHeader == "" </span><span class="cov0" title="0">{
+                        return echo.NewHTTPError(http.StatusUnauthorized, "Token is not provided")
+                }</span>
+
+                <span class="cov0" title="0">if !strings.HasPrefix(authHeader, "bearer ") </span><span class="cov0" title="0">{
+                        return echo.NewHTTPError(http.StatusBadRequest, "Invalid token format. Use Bearer token")
+                }</span>
+                <span class="cov0" title="0">tokenStr := strings.TrimPrefix(authHeader, "bearer ")
+
+                claims, err := helpers.ParseJWT(tokenStr)
+                if err != nil </span><span class="cov0" title="0">{
+                        return echo.NewHTTPError(http.StatusInternalServerError, err)
+                }</span>
+                <span class="cov0" title="0">isAdmin := claims.IsAdmin
+                fmt.Println(isAdmin)
+                if !isAdmin </span><span class="cov0" title="0">{
+                        return echo.NewHTTPError(http.StatusForbidden, "Only admins are allowed")
+                }</span>
+
+                <span class="cov0" title="0">return next(c)</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file34" style="display: none">package middlewares
+
+import (
+        "evoting/helpers"
+        "github.com/labstack/echo/v4"
+        "net/http"
+        "strings"
+)
+
+func JWTMiddleware(next echo.HandlerFunc) echo.HandlerFunc <span class="cov0" title="0">{
+        return func(c echo.Context) error </span><span class="cov0" title="0">{
+                authHeader := c.Request().Header.Get("Authorization")
+                if authHeader == "" </span><span class="cov0" title="0">{
+                        return echo.NewHTTPError(http.StatusUnauthorized, "Token is not provided")
+                }</span>
+
+                <span class="cov0" title="0">if !strings.HasPrefix(authHeader, "bearer ") </span><span class="cov0" title="0">{
+                        return echo.NewHTTPError(http.StatusBadRequest, "Invalid token format. Use Bearer token")
+                }</span>
+                <span class="cov0" title="0">tokenStr := strings.TrimPrefix(authHeader, "bearer ")
+
+                claims, err := helpers.ParseJWT(tokenStr)
+                id := &amp;claims.Id
+                if err != nil </span><span class="cov0" title="0">{
+                        return echo.NewHTTPError(http.StatusInternalServerError, err)
+                }</span>
+
+                <span class="cov0" title="0">c.Set("userId", id)
+                return next(c)</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file35" style="display: none">package middlewares
+
+import (
+        "github.com/labstack/echo/v4"
+        "github.com/labstack/echo/v4/middleware"
+)
+
+func LogMiddleware(e *echo.Echo) <span class="cov0" title="0">{
+        e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+                Format: "method=${method}, uri=${uri}, status=${status}\n",
+        }))
+}</span>
+</pre>
+		
+		<pre class="file" id="file36" style="display: none">package repositories
+
+import (
+        "evoting/entities"
+        "gorm.io/gorm"
+)
+
+type AdminRepository interface {
+        FindByEmail(email string) (*entities.Admin, error)
+        SaveRefreshToken(user *entities.Admin) error
+        GetUserByRefreshToken(token string) (*entities.Admin, error)
+}
+
+type adminRepository struct {
+        db *gorm.DB
+}
+
+func NewAdminRepository(db *gorm.DB) *adminRepository <span class="cov0" title="0">{
+        return &amp;adminRepository{db}
+}</span>
+
+func (r *adminRepository) FindByEmail(email string) (*entities.Admin, error) <span class="cov0" title="0">{
+        var admin *entities.Admin
+        if err := r.db.Where("email = ?", email).First(&amp;admin).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return admin, nil</span>
+}
+
+func (r *adminRepository) SaveRefreshToken(admin *entities.Admin) error <span class="cov0" title="0">{
+        err := r.db.Save(&amp;admin).Error
+        return err
+}</span>
+
+func (r *adminRepository) GetUserByRefreshToken(token string) (*entities.Admin, error) <span class="cov0" title="0">{
+        var admin *entities.Admin
+        err := r.db.Where("refresh_token = ?", token).First(&amp;admin).Error
+        return admin, err
+}</span>
+</pre>
+		
+		<pre class="file" id="file37" style="display: none">package repositories
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "github.com/google/uuid"
+        "gorm.io/gorm"
+)
+
+type CommentRepository interface {
+        FindById(id uuid.UUID) (*entities.Comment, error)
+        GetDetailPlace(id uuid.UUID) (*dto.CommentDetail, error)
+        FindByPlaceId(id uuid.UUID) (*[]dto.CommentData, error)
+        Create(comment *entities.Comment) (*entities.Comment, error)
+        Update(comment *entities.Comment) (*entities.Comment, error)
+        Delete(comment *entities.Comment) error
+}
+
+type commentRepository struct {
+        db *gorm.DB
+}
+
+func NewCommentRepository(db *gorm.DB) *commentRepository <span class="cov0" title="0">{
+        return &amp;commentRepository{db}
+}</span>
+
+func (r *commentRepository) FindById(id uuid.UUID) (*entities.Comment, error) <span class="cov0" title="0">{
+        var comment entities.Comment
+        if err := r.db.Where("id = ?", id).First(&amp;comment).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;comment, nil</span>
+}
+
+func (r *commentRepository) GetDetailPlace(id uuid.UUID) (*dto.CommentDetail, error) <span class="cov0" title="0">{
+        var placeDetail dto.CommentDetail
+        if err := r.db.
+                Table("places").
+                Select("places.name as place_name ,place_addresses.province,place_addresses.city, place_addresses.sub_district, place_addresses.street_name").
+                Joins("INNER JOIN place_addresses ON place_addresses.place_id = places.id").
+                Where("places.id = ?", id).
+                Scan(&amp;placeDetail).
+                Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;placeDetail, nil</span>
+}
+
+func (r *commentRepository) FindByPlaceId(id uuid.UUID) (*[]dto.CommentData, error) <span class="cov0" title="0">{
+        var comments []dto.CommentData
+        if err := r.db.
+                Table("comments").
+                Select("comments.id as comment_id,users.id as user_id, users.fullname, comments.body, comments.created_at,comments.updated_at").
+                Joins("INNER JOIN users ON comments.user_id = users.id").
+                Where("comments.place_id = ?", id).
+                Scan(&amp;comments).
+                Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;comments, nil</span>
+}
+
+func (r *commentRepository) Create(comment *entities.Comment) (*entities.Comment, error) <span class="cov0" title="0">{
+        if err := r.db.Create(&amp;comment).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return comment, nil</span>
+}
+
+func (r *commentRepository) Update(comment *entities.Comment) (*entities.Comment, error) <span class="cov0" title="0">{
+        if err := r.db.Save(&amp;comment).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return comment, nil</span>
+}
+
+func (r *commentRepository) Delete(comment *entities.Comment) error <span class="cov0" title="0">{
+        if err := r.db.Delete(&amp;comment).Error; err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file38" style="display: none">package repositories
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+        "gorm.io/gorm"
+)
+
+type PlaceAddressRepository interface {
+        FindById(id uuid.UUID) (*entities.PlaceAddress, error)
+        Create(address *entities.PlaceAddress) (*entities.PlaceAddress, error)
+        Update(address *entities.PlaceAddress) (*entities.PlaceAddress, error)
+        Delete(address *entities.PlaceAddress) error
+}
+
+type placeAddressRepository struct {
+        db *gorm.DB
+}
+
+func NewPlaceAddressRepository(db *gorm.DB) *placeAddressRepository <span class="cov0" title="0">{
+        return &amp;placeAddressRepository{db}
+}</span>
+
+func (r *placeAddressRepository) FindById(id uuid.UUID) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        var address entities.PlaceAddress
+        if err := r.db.Where("id = ?", id).First(&amp;address).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;address, nil</span>
+}
+
+func (r *placeAddressRepository) Create(address *entities.PlaceAddress) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        if err := r.db.Create(&amp;address).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return address, nil</span>
+}
+
+func (r *placeAddressRepository) Update(address *entities.PlaceAddress) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        if err := r.db.Save(&amp;address).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return address, nil</span>
+}
+
+func (r *placeAddressRepository) Delete(address *entities.PlaceAddress) error <span class="cov0" title="0">{
+        if err := r.db.Unscoped().Delete(&amp;address).Error; err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file39" style="display: none">package repositories
+
+import (
+        "evoting/entities"
+        "fmt"
+        "github.com/google/uuid"
+        "gorm.io/gorm"
+        "strings"
+)
+
+type PlaceRepository interface {
+        Create(place *entities.Place) (*entities.Place, error)
+        CreateAddress(place *entities.PlaceAddress) (*entities.PlaceAddress, error)
+        FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.Place, *int64, error)
+        FindByName(place string) (*entities.Place, error)
+        FindById(id uuid.UUID) (*entities.Place, error)
+        FindAddress(id uuid.UUID) (*entities.PlaceAddress, error)
+        Update(place *entities.Place) (*entities.Place, error)
+        UpdateAddress(place *entities.PlaceAddress) (*entities.PlaceAddress, error)
+        Delete(place *entities.Place) error
+}
+
+type placeRepository struct {
+        db *gorm.DB
+}
+
+func NewPlaceRepository(db *gorm.DB) *placeRepository <span class="cov0" title="0">{
+        return &amp;placeRepository{db}
+}</span>
+
+func (r *placeRepository) Create(place *entities.Place) (*entities.Place, error) <span class="cov0" title="0">{
+        if err := r.db.Create(&amp;place).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return place, nil</span>
+}
+
+func (r *placeRepository) CreateAddress(placeAddress *entities.PlaceAddress) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        if err := r.db.Create(&amp;placeAddress).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return placeAddress, nil</span>
+}
+
+func (r *placeRepository) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.Place, *int64, error) <span class="cov0" title="0">{
+        var places []entities.Place
+        var total int64
+        offset := (page - 1) * limit
+        db := r.db.Model(&amp;entities.Place{})
+        if sortBy != "" </span><span class="cov0" title="0">{
+                db = db.Order(fmt.Sprintf("%s %s", sortBy, sortType))
+        }</span>
+        <span class="cov0" title="0">if searchQuery != "" </span><span class="cov0" title="0">{
+                db = db.Where("LOWER(name) LIKE ?", "%"+strings.ToLower(searchQuery)+"%")
+        }</span>
+
+        <span class="cov0" title="0">if err := db.Debug().Preload("Address").Preload("Weather").
+                Offset(offset).Limit(limit).
+                Find(&amp;places).
+                Error; err != nil </span><span class="cov0" title="0">{
+                return nil, nil, err
+        }</span>
+        <span class="cov0" title="0">if err := db.Count(&amp;total).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;places, &amp;total, nil</span>
+}
+
+func (r *placeRepository) FindByName(name string) (*entities.Place, error) <span class="cov0" title="0">{
+        var place *entities.Place
+        if err := r.db.Where("name = ?", name).First(&amp;place).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return place, nil</span>
+}
+
+func (r *placeRepository) Delete(place *entities.Place) error <span class="cov0" title="0">{
+        if err := r.db.Unscoped().Delete(&amp;place).Error; err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+
+func (r *placeRepository) FindById(id uuid.UUID) (*entities.Place, error) <span class="cov0" title="0">{
+        var place entities.Place
+        if err := r.db.Where("id = ?", id).Preload("Address").Preload("Weather").
+                First(&amp;place).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;place, nil</span>
+}
+
+func (r *placeRepository) FindAddress(id uuid.UUID) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        var placeAddress entities.PlaceAddress
+        if err := r.db.Where("place_id = ?", id).First(&amp;placeAddress).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;placeAddress, nil</span>
+}
+
+func (r *placeRepository) Update(place *entities.Place) (*entities.Place, error) <span class="cov0" title="0">{
+        if err := r.db.Save(&amp;place).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return place, nil</span>
+}
+
+func (r *placeRepository) UpdateAddress(placeAddress *entities.PlaceAddress) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        if err := r.db.Save(&amp;placeAddress).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return placeAddress, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file40" style="display: none">package repositories
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+        "gorm.io/gorm"
+)
+
+type UserAddressRepository interface {
+        GetDetailUser(id uuid.UUID) (*entities.User, error)
+        Create(address *entities.UserAddress) (*entities.UserAddress, error)
+        FindByUserId(id uuid.UUID) (*entities.UserAddress, error)
+        Update(address *entities.UserAddress) (*entities.UserAddress, error)
+        Delete(address *entities.UserAddress) error
+}
+
+type userAddress struct {
+        db *gorm.DB
+}
+
+func NewUserAddressRepository(db *gorm.DB) *userAddress <span class="cov0" title="0">{
+        return &amp;userAddress{db}
+}</span>
+
+func (r *userAddress) GetDetailUser(id uuid.UUID) (*entities.User, error) <span class="cov0" title="0">{
+        var user entities.User
+        if err := r.db.Where("id = ?", id).Preload("Address").First(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;user, nil</span>
+}
+
+func (r *userAddress) Create(address *entities.UserAddress) (*entities.UserAddress, error) <span class="cov0" title="0">{
+        if err := r.db.Create(&amp;address).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return address, nil</span>
+}
+
+func (r *userAddress) FindByUserId(id uuid.UUID) (*entities.UserAddress, error) <span class="cov0" title="0">{
+        var address *entities.UserAddress
+        if err := r.db.Where("user_id = ?", id).First(&amp;address).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return address, nil</span>
+}
+
+func (r *userAddress) Update(address *entities.UserAddress) (*entities.UserAddress, error) <span class="cov0" title="0">{
+        if err := r.db.Save(&amp;address).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return address, nil</span>
+}
+
+func (r *userAddress) Delete(address *entities.UserAddress) error <span class="cov0" title="0">{
+        if err := r.db.Unscoped().Delete(&amp;address).Error; err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file41" style="display: none">package repositories
+
+import (
+        "evoting/entities"
+        "fmt"
+        "github.com/google/uuid"
+        "gorm.io/gorm"
+        "strings"
+)
+
+type UserRepository interface {
+        FindByEmail(email string) (*entities.User, error)
+        FindById(id uuid.UUID) (*entities.User, error)
+        FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error)
+        Create(user *entities.User) (*entities.User, error)
+        SaveRefreshToken(user *entities.User) error
+        Update(user *entities.User) (*entities.User, error)
+        Delete(user *entities.User) error
+        GetUserByRefreshToken(token string) (*entities.User, error)
+}
+
+type userRepository struct {
+        db *gorm.DB
+}
+
+func NewUserRepository(db *gorm.DB) *userRepository <span class="cov0" title="0">{
+        return &amp;userRepository{db}
+}</span>
+
+func (r *userRepository) FindByEmail(email string) (*entities.User, error) <span class="cov0" title="0">{
+        var user *entities.User
+        if err := r.db.Where("email = ?", email).First(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return user, nil</span>
+}
+
+func (r *userRepository) FindById(id uuid.UUID) (*entities.User, error) <span class="cov0" title="0">{
+        var user entities.User
+        if err := r.db.Where("id = ?", id).Preload("Address").First(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;user, nil</span>
+}
+
+func (r *userRepository) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error) <span class="cov0" title="0">{
+        var user []entities.User
+        var total int64
+        offset := (page - 1) * limit
+        db := r.db.Model(&amp;entities.User{})
+        if sortBy != "" </span><span class="cov0" title="0">{
+                db = db.Order(fmt.Sprintf("%s %s", sortBy, sortType))
+        }</span>
+        <span class="cov0" title="0">if searchQuery != "" </span><span class="cov0" title="0">{
+                db = db.Where("LOWER(fullname) LIKE ?", "%"+strings.ToLower(searchQuery)+"%")
+        }</span>
+
+        <span class="cov0" title="0">if err := db.Preload("Address").
+                Offset(offset).Limit(limit).
+                Find(&amp;user).
+                Error; err != nil </span><span class="cov0" title="0">{
+                return nil, nil, err
+        }</span>
+        <span class="cov0" title="0">if err := db.Count(&amp;total).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;user, &amp;total, nil</span>
+}
+
+func (r *userRepository) Create(user *entities.User) (*entities.User, error) <span class="cov0" title="0">{
+
+        if err := r.db.Create(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return user, nil</span>
+}
+
+func (r *userRepository) SaveRefreshToken(user *entities.User) error <span class="cov0" title="0">{
+        err := r.db.Save(&amp;user).Error
+        return err
+}</span>
+
+func (r *userRepository) Update(user *entities.User) (*entities.User, error) <span class="cov0" title="0">{
+        if err := r.db.Save(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return user, nil</span>
+
+}
+
+func (r *userRepository) Delete(user *entities.User) error <span class="cov0" title="0">{
+        if err := r.db.Delete(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+
+func (r *userRepository) GetUserByRefreshToken(token string) (*entities.User, error) <span class="cov0" title="0">{
+        var user *entities.User
+        err := r.db.Where("refresh_token = ?", token).First(&amp;user).Error
+        return user, err
+}</span>
+</pre>
+		
+		<pre class="file" id="file42" style="display: none">package repositories
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "github.com/google/uuid"
+        "gorm.io/gorm"
+)
+
+type VoteRepository interface {
+        TotalVoters() (int64, error)
+        TotalVotesReceived() (int64, error)
+        FindUserById(id uuid.UUID) (*entities.Vote, error)
+        GetTotalVotes() (*[]dto.GetPlaceWithTotalVotes, error)
+        Create(vote *entities.Vote) (*entities.Vote, error)
+}
+
+type voteRepository struct {
+        db *gorm.DB
+}
+
+func NewvoteRepository(db *gorm.DB) *voteRepository <span class="cov0" title="0">{
+        return &amp;voteRepository{db}
+}</span>
+
+func (r *voteRepository) FindUserById(id uuid.UUID) (*entities.Vote, error) <span class="cov0" title="0">{
+        var user entities.Vote
+        if err := r.db.Where("user_id = ?", id).First(&amp;user).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;user, nil</span>
+}
+
+func (r *voteRepository) GetTotalVotes() (*[]dto.GetPlaceWithTotalVotes, error) <span class="cov0" title="0">{
+        var votes *[]dto.GetPlaceWithTotalVotes
+
+        err := r.db.Table("places").
+                Select("places.id as place_id, places.name as place_name, COUNT(votes.id) as total_vote," +
+                        "ROUND(COUNT(votes.id) * 100.0 / (SELECT COUNT(DISTINCT user_id) FROM votes), 2) as percentage").
+                Joins("LEFT JOIN votes ON places.id = votes.place_id").
+                Group("places.id").
+                Scan(&amp;votes).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return votes, nil</span>
+}
+
+func (r *voteRepository) TotalVotesReceived() (int64, error) <span class="cov0" title="0">{
+        var totalVotes int64
+        err := r.db.Model(&amp;entities.Vote{}).Count(&amp;totalVotes).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return 0, err
+        }</span>
+        <span class="cov0" title="0">return totalVotes, nil</span>
+}
+
+func (r *voteRepository) TotalVoters() (int64, error) <span class="cov0" title="0">{
+        var totalVotes int64
+        err := r.db.Model(&amp;entities.User{}).Count(&amp;totalVotes).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return 0, err
+        }</span>
+        <span class="cov0" title="0">return totalVotes, nil</span>
+}
+
+func (r *voteRepository) Create(vote *entities.Vote) (*entities.Vote, error) <span class="cov0" title="0">{
+        if err := r.db.Create(&amp;vote).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return vote, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file43" style="display: none">package repositories
+
+import (
+        "evoting/entities"
+        "github.com/google/uuid"
+        "gorm.io/gorm"
+)
+
+type WeatherDataRepository interface {
+        FindPlace(placeId uuid.UUID) (*entities.Place, error)
+        FindByPlaceId(placeId uuid.UUID) (*entities.WeatherData, error)
+        Create(data *entities.WeatherData) (*entities.WeatherData, error)
+        Update(data *entities.WeatherData) (*entities.WeatherData, error)
+        Delete(data *entities.WeatherData) error
+}
+
+type weatherDataRepository struct {
+        db *gorm.DB
+}
+
+func NewWeatherDataRepository(db *gorm.DB) *weatherDataRepository <span class="cov0" title="0">{
+        return &amp;weatherDataRepository{db}
+}</span>
+
+func (r *weatherDataRepository) FindPlace(placeId uuid.UUID) (*entities.Place, error) <span class="cov0" title="0">{
+        var place entities.Place
+        if err := r.db.Where("id = ?", placeId).First(&amp;place).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;place, nil</span>
+}
+
+func (r *weatherDataRepository) FindByPlaceId(placeId uuid.UUID) (*entities.WeatherData, error) <span class="cov0" title="0">{
+        var weather entities.WeatherData
+        if err := r.db.Where("place_id = ?", placeId).First(&amp;weather).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return &amp;weather, nil</span>
+}
+
+func (r *weatherDataRepository) Create(data *entities.WeatherData) (*entities.WeatherData, error) <span class="cov0" title="0">{
+        if err := r.db.Create(&amp;data).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return data, nil</span>
+}
+
+func (r *weatherDataRepository) Update(data *entities.WeatherData) (*entities.WeatherData, error) <span class="cov0" title="0">{
+        if err := r.db.Save(&amp;data).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return data, nil</span>
+}
+
+func (r *weatherDataRepository) Delete(data *entities.WeatherData) error <span class="cov0" title="0">{
+        if err := r.db.Unscoped().Delete(&amp;data).Error; err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file44" style="display: none">package admin
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func PlaceAddressRouter(r *echo.Group) <span class="cov0" title="0">{
+        r.Use(middlewares.JWTMiddleware)
+        r.Use(middlewares.AdminOnlyMiddleware)
+        repository := repositories.NewPlaceAddressRepository(config.DB)
+        usecase := usecases.NewPlaceAddressUsecase(repository)
+        handler := handlers.NewPlaceAddressHandler(usecase)
+        r.POST("/:placeId/address", handler.CreateAddress)
+        r.PUT("/:placeId/address/:addressId", handler.UpdateAddress)
+        r.DELETE("/:placeId/address/:addressId", handler.DeleteAddress)
+}</span>
+</pre>
+		
+		<pre class="file" id="file45" style="display: none">package admin
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func PlaceRouter(r *echo.Group) <span class="cov0" title="0">{
+        r.Use(middlewares.JWTMiddleware)
+        r.Use(middlewares.AdminOnlyMiddleware)
+        repository := repositories.NewPlaceRepository(config.DB)
+        usecase := usecases.NewPlaceUsecase(repository)
+        handler := handlers.NewPlaceHandler(usecase)
+        r.GET("", handler.FindAllPlaces)
+        r.GET("/:id", handler.FindPlaceById)
+        r.POST("", handler.CreatePlace)
+        r.PUT("/:id", handler.UpdatePlace)
+        r.DELETE("/:id", handler.Delete)
+}</span>
+</pre>
+		
+		<pre class="file" id="file46" style="display: none">package admin
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func UserRouter(r *echo.Group) <span class="cov0" title="0">{
+        repository := repositories.NewUserRepository(config.DB)
+        usecase := usecases.NewUserUsecase(repository)
+        handler := handlers.NewUserHandler(usecase)
+        r.Use(middlewares.JWTMiddleware)
+        r.Use(middlewares.AdminOnlyMiddleware)
+        r.GET("", handler.FindAllUsers)
+        r.GET("/:id", handler.FindUserById)
+        r.POST("/create", handler.Create)
+        r.PUT("/:id", handler.UpdateUser)
+        r.DELETE("/:id", handler.DeleteUser)
+}</span>
+</pre>
+		
+		<pre class="file" id="file47" style="display: none">package admin
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func WeatherRouter(r *echo.Group) <span class="cov0" title="0">{
+        r.Use(middlewares.JWTMiddleware)
+        r.Use(middlewares.AdminOnlyMiddleware)
+        repository := repositories.NewWeatherDataRepository(config.DB)
+        usecase := usecases.NewWeatherDataUsecase(repository)
+        handler := handlers.NewWeatherDataHandler(usecase)
+        r.POST("/weather", handler.Create)
+        r.PUT("/:id/weather", handler.Update)
+        r.DELETE("/:id/weather", handler.Delete)
+}</span>
+</pre>
+		
+		<pre class="file" id="file48" style="display: none">package routers
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func AuthUserRouter(r *echo.Group) <span class="cov0" title="0">{
+        repository := repositories.NewUserRepository(config.DB)
+        usecase := usecases.NewUserUsecase(repository)
+        handler := handlers.NewUserHandler(usecase)
+
+        r.POST("/register", handler.Create)
+        r.POST("/login", handler.Login)
+        r.DELETE("/logout", handler.Logout)
+        
+}</span>
+
+func AuthAdminRouter(r *echo.Group) <span class="cov0" title="0">{
+        repository := repositories.NewAdminRepository(config.DB)
+        usecase := usecases.NewAdminUsecase(repository)
+        handler := handlers.NewAdminHandle(usecase)
+
+        r.POST("/login", handler.Login)
+        r.DELETE("/logout", handler.Logout)
+}</span>
+</pre>
+		
+		<pre class="file" id="file49" style="display: none">package routers
+
+import (
+        "evoting/routers/admin"
+        "evoting/routers/user"
+        "github.com/labstack/echo/v4"
+)
+
+func SetupRouter(e *echo.Echo) <span class="cov0" title="0">{
+        v1User := e.Group("/api/v1")
+        </span><span class="cov0" title="0">{
+                auth := v1User.Group("/auth")
+                AuthUserRouter(auth)
+
+                userAddress := v1User.Group("/profile")
+                user.UserAddressRouter(userAddress)
+
+                places := v1User.Group("/places")
+                user.PlaceRouter(places)
+
+                votes := v1User.Group("/votes")
+                user.VoteRouter(votes)
+
+                comments := v1User.Group("/places")
+                user.CommentRouter(comments)
+
+                chatbot := v1User.Group("/ws/chatbot")
+                user.ChatbotRouter(chatbot)
+        }</span>
+
+        <span class="cov0" title="0">v1Admin := e.Group("/api/v1/admin")
+        </span><span class="cov0" title="0">{
+                auth := v1Admin.Group("/auth")
+                AuthAdminRouter(auth)
+
+                users := v1Admin.Group("/users")
+                admin.UserRouter(users)
+
+                places := v1Admin.Group("/places")
+                admin.PlaceRouter(places)
+
+                weather := v1Admin.Group("/places")
+                admin.WeatherRouter(weather)
+
+                placeAddress := v1Admin.Group("/places")
+                admin.PlaceAddressRouter(placeAddress)
+
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file50" style="display: none">package user
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func ChatbotRouter(r *echo.Group) <span class="cov0" title="0">{
+        r.Use(middlewares.JWTMiddleware)
+        placeRepository := repositories.NewPlaceRepository(config.DB)
+        placeUsecae := usecases.NewPlaceUsecase(placeRepository)
+
+        usecase := usecases.NewChatbotUseCase()
+        handler := handlers.NewChatbotHandler(usecase, placeUsecae)
+        r.GET("", handler.HandleWebSocket)
+}</span>
+</pre>
+		
+		<pre class="file" id="file51" style="display: none">package user
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func CommentRouter(r *echo.Group) <span class="cov0" title="0">{
+        r.Use(middlewares.JWTMiddleware)
+        repository := repositories.NewCommentRepository(config.DB)
+        usecase := usecases.NewCommentUsecase(repository)
+        handler := handlers.NewCommentHandler(usecase)
+        r.GET("/:id/comments", handler.GetAllCommentsInPlace)
+        r.POST("/:id/comments", handler.CreateComment)
+        r.PUT("/:placeId/comments/:commentId", handler.UpdateComment)
+        r.DELETE("/:placeId/comments/:commentId", handler.DeleteComment)
+}</span>
+</pre>
+		
+		<pre class="file" id="file52" style="display: none">package user
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func PlaceRouter(r *echo.Group) <span class="cov0" title="0">{
+        r.Use(middlewares.JWTMiddleware)
+        repository := repositories.NewPlaceRepository(config.DB)
+        usecase := usecases.NewPlaceUsecase(repository)
+        handler := handlers.NewPlaceHandler(usecase)
+        r.GET("", handler.FindAllPlaces)
+        r.GET("/:id", handler.FindPlaceById)
+}</span>
+</pre>
+		
+		<pre class="file" id="file53" style="display: none">package user
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func UserAddressRouter(r *echo.Group) <span class="cov0" title="0">{
+        repositoryAddress := repositories.NewUserAddressRepository(config.DB)
+        usecaseAddress := usecases.NewUserAddressUsecase(repositoryAddress)
+        handlerAddress := handlers.NewUserAddressHandler(usecaseAddress)
+
+        repositoryUser := repositories.NewUserRepository(config.DB)
+        usecaseUser := usecases.NewUserUsecase(repositoryUser)
+        handlerUser := handlers.NewUserHandler(usecaseUser)
+
+        r.Use(middlewares.JWTMiddleware)
+        r.POST("/address", handlerAddress.Create)
+        r.GET("/address", handlerAddress.GetDetailUser)
+        r.PUT("/:id", handlerUser.UpdateUser)
+        r.PUT("/address", handlerAddress.Update)
+        r.DELETE("/address", handlerAddress.Delete)
+
+}</span>
+</pre>
+		
+		<pre class="file" id="file54" style="display: none">package user
+
+import (
+        "evoting/config"
+        "evoting/handlers"
+        "evoting/middlewares"
+        "evoting/repositories"
+        "evoting/usecases"
+        "github.com/labstack/echo/v4"
+)
+
+func VoteRouter(r *echo.Group) <span class="cov0" title="0">{
+        r.Use(middlewares.JWTMiddleware)
+        repository := repositories.NewvoteRepository(config.DB)
+        usecase := usecases.NewVoteUsecase(repository)
+        handler := handlers.NewVoteHandler(usecase)
+        r.POST("", handler.CreateVote)
+        r.GET("", handler.GetPlaceWithTotalVotes)
+}</span>
+</pre>
+		
+		<pre class="file" id="file55" style="display: none">package schedulers
+
+import (
+        "evoting/config"
+        "evoting/repositories"
+        "evoting/usecases"
+        "fmt"
+        "github.com/go-co-op/gocron"
+        "log"
+        "time"
+)
+
+func StartScheduler() <span class="cov0" title="0">{
+        jakartaTime, err := time.LoadLocation("Asia/Jakarta")
+        if err != nil </span><span class="cov0" title="0">{
+                jakartaTime = time.UTC
+        }</span>
+        <span class="cov0" title="0">s := gocron.NewScheduler(jakartaTime)
+        s.Every(1).Day().At("12:00").Do(updateAllPlaces)
+        s.StartBlocking()</span>
+}
+
+func updateAllPlaces() <span class="cov0" title="0">{
+        placeRepository := repositories.NewPlaceRepository(config.DB)
+        placeUsecase := usecases.NewPlaceUsecase(placeRepository)
+
+        weatherRepository := repositories.NewWeatherDataRepository(config.DB)
+        weatherUsecase := usecases.NewWeatherDataUsecase(weatherRepository)
+
+        allPlaces, _, err := placeUsecase.FindAll(1, 10, "", "", "")
+        if err != nil </span><span class="cov0" title="0">{
+                log.Fatal(err)
+                return
+        }</span>
+        <span class="cov0" title="0">for _, place := range *allPlaces </span><span class="cov0" title="0">{
+                _, err := weatherUsecase.Update(place.Id)
+                if err != nil </span><span class="cov0" title="0">{
+                        log.Printf("Failed to update weather data for place %s: %v", place.Name, err)
+                        continue</span>
+                }
+
+        }
+
+        <span class="cov0" title="0">fmt.Println("Weather data update for all places completed")</span>
+}
+</pre>
+		
+		<pre class="file" id="file56" style="display: none">package usecases
+
+import (
+        "evoting/dto"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/repositories"
+)
+
+type AdminUsecase interface {
+        Login(request *dto.LoginAdminRequest) (*dto.LoginAdminResponse, error)
+        Logout(token string) error
+}
+
+type adminUsecase struct {
+        repository repositories.AdminRepository
+}
+
+func NewAdminUsecase(repository repositories.AdminRepository) *adminUsecase <span class="cov8" title="1">{
+        return &amp;adminUsecase{repository}
+}</span>
+
+func (uc *adminUsecase) Login(request *dto.LoginAdminRequest) (*dto.LoginAdminResponse, error) <span class="cov8" title="1">{
+        admin, err := uc.repository.FindByEmail(request.Email)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "Wrong email or password"}
+        }</span>
+        <span class="cov8" title="1">if err := helpers.VerifyPassword(admin.Password, request.Password); err != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "Wrong email or password"}
+        }</span>
+
+        <span class="cov8" title="1">accessToken, err := helpers.GenerateAccessToken(admin)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">refreshToken, err := helpers.GenerateRefreshToken(admin)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov8" title="1">admin.RefreshToken = refreshToken
+        if err := uc.repository.SaveRefreshToken(admin); err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">response := &amp;dto.LoginAdminResponse{
+                Id:           admin.Id,
+                Username:     admin.Username,
+                AccessToken:  accessToken,
+                RefreshToken: refreshToken,
+        }
+
+        return response, nil</span>
+}
+
+func (uc *adminUsecase) Logout(token string) error <span class="cov8" title="1">{
+        user, err := uc.repository.GetUserByRefreshToken(token)
+        if err != nil </span><span class="cov8" title="1">{
+                return &amp;errorHandlers.UnAuthorizedError{Message: "Token is not valid"}
+        }</span>
+
+        <span class="cov8" title="1">user.RefreshToken = ""
+        if err := uc.repository.SaveRefreshToken(user); err != nil </span><span class="cov8" title="1">{
+                return &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov8" title="1">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file57" style="display: none">package usecases
+
+import (
+        "encoding/json"
+        "evoting/dto"
+        "evoting/entities"
+        "fmt"
+        "io/ioutil"
+        "net/http"
+        "strings"
+)
+
+type ChatbotUsecase interface {
+        GetRecommendation(query string, chatHistory []dto.ChatHistory, allPlaces *[]entities.Place) (string, error)
+}
+
+type chatbotUsecase struct {
+}
+
+func NewChatbotUseCase() *chatbotUsecase <span class="cov8" title="1">{
+        return &amp;chatbotUsecase{}
+}</span>
+
+func (uc *chatbotUsecase) GetRecommendation(query string, chatHistory []dto.ChatHistory, allPlaces *[]entities.Place) (string, error) <span class="cov8" title="1">{
+        messages := append([]dto.ChatHistory{}, chatHistory...)
+        messages = append(messages, dto.ChatHistory{PreviousMessages: query})
+
+        var prompt string
+        prompt = "I want to create a voting system for environmental selection for restoration. given the location data to be voted:"
+        for i, place := range *allPlaces </span><span class="cov8" title="1">{
+                prompt += fmt.Sprintf("%d. %s, description: %s, temperature: %d. ", i+1, place.Name, place.Description, place.Weather.Temperature)
+        }</span>
+        <span class="cov8" title="1">prompt += fmt.Sprintf("question: %s", messages)
+
+        url := "https://wgpt-production.up.railway.app/v1/chat/completions"
+        payload := fmt.Sprintf(`{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "%s"}], "stream": false}`, prompt)
+        req, err := http.NewRequest("POST", url, strings.NewReader(payload))
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov8" title="1">req.Header.Set("Content-Type", "application/json")
+
+        client := &amp;http.Client{}
+        resp, err := client.Do(req)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+        <span class="cov8" title="1">defer resp.Body.Close()
+
+        body, err := ioutil.ReadAll(resp.Body)
+        if err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+
+        <span class="cov8" title="1">var aiResponse dto.ChatCompletionResponse
+        if err := json.Unmarshal(body, &amp;aiResponse); err != nil </span><span class="cov0" title="0">{
+                return "", err
+        }</span>
+
+        <span class="cov8" title="1">if len(aiResponse.Choices) &gt; 0 </span><span class="cov8" title="1">{
+                return aiResponse.Choices[0].Message.Content, nil
+        }</span>
+
+        <span class="cov0" title="0">return "", fmt.Errorf("no completions found")</span>
+}
+</pre>
+		
+		<pre class="file" id="file58" style="display: none">package usecases
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "evoting/errorHandlers"
+        "evoting/repositories"
+        "github.com/google/uuid"
+)
+
+type CommentUsecase interface {
+        Create(userId uuid.UUID, placeId uuid.UUID, request *dto.CommentRequest) (*entities.Comment, error)
+        GetAllCommentInPlace(placeId uuid.UUID) (*[]dto.CommentData, *dto.CommentDetail, error)
+        Update(commentId, userId, placeId uuid.UUID, request *dto.CommentRequest) (*entities.Comment, error)
+        Delete(commentId, userId, placeId uuid.UUID) error
+}
+
+type commentUsecase struct {
+        repository repositories.CommentRepository
+}
+
+func NewCommentUsecase(repository repositories.CommentRepository) *commentUsecase <span class="cov0" title="0">{
+        return &amp;commentUsecase{repository}
+}</span>
+
+func (uc *commentUsecase) Create(userId uuid.UUID, placeId uuid.UUID, request *dto.CommentRequest) (*entities.Comment, error) <span class="cov0" title="0">{
+        response := &amp;entities.Comment{
+                Id:      uuid.New(),
+                UserId:  userId,
+                PlaceId: placeId,
+                Body:    request.Body,
+        }
+
+        newComment, err := uc.repository.Create(response)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return newComment, nil</span>
+}
+func (uc *commentUsecase) GetAllCommentInPlace(placeId uuid.UUID) (*[]dto.CommentData, *dto.CommentDetail, error) <span class="cov0" title="0">{
+        comments, err := uc.repository.FindByPlaceId(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, nil, &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">placeDetail, err := uc.repository.GetDetailPlace(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, nil, &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">return comments, placeDetail, nil</span>
+}
+
+func (uc *commentUsecase) Delete(commentId, userId, placeId uuid.UUID) error <span class="cov0" title="0">{
+        comment, err := uc.repository.FindById(commentId)
+        if err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">if comment.PlaceId != placeId </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.NotFoundError{Message: "comment does not belong to this post"}
+        }</span>
+
+        <span class="cov0" title="0">if comment.UserId != userId </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.UnAuthorizedError{Message: "You are not allowed to delete this comment"}
+        }</span>
+        <span class="cov0" title="0">if err := uc.repository.Delete(comment); err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+
+func (uc *commentUsecase) Update(commentId, userId, placeId uuid.UUID, request *dto.CommentRequest) (*entities.Comment, error) <span class="cov0" title="0">{
+        comment, err := uc.repository.FindById(commentId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">if comment.PlaceId != placeId </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.NotFoundError{Message: "comment does not belong to this post"}
+        }</span>
+
+        <span class="cov0" title="0">if comment.UserId != userId </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.UnAuthorizedError{Message: "You are not allowed to delete this comment"}
+        }</span>
+        <span class="cov0" title="0">comment.Body = request.Body
+
+        update, err := uc.repository.Update(comment)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return update, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file59" style="display: none">package usecases
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "evoting/errorHandlers"
+        "evoting/repositories"
+        "github.com/google/uuid"
+)
+
+type PlaceAddressUsecase interface {
+        Create(placeId uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error)
+        Update(id, placeId uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error)
+        Delete(id, placeId uuid.UUID) error
+}
+
+type placeAddressUsecase struct {
+        repository repositories.PlaceAddressRepository
+}
+
+func NewPlaceAddressUsecase(repository repositories.PlaceAddressRepository) *placeAddressUsecase <span class="cov0" title="0">{
+        return &amp;placeAddressUsecase{repository}
+}</span>
+
+func (uc *placeAddressUsecase) Create(placeId uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        address := &amp;entities.PlaceAddress{
+                Id:          uuid.New(),
+                PlaceId:     placeId,
+                Province:    request.Province,
+                City:        request.City,
+                SubDistrict: request.SubDistrict,
+                StreetName:  request.StreetName,
+                ZipCode:     request.ZipCode,
+        }
+
+        newAddress, err := uc.repository.Create(address)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return newAddress, nil</span>
+}
+
+func (uc *placeAddressUsecase) Update(id, placeId uuid.UUID, request *dto.PlaceAddressRequest) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        address, err := uc.repository.FindById(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">if address.PlaceId != placeId </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">address.Province = request.Province
+        address.City = request.City
+        address.StreetName = request.StreetName
+        address.SubDistrict = request.SubDistrict
+        address.ZipCode = request.ZipCode
+
+        updateAddress, err := uc.repository.Update(address)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return updateAddress, nil</span>
+}
+
+func (uc *placeAddressUsecase) Delete(id, placeId uuid.UUID) error <span class="cov0" title="0">{
+        address, err := uc.repository.FindById(id)
+        if address.PlaceId != placeId </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">if err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">if err := uc.repository.Delete(address); err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file60" style="display: none">package usecases
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/repositories"
+        "github.com/google/uuid"
+        "strings"
+)
+
+type PlaceUsecase interface {
+        FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.Place, *int64, error)
+        FindById(id uuid.UUID) (*entities.Place, error)
+        Create(request *dto.PlaceRequest) (*entities.Place, error)
+        CreateAddress(place *entities.PlaceAddress) (*entities.PlaceAddress, error)
+        Update(id uuid.UUID, request *dto.PlaceRequest) (*entities.Place, error)
+        UpdateAddress(place *entities.PlaceAddress) (*entities.PlaceAddress, error)
+        Delete(id uuid.UUID) error
+}
+
+type placeUsecase struct {
+        repository repositories.PlaceRepository
+}
+
+func NewPlaceUsecase(uc repositories.PlaceRepository) *placeUsecase <span class="cov0" title="0">{
+        return &amp;placeUsecase{uc}
+}</span>
+
+func (uc *placeUsecase) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.Place, *int64, error) <span class="cov0" title="0">{
+        places, total, err := uc.repository.FindAll(page, limit, sortBy, sortType, searchQuery)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">return places, total, nil</span>
+}
+
+func (uc *placeUsecase) FindById(id uuid.UUID) (*entities.Place, error) <span class="cov0" title="0">{
+        place, err := uc.repository.FindById(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">return place, nil</span>
+}
+
+func (uc *placeUsecase) Create(request *dto.PlaceRequest) (*entities.Place, error) <span class="cov0" title="0">{
+        exist, _ := uc.repository.FindByName(request.Name)
+
+        if exist != nil &amp;&amp; strings.ToLower(exist.Name) == strings.ToLower(request.Name) </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{"Place is already created, please enter another place"}
+        }</span>
+        <span class="cov0" title="0">location := helpers.GenerateImageLocation(request)
+        place := &amp;entities.Place{
+                Id:          uuid.New(),
+                Name:        request.Name,
+                Description: request.Description,
+                Longitude:   request.Longitude,
+                Latitude:    request.Latitude,
+                MapImage:    &amp;location,
+        }
+        newPlace, err := uc.repository.Create(place)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return newPlace, nil</span>
+}
+
+func (uc *placeUsecase) CreateAddress(place *entities.PlaceAddress) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        address := &amp;entities.PlaceAddress{
+                Id:          uuid.New(),
+                PlaceId:     place.PlaceId,
+                Province:    place.Province,
+                City:        place.City,
+                SubDistrict: place.SubDistrict,
+        }
+
+        newAddress, err := uc.repository.CreateAddress(address)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return newAddress, nil</span>
+}
+
+func (uc *placeUsecase) Update(id uuid.UUID, request *dto.PlaceRequest) (*entities.Place, error) <span class="cov0" title="0">{
+        place, err := uc.repository.FindById(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">if strings.ToLower(place.Name) != strings.ToLower(request.Name) </span><span class="cov0" title="0">{
+                exist, _ := uc.repository.FindByName(request.Name)
+
+                if exist != nil &amp;&amp; strings.ToLower(exist.Name) == strings.ToLower(request.Name) </span><span class="cov0" title="0">{
+                        return nil, &amp;errorHandlers.BadRequestError{"Place is already created, please enter another place"}
+                }</span>
+        }
+        <span class="cov0" title="0">var location string
+        if place.MapImage != nil </span><span class="cov0" title="0">{
+                if err := helpers.DeleteImage(*place.MapImage); err != nil </span><span class="cov0" title="0">{
+                        return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+                }</span>
+                <span class="cov0" title="0">location = helpers.GenerateImageLocation(request)</span>
+        }
+        <span class="cov0" title="0">place.Name = request.Name
+        place.Description = request.Description
+        place.Longitude = request.Longitude
+        place.Latitude = request.Latitude
+        place.MapImage = &amp;location
+
+        updatePlace, err := uc.repository.Update(place)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return updatePlace, nil</span>
+}
+
+func (uc *placeUsecase) Delete(id uuid.UUID) error <span class="cov0" title="0">{
+        place, err := uc.repository.FindById(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.BadRequestError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">if place.MapImage != nil </span><span class="cov0" title="0">{
+                if err := helpers.DeleteImage(*place.MapImage); err != nil </span><span class="cov0" title="0">{
+                        return &amp;errorHandlers.InternalServerError{err.Error()}
+                }</span>
+        }
+        <span class="cov0" title="0">if err := uc.repository.Delete(place); err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">return nil</span>
+}
+
+func (uc *placeUsecase) UpdateAddress(place *entities.PlaceAddress) (*entities.PlaceAddress, error) <span class="cov0" title="0">{
+        address, err := uc.repository.FindAddress(place.PlaceId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">address.Province = place.Province
+        address.City = place.City
+        address.SubDistrict = place.SubDistrict
+        address.StreetName = place.StreetName
+
+        updateAddress, err := uc.repository.UpdateAddress(address)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return updateAddress, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file61" style="display: none">package usecases
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "evoting/errorHandlers"
+        "evoting/repositories"
+        "github.com/google/uuid"
+)
+
+type UserAddressUsecase interface {
+        GetDetailUser(id uuid.UUID) (*entities.User, error)
+        Create(address *dto.CreateUserAddressRequest) (*entities.UserAddress, error)
+        FindByUserId(id uuid.UUID) (*entities.UserAddress, error)
+        Update(address *dto.CreateUserAddressRequest) (*entities.UserAddress, error)
+        Delete(id uuid.UUID) error
+}
+
+type userAddress struct {
+        repositoryAddress repositories.UserAddressRepository
+}
+
+func NewUserAddressUsecase(address repositories.UserAddressRepository) *userAddress <span class="cov0" title="0">{
+        return &amp;userAddress{address}
+}</span>
+
+func (uc *userAddress) GetDetailUser(id uuid.UUID) (*entities.User, error) <span class="cov0" title="0">{
+        user, err := uc.repositoryAddress.GetDetailUser(id)
+
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">return user, nil</span>
+}
+
+func (uc *userAddress) Create(req *dto.CreateUserAddressRequest) (*entities.UserAddress, error) <span class="cov0" title="0">{
+        existingUser, _ := uc.repositoryAddress.FindByUserId(req.UserId)
+        if existingUser != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "Failed to create address, user only have one address"}
+        }</span>
+
+        <span class="cov0" title="0">address := &amp;entities.UserAddress{
+                Id:          uuid.New(),
+                UserId:      req.UserId,
+                Province:    req.Province,
+                City:        req.City,
+                SubDistrict: req.SubDistrict,
+                StreetName:  req.StreetName,
+                ZipCode:     req.ZipCode,
+        }
+
+        newAddress, err := uc.repositoryAddress.Create(address)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return newAddress, nil</span>
+}
+
+func (uc *userAddress) FindByUserId(id uuid.UUID) (*entities.UserAddress, error) <span class="cov0" title="0">{
+        user, err := uc.repositoryAddress.FindByUserId(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">return user, nil</span>
+}
+
+func (uc *userAddress) Update(address *dto.CreateUserAddressRequest) (*entities.UserAddress, error) <span class="cov0" title="0">{
+        useradd, err := uc.repositoryAddress.FindByUserId(address.UserId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">useradd.Province = address.Province
+        useradd.City = address.City
+        useradd.SubDistrict = address.SubDistrict
+        useradd.StreetName = address.StreetName
+        useradd.ZipCode = address.ZipCode
+
+        updateUser, err := uc.repositoryAddress.Update(useradd)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">return updateUser, nil</span>
+}
+
+func (uc *userAddress) Delete(id uuid.UUID) error <span class="cov0" title="0">{
+        userAdd, err := uc.repositoryAddress.FindByUserId(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.BadRequestError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">if err := uc.repositoryAddress.Delete(userAdd); err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file62" style="display: none">package usecases
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/repositories"
+        "github.com/google/uuid"
+)
+
+type UserUsecase interface {
+        Create(request *dto.CreateRequest) (*entities.User, error)
+        Login(request *dto.LoginRequest) (*dto.LoginResponse, error)
+        FindById(id uuid.UUID) (*entities.User, error)
+        FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error)
+        Update(id uuid.UUID, request *dto.UpdateRequest) (*entities.User, error)
+        Delete(id uuid.UUID) error
+        Logout(token string) error
+}
+
+type userUsecase struct {
+        repository repositories.UserRepository
+}
+
+func NewUserUsecase(repository repositories.UserRepository) *userUsecase <span class="cov8" title="1">{
+        return &amp;userUsecase{repository}
+}</span>
+
+func (uc *userUsecase) Create(request *dto.CreateRequest) (*entities.User, error) <span class="cov8" title="1">{
+        existingUser, _ := uc.repository.FindByEmail(request.Email)
+        if existingUser != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "Register Failed: Email already used"}
+        }</span>
+
+        <span class="cov8" title="1">hash, err := helpers.HashPassword(request.Password)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov8" title="1">user := &amp;entities.User{
+                Id:       uuid.New(),
+                Email:    request.Email,
+                Fullname: request.Fullname,
+                Password: hash,
+        }
+        newUser, err := uc.repository.Create(user)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">return newUser, nil</span>
+}
+
+func (uc *userUsecase) Login(request *dto.LoginRequest) (*dto.LoginResponse, error) <span class="cov8" title="1">{
+        user, err := uc.repository.FindByEmail(request.Email)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "Wrong email or password"}
+        }</span>
+        <span class="cov8" title="1">if err := helpers.VerifyPassword(user.Password, request.Password); err != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "Wrong email or password"}
+        }</span>
+
+        <span class="cov8" title="1">accessToken, err := helpers.GenerateAccessToken(user)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">refreshToken, err := helpers.GenerateRefreshToken(user)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov8" title="1">user.RefreshToken = refreshToken
+        if err := uc.repository.SaveRefreshToken(user); err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">response := &amp;dto.LoginResponse{
+                Id:           user.Id,
+                Fullname:     user.Fullname,
+                AccessToken:  accessToken,
+                RefreshToken: refreshToken,
+        }
+
+        return response, nil</span>
+}
+
+func (uc *userUsecase) FindById(id uuid.UUID) (*entities.User, error) <span class="cov8" title="1">{
+        user, err := uc.repository.FindById(id)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">return user, nil</span>
+}
+
+func (uc *userUsecase) FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error) <span class="cov8" title="1">{
+        users, total, err := uc.repository.FindAll(page, limit, sortBy, sortType, searchQuery)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">return users, total, nil</span>
+}
+
+func (uc *userUsecase) Update(id uuid.UUID, request *dto.UpdateRequest) (*entities.User, error) <span class="cov8" title="1">{
+        user, err := uc.repository.FindById(id)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">if user.Email != request.Email </span><span class="cov8" title="1">{
+                existingUser, _ := uc.repository.FindByEmail(request.Email)
+                if existingUser != nil </span><span class="cov8" title="1">{
+                        return nil, &amp;errorHandlers.BadRequestError{Message: "Update Failed: Email already used"}
+                }</span>
+        }
+
+        <span class="cov8" title="1">user.Fullname = request.Fullname
+        user.Email = request.Email
+
+        password, err := helpers.HashPassword(request.Password)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">user.Password = password
+
+        if request.Image != nil </span><span class="cov8" title="1">{
+                if imageType := helpers.IsValidImageType(request.Image); !imageType </span><span class="cov8" title="1">{
+                        return nil, &amp;errorHandlers.BadRequestError{Message: "Invalid image format. Only JPG, JPEG and PNG are allowed."}
+                }</span>
+
+                <span class="cov0" title="0">if size := helpers.IsValidImageSize(request.Image); !size </span><span class="cov0" title="0">{
+                        return nil, &amp;errorHandlers.BadRequestError{Message: "Image size exceeds the limit of 2MB."}
+                }</span>
+                <span class="cov0" title="0">if user.Image != nil </span><span class="cov0" title="0">{
+                        if err := helpers.DeleteImage(*user.Image); err != nil </span><span class="cov0" title="0">{
+                                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+                        }</span>
+                }
+                <span class="cov0" title="0">filename, err := helpers.UploadImageToCloudinary(*request.Image, "users")
+                if err != nil </span><span class="cov0" title="0">{
+                        return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+                }</span>
+                <span class="cov0" title="0">user.Image = &amp;filename</span>
+        }
+
+        <span class="cov8" title="1">updateUser, err := uc.repository.Update(user)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">return updateUser, nil</span>
+}
+
+func (uc *userUsecase) Delete(id uuid.UUID) error <span class="cov8" title="1">{
+        user, err := uc.repository.FindById(id)
+        if err != nil </span><span class="cov8" title="1">{
+                return &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">if user.Image != nil </span><span class="cov0" title="0">{
+                if err := helpers.DeleteImage(*user.Image); err != nil </span><span class="cov0" title="0">{
+                        return &amp;errorHandlers.InternalServerError{Message: err.Error()}
+                }</span>
+        }
+        <span class="cov8" title="1">if err := uc.repository.Delete(user); err != nil </span><span class="cov8" title="1">{
+                return &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov8" title="1">return nil</span>
+}
+
+func (uc *userUsecase) Logout(token string) error <span class="cov8" title="1">{
+        user, err := uc.repository.GetUserByRefreshToken(token)
+        if err != nil </span><span class="cov8" title="1">{
+                return &amp;errorHandlers.UnAuthorizedError{Message: "Token is not valid"}
+        }</span>
+
+        <span class="cov8" title="1">user.RefreshToken = ""
+        if err := uc.repository.SaveRefreshToken(user); err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov8" title="1">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file63" style="display: none">package usecases
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "evoting/errorHandlers"
+        "evoting/repositories"
+        "github.com/google/uuid"
+)
+
+type VoteUsecase interface {
+        GetPlaceWithTotalVotes() (*[]dto.GetPlaceWithTotalVotes, []int64, error)
+        Create(userId uuid.UUID, request *dto.VoteRequest) (*entities.Vote, error)
+}
+
+type voteUsecase struct {
+        repository repositories.VoteRepository
+}
+
+func NewVoteUsecase(repository repositories.VoteRepository) *voteUsecase <span class="cov0" title="0">{
+        return &amp;voteUsecase{repository}
+}</span>
+
+func (uc *voteUsecase) GetPlaceWithTotalVotes() (*[]dto.GetPlaceWithTotalVotes, []int64, error) <span class="cov0" title="0">{
+        votes, err := uc.repository.GetTotalVotes()
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">totalVoters, err := uc.repository.TotalVoters()
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">totalVotes, err := uc.repository.TotalVotesReceived()
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">return votes, []int64{totalVoters, totalVotes}, nil</span>
+}
+
+func (uc *voteUsecase) Create(userId uuid.UUID, request *dto.VoteRequest) (*entities.Vote, error) <span class="cov0" title="0">{
+        user, _ := uc.repository.FindUserById(userId)
+        if user != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "You have already voted or cannot vote more than once."}
+        }</span>
+        <span class="cov0" title="0">vote := &amp;entities.Vote{
+                Id:      uuid.New(),
+                UserId:  userId,
+                PlaceId: request.PlaceId,
+        }
+
+        newVote, err := uc.repository.Create(vote)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{err.Error()}
+        }</span>
+        <span class="cov0" title="0">return newVote, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file64" style="display: none">package usecases
+
+import (
+        "evoting/dto"
+        "evoting/entities"
+        "evoting/errorHandlers"
+        "evoting/helpers"
+        "evoting/repositories"
+        "github.com/google/uuid"
+        "time"
+)
+
+type WeatherDataUsecase interface {
+        GetPlace(placeId uuid.UUID) (*entities.Place, error)
+        Create(request *dto.WeatherDataRequest) (*entities.WeatherData, error)
+        Update(placeId uuid.UUID) (*entities.WeatherData, error)
+        Delete(placeId uuid.UUID) error
+}
+
+type weatherDataUsecase struct {
+        repository repositories.WeatherDataRepository
+}
+
+func NewWeatherDataUsecase(repository repositories.WeatherDataRepository) *weatherDataUsecase <span class="cov0" title="0">{
+        return &amp;weatherDataUsecase{repository}
+}</span>
+
+func (uc *weatherDataUsecase) GetPlace(placeId uuid.UUID) (*entities.Place, error) <span class="cov0" title="0">{
+        place, err := uc.repository.FindPlace(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return place, nil</span>
+}
+
+func (uc *weatherDataUsecase) Create(request *dto.WeatherDataRequest) (*entities.WeatherData, error) <span class="cov0" title="0">{
+        place, err := uc.repository.FindPlace(request.PlaceId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">existingWeather, _ := uc.repository.FindByPlaceId(request.PlaceId)
+        if existingWeather != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "Weather data already exists for the specified placeId"}
+        }</span>
+
+        <span class="cov0" title="0">weatherData, err := helpers.GenerateWeatherData(place.Latitude, place.Longitude)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">newWeather := &amp;entities.WeatherData{
+                Id:          uuid.New(),
+                PlaceId:     request.PlaceId,
+                Temperature: weatherData.Temperature,
+                WindSpeed:   weatherData.WindSpeed,
+                Humadity:    weatherData.Humadity,
+                Condition:   weatherData.Condition,
+                RecordedAt:  time.Now(),
+        }
+
+        createdWeather, err := uc.repository.Create(newWeather)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">return createdWeather, nil</span>
+
+}
+
+func (uc *weatherDataUsecase) Update(placeId uuid.UUID) (*entities.WeatherData, error) <span class="cov0" title="0">{
+        exist, err := uc.repository.FindByPlaceId(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">place, err := uc.repository.FindPlace(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">weatherData, err := helpers.GenerateWeatherData(place.Latitude, place.Longitude)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">if exist == nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.BadRequestError{Message: "Weather data not found for the specified placeId"}
+        }</span>
+
+        <span class="cov0" title="0">exist.Temperature = weatherData.Temperature
+        exist.Humadity = weatherData.Humadity
+        exist.WindSpeed = weatherData.WindSpeed
+        exist.Condition = weatherData.Condition
+        exist.RecordedAt = time.Now()
+
+        updatedWeather, err := uc.repository.Update(exist)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+
+        <span class="cov0" title="0">return updatedWeather, nil</span>
+}
+
+func (uc *weatherDataUsecase) Delete(placeId uuid.UUID) error <span class="cov0" title="0">{
+        weather, err := uc.repository.FindByPlaceId(placeId)
+        if err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.BadRequestError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">if err := uc.repository.Delete(weather); err != nil </span><span class="cov0" title="0">{
+                return &amp;errorHandlers.InternalServerError{Message: err.Error()}
+        }</span>
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
