@@ -10,6 +10,7 @@ import (
 type AdminUsecase interface {
 	Login(request *dto.LoginAdminRequest) (*dto.LoginAdminResponse, error)
 	Logout(token string) error
+	GetNewAccessToken(tokenOld string) (*string, error)
 }
 
 type adminUsecase struct {
@@ -64,4 +65,20 @@ func (uc *adminUsecase) Logout(token string) error {
 	}
 
 	return nil
+}
+
+func (uc *adminUsecase) GetNewAccessToken(tokenOld string) (*string, error) {
+	user, err := uc.repository.GetUserByRefreshToken(tokenOld)
+	if err != nil {
+		return nil, &errorHandlers.UnAuthorizedError{Message: "Token is not valid"}
+	}
+	if user.RefreshToken == "" {
+		return nil, &errorHandlers.UnAuthorizedError{Message: "Token is empty"}
+	}
+	accessToken, err := helpers.GenerateAccessToken(user)
+	if err != nil {
+		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
+
+	}
+	return &accessToken, nil
 }
