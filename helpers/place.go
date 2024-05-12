@@ -29,6 +29,7 @@ type ResponseMapsApi struct {
 
 func init() {
 	viper.AutomaticEnv()
+	viper.Set("MAPS_GEOCODING_URL", "https://dev.virtualearth.net/REST/v1/Locations?q=%s&key=%s")
 }
 
 func GenerateLocationDetail(request *dto.PlaceRequest) (*entities.Place, *entities.PlaceAddress, error) {
