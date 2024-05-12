@@ -25,8 +25,9 @@ type ResponseWeatherApi struct {
 func GenerateWeatherData(latitude, longitude float64) (*entities.WeatherData, error) {
 	apiKey := viper.GetString("WEATHER_API_KEY")
 	apiUrl := viper.GetString("WEATHER_API_URL")
-
+	fmt.Println(apiUrl)
 	url := fmt.Sprintf(apiUrl, latitude, longitude, apiKey)
+	fmt.Println("as:", url)
 	resp, err := http.Get(url)
 
 	if err != nil {

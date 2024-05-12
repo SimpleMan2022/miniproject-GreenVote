@@ -12,7 +12,6 @@ type UserRepository interface {
 	FindByEmail(email string) (*entities.User, error)
 	FindById(id uuid.UUID) (*entities.User, error)
 	FindAll(page, limit int, sortBy, sortType, searchQuery string) (*[]entities.User, *int64, error)
-	FindSoftDelete(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error)
 	Create(user *entities.User) (*entities.User, error)
 	SaveRefreshToken(user *entities.User) error
 	Update(user *entities.User) (*entities.User, error)
@@ -57,28 +56,6 @@ func (r *userRepository) FindAll(page, limit int, sortBy, sortType, searchQuery 
 	}
 
 	if err := db.Preload("Address").
-		Offset(offset).Limit(limit).
-		Find(&user).
-		Error; err != nil {
-		return nil, nil, err
-	}
-	if err := db.Count(&total).Error; err != nil {
-		return nil, nil, err
-	}
-	return &user, &total, nil
-}
-
-func (r *userRepository) FindSoftDelete(page, limit int, sortBy, sortType string) (*[]entities.User, *int64, error) {
-	var user []entities.User
-	var total int64
-	offset := (page - 1) * limit
-	db := r.db.Unscoped().Model(&entities.User{})
-	if sortBy != "" {
-		db = db.Order(fmt.Sprintf("%s %s", sortBy, sortType))
-	}
-
-	if err := db.Preload("Address").
-		Where("deleted_at IS NOT NULL").
 		Offset(offset).Limit(limit).
 		Find(&user).
 		Error; err != nil {

@@ -63,7 +63,7 @@ func (uc *placeAddressUsecase) Update(id, placeId uuid.UUID, request *dto.PlaceA
 
 func (uc *placeAddressUsecase) Delete(id, placeId uuid.UUID) error {
 	address, err := uc.repository.FindById(id)
-	if address.PlaceId != placeId {
+	if address == nil || address.PlaceId != placeId {
 		return &errorHandlers.BadRequestError{Message: err.Error()}
 	}
 	if err != nil {

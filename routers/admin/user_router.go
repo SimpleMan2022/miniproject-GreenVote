@@ -16,7 +16,6 @@ func UserRouter(r *echo.Group) {
 	r.Use(middlewares.JWTMiddleware)
 	r.Use(middlewares.AdminOnlyMiddleware)
 	r.GET("", handler.FindAllUsers)
-	r.GET("/soft-deleted", handler.FindAllUserWithSoftDelete)
 	r.GET("/:id", handler.FindUserById)
 	r.POST("/create", handler.Create)
 	r.PUT("/:id", handler.UpdateUser)
