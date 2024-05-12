@@ -13,6 +13,7 @@ import (
 
 func init() {
 	viper.AutomaticEnv()
+	viper.Set("CLOUDINARY_URL", "cloudinary://275428721741137:k639fmc7tFfajdO0LzV6b2BSVik@destjdrbz")
 }
 func DeleteImage(imageURL string) error {
 	parts := strings.Split(imageURL, "/")
