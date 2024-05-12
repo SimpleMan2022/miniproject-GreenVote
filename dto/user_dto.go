@@ -4,7 +4,6 @@ import (
 	"evoting/entities"
 	"github.com/google/uuid"
 	"mime/multipart"
-	"time"
 )
 
 type User struct {
@@ -19,11 +18,9 @@ type CreateRequest struct {
 }
 
 type CreateResponse struct {
-	Id        uuid.UUID `json:"id"`
-	Email     string    `json:"email"`
-	Fullname  string    `json:"fullname"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	Id       uuid.UUID `json:"id"`
+	Email    string    `json:"email"`
+	Fullname string    `json:"fullname"`
 }
 
 type UpdateRequest struct {
