@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="alta_evoting@database-1.cjqcyy4wkyn1.ap-southeast-1.rds.amazonaws.com" uuid="aa8b3c18-4bb5-4838-9db6-66ac31f4a06e">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://database-1.cjqcyy4wkyn1.ap-southeast-1.rds.amazonaws.com:3306/alta_evoting</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
