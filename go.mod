@@ -2,8 +2,6 @@ module evoting
 
 go 1.20
 
-toolchain go1.22.2
-
 require (
 	github.com/cloudinary/cloudinary-go v1.7.0
 	github.com/go-co-op/gocron v1.37.0
