@@ -30,8 +30,5 @@ func LoadDb() {
 		mysql2.Comment{},
 		mysql2.Admin{})
 
-	//if err := seeders.DBSeed(db); err != nil {
-	//	panic(err)
-	//}
 	DB = db
 }

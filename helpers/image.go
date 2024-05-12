@@ -11,6 +11,9 @@ import (
 	"strings"
 )
 
+func init() {
+	viper.AutomaticEnv()
+}
 func DeleteImage(imageURL string) error {
 	parts := strings.Split(imageURL, "/")
 	publicIDWithExtension := parts[len(parts)-2] + "/" + parts[len(parts)-1]

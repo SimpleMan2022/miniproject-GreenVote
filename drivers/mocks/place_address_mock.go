@@ -10,7 +10,7 @@ type MockPlaceAddressRepository struct {
 	mock.Mock
 }
 
-func (m MockPlaceAddressRepository) FindById(id uuid.UUID) (*entities.PlaceAddress, error) {
+func (m *MockPlaceAddressRepository) FindById(id uuid.UUID) (*entities.PlaceAddress, error) {
 	args := m.Called(id)
 	if args.Get(0) == nil {
 		return nil, args.Error(1)
@@ -18,7 +18,7 @@ func (m MockPlaceAddressRepository) FindById(id uuid.UUID) (*entities.PlaceAddre
 	return args.Get(0).(*entities.PlaceAddress), nil
 }
 
-func (m MockPlaceAddressRepository) Create(address *entities.PlaceAddress) (*entities.PlaceAddress, error) {
+func (m *MockPlaceAddressRepository) Create(address *entities.PlaceAddress) (*entities.PlaceAddress, error) {
 	args := m.Called(address)
 	if args.Get(0) == nil {
 		return nil, args.Error(1)
@@ -26,7 +26,7 @@ func (m MockPlaceAddressRepository) Create(address *entities.PlaceAddress) (*ent
 	return args.Get(0).(*entities.PlaceAddress), nil
 }
 
-func (m MockPlaceAddressRepository) Update(address *entities.PlaceAddress) (*entities.PlaceAddress, error) {
+func (m *MockPlaceAddressRepository) Update(address *entities.PlaceAddress) (*entities.PlaceAddress, error) {
 	args := m.Called(address)
 	if args.Get(0) == nil {
 		return nil, args.Error(1)
@@ -34,7 +34,7 @@ func (m MockPlaceAddressRepository) Update(address *entities.PlaceAddress) (*ent
 	return args.Get(0).(*entities.PlaceAddress), nil
 }
 
-func (m MockPlaceAddressRepository) Delete(address *entities.PlaceAddress) error {
+func (m *MockPlaceAddressRepository) Delete(address *entities.PlaceAddress) error {
 	args := m.Called(address)
 	if args.Get(0) == nil {
 		return nil
