@@ -17,6 +17,7 @@ type UserUsecase interface {
 	Update(id uuid.UUID, request *dto.UpdateRequest) (*entities.User, error)
 	Delete(id uuid.UUID) error
 	Logout(token string) error
+	GetNewAccessToken(tokenOld string) (*string, error)
 }
 
 type userUsecase struct {
@@ -175,4 +176,20 @@ func (uc *userUsecase) Logout(token string) error {
 	}
 
 	return nil
+}
+
+func (uc *userUsecase) GetNewAccessToken(tokenOld string) (*string, error) {
+	user, err := uc.repository.GetUserByRefreshToken(tokenOld)
+	if err != nil {
+		return nil, &errorHandlers.UnAuthorizedError{Message: "Token is not valid"}
+	}
+	if user.RefreshToken == "" {
+		return nil, &errorHandlers.UnAuthorizedError{Message: "Token is empty"}
+	}
+	accessToken, err := helpers.GenerateAccessToken(user)
+	if err != nil {
+		return nil, &errorHandlers.InternalServerError{Message: err.Error()}
+
+	}
+	return &accessToken, nil
 }

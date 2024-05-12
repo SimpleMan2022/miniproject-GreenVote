@@ -53,6 +53,10 @@ type findAllResponse struct {
 	Image    *string     `json:"image"`
 }
 
+type ToNewTokenResponse struct {
+	Token string
+}
+
 func ToCreateResponse(user *entities.User) *CreateResponse {
 	return &CreateResponse{
 		Id:       user.Id,

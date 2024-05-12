@@ -231,3 +231,21 @@ func (h *userHandler) Logout(ctx echo.Context) error {
 	})
 	return ctx.JSON(http.StatusOK, response)
 }
+
+func (h *userHandler) GetNewAccessToken(ctx echo.Context) error {
+	cookie, err := ctx.Cookie("refreshToken")
+	if err != nil {
+		return errorHandlers.HandleError(ctx, &errorHandlers.UnAuthorizedError{Message: err.Error()})
+	}
+	token, err := h.usecase.GetNewAccessToken(cookie.Value)
+	if err != nil {
+		return errorHandlers.HandleError(ctx, err)
+	}
+	newToken := dto.ToNewTokenResponse{Token: *token}
+	response := helpers.Response(dto.ResponseParams{
+		StatusCode: http.StatusOK,
+		Message:    "New access token has been obtained",
+		Data:       newToken,
+	})
+	return ctx.JSON(http.StatusOK, response)
+}
