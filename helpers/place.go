@@ -37,6 +37,7 @@ func GenerateLocationDetail(request *dto.PlaceRequest) (*entities.Place, *entiti
 	query := request.Name
 
 	url := fmt.Sprintf(geocodingUrl, query, apikey)
+	fmt.Println("detail", url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, nil, err
@@ -94,8 +95,7 @@ func GenerateImageLocation(place *dto.PlaceRequest) string {
 	apikey := viper.GetString("MAPS_API_KEY")
 	imageryUrl := viper.GetString("MAPS_IMAGERY_URL")
 	url := fmt.Sprintf(imageryUrl, longLat, longLat, apikey)
-
-	fmt.Println(url)
+	fmt.Println("img:", url)
 	resp, err := http.Get(url)
 	if err != nil {
 		return ""
