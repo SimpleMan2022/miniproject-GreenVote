@@ -1,0 +1,950 @@
+swagger: "2.0"
+info:
+  description: "API documentation for GreenVote API."
+  version: "1.0.0"
+  title: "GreenVote API"
+  contact:
+    email: "rosyadadityanugroho@students.polmed.ac.id"
+basePath: "https://greenvote.aditnugroho.my.id/api/v1"
+tags:
+  - name: "User Authentication"
+    description: "User Authentication Resource"
+  - name: "User Profile"
+    description: "User Profile Resource"
+  - name: "Places"
+    description: "Place Resource"
+  - name: "Votes"
+    description: "Votes Resource"
+  - name: "Comments"
+    description: "Comments Resource"
+schemes:
+  - "https"
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Use 'Bearer' followed by a space, then your access token (e.g., 'Bearer your_access_token_here')
+paths:
+  /auth/register:
+    post:
+      tags:
+        - "User Authentication"
+      summary: "Register a new user"
+      operationId: "registerUser"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User registration input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+              fullname:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        201:
+          description: "User registered successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 201
+              message:
+                type: "string"
+                example: "Congratulations! Your registration was successful. Please login to continue"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    example: "string"
+                  email:
+                    type: "string"
+                    example: "string"
+                  fullname:
+                    type: "string"
+                    example: "string"
+  /auth/login:
+    post:
+      tags:
+        - "User Authentication"
+      summary: "Login user"
+      operationId: "loginUser"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User login input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        200:
+          description: "User logged in successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "You have successfully logged in"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    example: "string"
+                  fullname:
+                    type: "string"
+                    example: "string"
+                  access_token:
+                    type: "string"
+                    example: "string"
+  /auth/logout:
+    delete:
+      tags:
+        - "User Authentication"
+      summary: "Logout user"
+      operationId: "logoutUser"
+      security:
+        - BearerAuth: [ ]
+      responses:
+        200:
+          description: "User logged out successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "You have been successfully logged out."
+
+  /auth/token:
+    get:
+      tags:
+        - "User Authentication"
+      summary: "Get new access token"
+      operationId: "getAccessToken"
+      security:
+        - BearerAuth: [ ]
+      responses:
+        200:
+          description: "New access token obtained"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "New access token has been obtained"
+              data:
+                type: "object"
+                properties:
+                  Token:
+                    type: "string"
+                    example: "string"
+
+  /profile/address:
+    get:
+      tags:
+        - "User Profile"
+      summary: "Get user address"
+      operationId: "getUserAddress"
+      security:
+        - BearerAuth: [ ]
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Successfully retrieved user data"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Successfully retrieved user data"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    example: "string"
+                  email:
+                    type: "string"
+                    example: "string"
+                  fullname:
+                    type: "string"
+                    example: "string"
+                  address:
+                    type: "object"
+                    properties:
+                      province:
+                        type: "string"
+                        example: "string"
+                      city:
+                        type: "string"
+                        example: "string"
+                      sub_district:
+                        type: "string"
+                        example: "string"
+                      street_name:
+                        type: "string"
+                        example: "string"
+                      zip_code:
+                        type: "string"
+                        example: "string"
+                  image:
+                    type: "string"
+                    format: "url"
+                    example: "string"
+        401:
+          description: "Unauthorized"
+    post:
+      tags:
+        - "User Profile"
+      summary: "Create user address information"
+      operationId: "createUserAddress"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User address creation input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              province:
+                type: "string"
+              city:
+                type: "string"
+              sub_district:
+                type: "string"
+              street_name:
+                type: "string"
+              zip_code:
+                type: "string"
+      responses:
+        201:
+          description: "User address information created successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 201
+              message:
+                type: "string"
+                example: "Create successful. User address information has been created."
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  province:
+                    type: "string"
+                  city:
+                    type: "string"
+                  sub_district:
+                    type: "string"
+                  street_name:
+                    type: "string"
+                  zip_code:
+                    type: "string"
+    put:
+      tags:
+        - "User Profile"
+      summary: "Update user address information"
+      operationId: "updateUserAddress"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User address update input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              province:
+                type: "string"
+              city:
+                type: "string"
+              sub_district:
+                type: "string"
+              street_name:
+                type: "string"
+              zip_code:
+                type: "string"
+      responses:
+        200:
+          description: "User address information updated successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Update successful. User address information has been updated."
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  province:
+                    type: "string"
+                  city:
+                    type: "string"
+                  sub_district:
+                    type: "string"
+                  street_name:
+                    type: "string"
+                  zip_code:
+                    type: "string"
+    delete:
+      tags:
+        - "User Profile"
+      summary: "Delete user address"
+      operationId: "deleteUserAddress"
+      security:
+        - BearerAuth: [ ]
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "User address deleted successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+              status_code:
+                type: "integer"
+              message:
+                type: "string"
+  /profile/{userId}:
+    put:
+      tags:
+        - "User Profile"
+      summary: "Update user information"
+      operationId: "updateUserInformation"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: "path"
+          name: "userId"
+          description: "User ID"
+          required: true
+          type: "string"
+        - in: "formData"
+          name: "email"
+          description: "User email"
+          required: false
+          type: "string"
+        - in: "formData"
+          name: "fullname"
+          description: "User full name"
+          required: false
+          type: "string"
+        - in: "formData"
+          name: "password"
+          description: "User password"
+          required: false
+          type: "string"
+        - in: "formData"
+          name: "image"
+          description: "User image"
+          required: false
+          type: "file"
+      responses:
+        200:
+          description: "User information updated successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Update successful. User information has been updated."
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  email:
+                    type: "string"
+                  fullname:
+                    type: "string"
+                  address:
+                    type: "object"
+                    properties:
+                      province:
+                        type: "string"
+                      city:
+                        type: "string"
+                      sub_district:
+                        type: "string"
+                      street_name:
+                        type: "string"
+                      zip_code:
+                        type: "string"
+                  image:
+                    type: "string"
+                    format: "url"
+  /places:
+    get:
+      tags:
+        - "Places"
+      summary: "Get places data"
+      operationId: "getPlaces"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "page"
+          in: "query"
+          description: "Page number"
+          required: false
+          type: "integer"
+        - name: "limit"
+          in: "query"
+          description: "Number of items per page"
+          required: false
+          type: "integer"
+        - name: "sort"
+          in: "query"
+          description: "Field to sort by"
+          required: false
+          type: "string"
+        - name: "search"
+          in: "query"
+          description: "Search keyword"
+          required: false
+          type: "string"
+        - name: "sort_by"
+          in: "query"
+          description: "Field to sort by"
+          required: false
+          type: "string"
+        - name: "sort_type"
+          in: "query"
+          description: "Sort type (asc/desc)"
+          required: false
+          type: "string"
+      responses:
+        200:
+          description: "Successfully retrieved places data"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+              status_code:
+                type: "integer"
+              message:
+                type: "string"
+              data:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "string"
+                    name:
+                      type: "string"
+                    description:
+                      type: "string"
+                    longitude:
+                      type: "number"
+                    latitude:
+                      type: "number"
+                    map_image:
+                      type: "string"
+                      format: "url"
+                    address:
+                      type: "object"
+                      properties:
+                        id:
+                          type: "string"
+                        province:
+                          type: "string"
+                        city:
+                          type: "string"
+                        sub_district:
+                          type: "string"
+                        street_name:
+                          type: "string"
+                        zip_code:
+                          type: "string"
+                    weather:
+                      type: "object"
+                      properties:
+                        temperature:
+                          type: "number"
+                        wind_speed:
+                          type: "number"
+                        humidity:
+                          type: "number"
+                        condition:
+                          type: "string"
+                        recorded_at:
+                          type: "string"
+                          format: "date-time"
+              pagination:
+                type: "object"
+                properties:
+                  total:
+                    type: "integer"
+                  per_page:
+                    type: "integer"
+                  current_page:
+                    type: "integer"
+                  last_page:
+                    type: "integer"
+              sorting:
+                type: "object"
+                properties:
+                  sort_by:
+                    type: "string"
+                  sort_type:
+                    type: "string"
+  /places/{placeId}:
+    get:
+      tags:
+        - "Places"
+      summary: "Get place by ID"
+      operationId: "getPlaceById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "placeId"
+          in: "path"
+          description: "ID of the place to get"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Successfully retrieved place data"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+              status_code:
+                type: "integer"
+              message:
+                type: "string"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  name:
+                    type: "string"
+                  description:
+                    type: "string"
+                  longitude:
+                    type: "number"
+                  latitude:
+                    type: "number"
+                  map_image:
+                    type: "string"
+                    format: "url"
+                  address:
+                    type: "object"
+                    properties:
+                      id:
+                        type: "string"
+                      province:
+                        type: "string"
+                      city:
+                        type: "string"
+                      sub_district:
+                        type: "string"
+                      street_name:
+                        type: "string"
+                      zip_code:
+                        type: "string"
+                  weather:
+                    type: "object"
+                    properties:
+                      temperature:
+                        type: "number"
+                      wind_speed:
+                        type: "number"
+                      humidity:
+                        type: "number"
+                      condition:
+                        type: "string"
+                      recorded_at:
+                        type: "string"
+                        format: "date-time"
+  /votes:
+    post:
+      tags:
+        - "Votes"
+      summary: "Record a vote"
+      operationId: "recordVote"
+      security:
+        - BearerAuth: [ ]
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Vote record input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              place_id:
+                type: "string"
+                example: "string"
+      responses:
+        201:
+          description: "Vote recorded successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 201
+              message:
+                type: "string"
+                example: "Your vote has been recorded successfully. Thank you!"
+              data:
+                type: "object"
+                properties:
+                  user_id:
+                    type: "string"
+                    example: "string"
+                  place_id:
+                    type: "string"
+                    example: "string"
+
+    get:
+      tags:
+        - "Votes"
+      summary: "Get votes data"
+      operationId: "getVotes"
+      responses:
+        200:
+          description: "Successfully retrieved votes data"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "success"
+              data:
+                type: "object"
+                properties:
+                  votes:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        place_id:
+                          type: "string"
+                          example: "string"
+                        place_name:
+                          type: "string"
+                          example: "string"
+                        total_vote:
+                          type: "integer"
+                          example: 0
+                        percentage:
+                          type: "integer"
+                          example: 0
+                  detail_vote:
+                    type: "object"
+                    properties:
+                      total_voters:
+                        type: "integer"
+                        example: 0
+                      total_votes_received:
+                        type: "integer"
+                        example: 0
+
+  /places/{placeId}/comments:
+    post:
+      tags:
+        - "Comments"
+      summary: "Create a comment for a place"
+      operationId: "createPlaceComment"
+      security:
+        - BearerAuth: [ ]
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "placeId"
+          description: "ID of the place to comment on"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Comment creation input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              body:
+                type: "string"
+      responses:
+        201:
+          description: "Comment created successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 201
+              message:
+                type: "string"
+                example: "Create successful. Comment has been created."
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  user_id:
+                    type: "string"
+                  place_id:
+                    type: "string"
+                  body:
+                    type: "string"
+
+    get:
+      tags:
+        - "Comments"
+      summary: "Get comments for a place"
+      operationId: "getPlaceComments"
+      parameters:
+        - in: "path"
+          name: "placeId"
+          description: "ID of the place to get comments for"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Successfully retrieved place comments"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Successfully retrieved place comments"
+              data:
+                type: "object"
+                properties:
+                  place_detail:
+                    type: "object"
+                    properties:
+                      place_name:
+                        type: "string"
+                      province:
+                        type: "string"
+                      city:
+                        type: "string"
+                      sub_district:
+                        type: "string"
+                      street_name:
+                        type: "string"
+                  comments:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        comment_id:
+                          type: "string"
+                        user_id:
+                          type: "string"
+                        fullname:
+                          type: "string"
+                        body:
+                          type: "string"
+                        created_at:
+                          type: "string"
+                        updated_at:
+                          type: "string"
+  /places/{placeId}/comments/{commentId}:
+    put:
+      tags:
+        - "Comments"
+      summary: "Update a comment for a place"
+      operationId: "updatePlaceComment"
+      security:
+        - BearerAuth: [ ]
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "placeId"
+          description: "ID of the place the comment belongs to"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "commentId"
+          description: "ID of the comment to update"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Comment update input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              body:
+                type: "string"
+      responses:
+        200:
+          description: "Comment updated successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Update successful. Comment has been updated."
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  user_id:
+                    type: "string"
+                  place_id:
+                    type: "string"
+                  body:
+                    type: "string"
+
+    delete:
+      tags:
+        - "Comments"
+      summary: "Delete a comment for a place"
+      operationId: "deletePlaceComment"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: "path"
+          name: "placeId"
+          description: "ID of the place the comment belongs to"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "commentId"
+          description: "ID of the comment to delete"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Comment deleted successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Delete successful. Comment has been deleted"
