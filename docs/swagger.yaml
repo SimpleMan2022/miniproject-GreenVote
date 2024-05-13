@@ -17,6 +17,12 @@ tags:
     description: "Votes Resource"
   - name: "Comments"
     description: "Comments Resource"
+  - name: "Admin - Users"
+    description: "Manage Users Resource"
+  - name: "Admin - Places"
+    description: "Manage Places Resource"
+  - name: "Admin - Place Address"
+    description: "Manage Place Address Resource"
 schemes:
   - "https"
 securityDefinitions:
@@ -463,9 +469,11 @@ paths:
       tags:
         - "Places"
       summary: "Get places data"
-      operationId: "getPlaces"
+      operationId: "getPlaces for admin"
       produces:
         - "application/json"
+      security:
+        - BearerAuth: [ ]
       parameters:
         - name: "page"
           in: "query"
@@ -582,6 +590,8 @@ paths:
       operationId: "getPlaceById"
       produces:
         - "application/json"
+      security:
+        - BearerAuth: [ ]
       parameters:
         - name: "placeId"
           in: "path"
@@ -698,6 +708,8 @@ paths:
         - "Votes"
       summary: "Get votes data"
       operationId: "getVotes"
+      security:
+        - BearerAuth: [ ]
       responses:
         200:
           description: "Successfully retrieved votes data"
@@ -802,6 +814,8 @@ paths:
         - "Comments"
       summary: "Get comments for a place"
       operationId: "getPlaceComments"
+      security:
+        - BearerAuth: [ ]
       parameters:
         - in: "path"
           name: "placeId"
@@ -948,3 +962,873 @@ paths:
               message:
                 type: "string"
                 example: "Delete successful. Comment has been deleted"
+  /admin/users:
+    get:
+      tags:
+        - "Admin - Users"
+      summary: "Get users data"
+      operationId: "getUsers"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: "page"
+          in: "query"
+          description: "Page number"
+          required: false
+          type: "integer"
+        - name: "limit"
+          in: "query"
+          description: "Number of items per page"
+          required: false
+          type: "integer"
+        - name: "sort_by"
+          in: "query"
+          description: "Field to sort by"
+          required: false
+          type: "string"
+        - name: "sort_type"
+          in: "query"
+          description: "Sort type (asc/desc)"
+          required: false
+          type: "string"
+        - name: "search"
+          in: "query"
+          description: "Search keyword"
+          required: false
+          type: "string"
+      responses:
+        200:
+          description: "Successfully retrieved user data"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Successfully retrieved user data"
+              data:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "string"
+                    email:
+                      type: "string"
+                    fullname:
+                      type: "string"
+                    address:
+                      type: "object"
+                      properties:
+                        province:
+                          type: "string"
+                        city:
+                          type: "string"
+                        sub_district:
+                          type: "string"
+                        street_name:
+                          type: "string"
+                        zip_code:
+                          type: "string"
+                    image:
+                      type: "string"
+              pagination:
+                type: "object"
+                properties:
+                  total:
+                    type: "integer"
+                  per_page:
+                    type: "integer"
+                  current_page:
+                    type: "integer"
+                  last_page:
+                    type: "integer"
+              sorting:
+                type: "object"
+                properties:
+                  sort_by:
+                    type: "string"
+                  sort_type:
+                    type: "string"
+    post:
+      tags:
+        - "Admin - Users"
+      summary: "Create a new user"
+      operationId: "createUser"
+      security:
+        - BearerAuth: [ ]
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User registration input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+              fullname:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        201:
+          description: "User registered successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 201
+              message:
+                type: "string"
+                example: "Congratulations! Your registration was successful. Please login to continue"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  email:
+                    type: "string"
+                  fullname:
+                    type: "string"
+  /admin/users/{userId}:
+    get:
+      tags:
+        - "Admin - Users"
+      summary: "Get user data by ID"
+      operationId: "getUserById"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "User ID"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Successfully retrieved user data"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Successfully retrieved user data"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  email:
+                    type: "string"
+                  fullname:
+                    type: "string"
+                  address:
+                    type: "object"
+                    properties:
+                      province:
+                        type: "string"
+                      city:
+                        type: "string"
+                      sub_district:
+                        type: "string"
+                      street_name:
+                        type: "string"
+                      zip_code:
+                        type: "string"
+                  image:
+                    type: "string"
+
+    put:
+      tags:
+        - "Admin - Users"
+      summary: "Update user information by ID"
+      operationId: "updateUserById"
+      consumes:
+        - "multipart/form-data"
+      produces:
+        - "application/json"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: "path"
+          name: "userId"
+          description: "User ID"
+          required: true
+          type: "string"
+        - in: "formData"
+          name: "email"
+          description: "User email"
+          required: false
+          type: "string"
+        - in: "formData"
+          name: "fullname"
+          description: "User full name"
+          required: false
+          type: "string"
+        - in: "formData"
+          name: "password"
+          description: "User password"
+          required: false
+          type: "string"
+        - in: "formData"
+          name: "image"
+          description: "User image"
+          required: false
+          type: "file"
+      responses:
+        200:
+          description: "User information updated successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Update successful. User information has been updated."
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  email:
+                    type: "string"
+                  fullname:
+                    type: "string"
+                  address:
+                    type: "object"
+                    properties:
+                      province:
+                        type: "string"
+                      city:
+                        type: "string"
+                      sub_district:
+                        type: "string"
+                      street_name:
+                        type: "string"
+                      zip_code:
+                        type: "string"
+                  image:
+                    type: "string"
+    delete:
+      tags:
+        - "Admin - Users"
+      summary: "Delete user by ID"
+      operationId: "deleteUserById"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "User ID"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "User information deleted successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Delete successful. User information has been deleted."
+  /admin/places:
+    get:
+      tags:
+        - "Admin - Places"
+      summary: "Get places data"
+      operationId: "getPlaces"
+      security:
+        - BearerAuth: [ ]
+      produces:
+        - "application/json"
+      parameters:
+        - name: "page"
+          in: "query"
+          description: "Page number"
+          required: false
+          type: "integer"
+        - name: "limit"
+          in: "query"
+          description: "Number of items per page"
+          required: false
+          type: "integer"
+        - name: "sort"
+          in: "query"
+          description: "Field to sort by"
+          required: false
+          type: "string"
+        - name: "search"
+          in: "query"
+          description: "Search keyword"
+          required: false
+          type: "string"
+        - name: "sort_by"
+          in: "query"
+          description: "Field to sort by"
+          required: false
+          type: "string"
+        - name: "sort_type"
+          in: "query"
+          description: "Sort type (asc/desc)"
+          required: false
+          type: "string"
+      responses:
+        200:
+          description: "Successfully retrieved places data"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+              status_code:
+                type: "integer"
+              message:
+                type: "string"
+              data:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "string"
+                    name:
+                      type: "string"
+                    description:
+                      type: "string"
+                    longitude:
+                      type: "number"
+                    latitude:
+                      type: "number"
+                    map_image:
+                      type: "string"
+                      format: "url"
+                    address:
+                      type: "object"
+                      properties:
+                        id:
+                          type: "string"
+                        province:
+                          type: "string"
+                        city:
+                          type: "string"
+                        sub_district:
+                          type: "string"
+                        street_name:
+                          type: "string"
+                        zip_code:
+                          type: "string"
+                    weather:
+                      type: "object"
+                      properties:
+                        temperature:
+                          type: "number"
+                        wind_speed:
+                          type: "number"
+                        humidity:
+                          type: "number"
+                        condition:
+                          type: "string"
+                        recorded_at:
+                          type: "string"
+                          format: "date-time"
+              pagination:
+                type: "object"
+                properties:
+                  total:
+                    type: "integer"
+                  per_page:
+                    type: "integer"
+                  current_page:
+                    type: "integer"
+                  last_page:
+                    type: "integer"
+              sorting:
+                type: "object"
+                properties:
+                  sort_by:
+                    type: "string"
+                  sort_type:
+                    type: "string"
+    post:
+      tags:
+        - "Admin - Places"
+      summary: "Create a new place"
+      operationId: "createPlace"
+      security:
+        - BearerAuth: [ ]
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Authorization"
+          description: "Bearer token"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Place creation input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              description:
+                type: "string"
+      responses:
+        201:
+          description: "Place information created successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 201
+              message:
+                type: "string"
+                example: "Create successful. Place information has been created."
+              data:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                  description:
+                    type: "string"
+                  longitude:
+                    type: "number"
+                  latitude:
+                    type: "number"
+                  map_image:
+                    type: "string"
+                    format: "url"
+                  address:
+                    type: "object"
+                    properties:
+                      id:
+                        type: "string"
+                      province:
+                        type: "string"
+                      city:
+                        type: "string"
+                      sub_district:
+                        type: "string"
+                      street_name:
+                        type: "string"
+                      zip_code:
+                        type: "string"
+                  weather:
+                    type: "object"
+                    properties:
+                      temperature:
+                        type: "number"
+                      wind_speed:
+                        type: "number"
+                      humidity:
+                        type: "number"
+                      condition:
+                        type: "string"
+                      recorded_at:
+                        type: "string"
+                        format: "date-time"
+  /admin/places/{placeId}:
+    get:
+      tags:
+        - "Admin - Places"
+      summary: "Get place by ID"
+      operationId: "getPlaceById for admin"
+      produces:
+        - "application/json"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - name: "placeId"
+          in: "path"
+          description: "ID of the place to get"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Successfully retrieved place data"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+              status_code:
+                type: "integer"
+              message:
+                type: "string"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  name:
+                    type: "string"
+                  description:
+                    type: "string"
+                  longitude:
+                    type: "number"
+                  latitude:
+                    type: "number"
+                  map_image:
+                    type: "string"
+                    format: "url"
+                  address:
+                    type: "object"
+                    properties:
+                      id:
+                        type: "string"
+                      province:
+                        type: "string"
+                      city:
+                        type: "string"
+                      sub_district:
+                        type: "string"
+                      street_name:
+                        type: "string"
+                      zip_code:
+                        type: "string"
+                  weather:
+                    type: "object"
+                    properties:
+                      temperature:
+                        type: "number"
+                      wind_speed:
+                        type: "number"
+                      humidity:
+                        type: "number"
+                      condition:
+                        type: "string"
+                      recorded_at:
+                        type: "string"
+                        format: "date-time"
+    put:
+      tags:
+        - "Admin - Places"
+      summary: "Update place information by ID"
+      operationId: "updatePlaceById"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: "path"
+          name: "placeId"
+          description: "Place ID"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Place update input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              description:
+                type: "string"
+      responses:
+        200:
+          description: "Place information updated successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Update successful. Place information has been updated."
+              data:
+                type: "object"
+                properties:
+                  name:
+                    type: "string"
+                  description:
+                    type: "string"
+                  longitude:
+                    type: "number"
+                  latitude:
+                    type: "number"
+                  map_image:
+                    type: "string"
+                    format: "url"
+                  address:
+                    type: "object"
+                    properties:
+                      id:
+                        type: "string"
+                      province:
+                        type: "string"
+                      city:
+                        type: "string"
+                      sub_district:
+                        type: "string"
+                      street_name:
+                        type: "string"
+                      zip_code:
+                        type: "string"
+                  weather:
+                    type: "object"
+                    properties:
+                      temperature:
+                        type: "number"
+                      wind_speed:
+                        type: "number"
+                      humidity:
+                        type: "number"
+                      condition:
+                        type: "string"
+                      recorded_at:
+                        type: "string"
+                        format: "date-time"
+    delete:
+      tags:
+        - "Admin - Places"
+      summary: "Delete place by ID"
+      operationId: "deletePlaceById"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: "path"
+          name: "placeId"
+          description: "Place ID"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Place information deleted successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Delete successful. Place information has been deleted."
+  /admin/places/{placeId}/address:
+    post:
+      tags:
+        - "Admin - Place Address"
+      summary: "Create a new address for a place"
+      operationId: "createPlaceAddress"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Authorization"
+          description: "Bearer token"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "placeId"
+          description: "Place ID"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Address creation input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              province:
+                type: "string"
+              city:
+                type: "string"
+              sub_district:
+                type: "string"
+              street_name:
+                type: "string"
+              zip_code:
+                type: "string"
+      responses:
+        201:
+          description: "Place address information created successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 201
+              message:
+                type: "string"
+                example: "Create successful. Place address information has been created."
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  province:
+                    type: "string"
+                  city:
+                    type: "string"
+                  sub_district:
+                    type: "string"
+                  street_name:
+                    type: "string"
+                  zip_code:
+                    type: "string"
+
+  /admin/places/{placeId}/address/{addressId}:
+    put:
+      tags:
+        - "Admin - Place Address"
+      summary: "Update place address information by address ID"
+      operationId: "updatePlaceAddressById"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Authorization"
+          description: "Bearer token"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "placeId"
+          description: "Place ID"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "addressId"
+          description: "Address ID"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Address update input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              province:
+                type: "string"
+              city:
+                type: "string"
+              sub_district:
+                type: "string"
+              street_name:
+                type: "string"
+              zip_code:
+                type: "string"
+      responses:
+        200:
+          description: "Place address information updated successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Update successful. Place address information has been updated."
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                  province:
+                    type: "string"
+                  city:
+                    type: "string"
+                  sub_district:
+                    type: "string"
+                  street_name:
+                    type: "string"
+                  zip_code:
+                    type: "string"
+
+    delete:
+      tags:
+        - "Admin - Place Address"
+      summary: "Delete place address by address ID"
+      operationId: "deletePlaceAddressById"
+      parameters:
+        - in: "header"
+          name: "Authorization"
+          description: "Bearer token"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "placeId"
+          description: "Place ID"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "addressId"
+          description: "Address ID"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Place address information deleted successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Delete successful. Place address information has been deleted."

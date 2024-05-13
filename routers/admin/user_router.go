@@ -17,7 +17,7 @@ func UserRouter(r *echo.Group) {
 	r.Use(middlewares.AdminOnlyMiddleware)
 	r.GET("", handler.FindAllUsers)
 	r.GET("/:id", handler.FindUserById)
-	r.POST("/create", handler.Create)
+	r.POST("", handler.Create)
 	r.PUT("/:id", handler.UpdateUser)
 	r.DELETE("/:id", handler.DeleteUser)
 }
