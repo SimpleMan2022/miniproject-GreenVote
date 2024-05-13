@@ -26,7 +26,7 @@ func (uc *chatbotUsecase) GetRecommendation(query string, chatHistory []dto.Chat
 	messages = append(messages, dto.ChatHistory{PreviousMessages: query})
 
 	var prompt string
-	prompt = "I want to create a voting system for environmental selection for restoration. given the location data to be voted:"
+	prompt = "You are assistant for give all information about the places. given the location data to be voted:"
 	for i, place := range *allPlaces {
 		prompt += fmt.Sprintf("%d. %s, description: %s, temperature: %d. ", i+1, place.Name, place.Description, place.Weather.Temperature)
 	}

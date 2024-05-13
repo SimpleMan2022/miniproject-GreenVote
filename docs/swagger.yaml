@@ -23,8 +23,12 @@ tags:
     description: "Manage Places Resource"
   - name: "Admin - Place Address"
     description: "Manage Place Address Resource"
+  - name: "Admin - Place Weather"
+    description: "Manage Place Weather Resource"
+  - name: "Admin Authentication"
+    description: "Admin Authentication Resource"
 schemes:
-  - "https"
+  - "https://greenvote.aditnugroho.my.id/api/v1"
 securityDefinitions:
   BearerAuth:
     type: apiKey
@@ -138,8 +142,6 @@ paths:
         - "User Authentication"
       summary: "Logout user"
       operationId: "logoutUser"
-      security:
-        - BearerAuth: [ ]
       responses:
         200:
           description: "User logged out successfully"
@@ -162,8 +164,6 @@ paths:
         - "User Authentication"
       summary: "Get new access token"
       operationId: "getAccessToken"
-      security:
-        - BearerAuth: [ ]
       responses:
         200:
           description: "New access token obtained"
@@ -1659,6 +1659,8 @@ paths:
         - "Admin - Place Address"
       summary: "Create a new address for a place"
       operationId: "createPlaceAddress"
+      security:
+        - BearerAuth: [ ]
       consumes:
         - "application/json"
       produces:
@@ -1727,6 +1729,8 @@ paths:
       tags:
         - "Admin - Place Address"
       summary: "Update place address information by address ID"
+      security:
+        - BearerAuth: [ ]
       operationId: "updatePlaceAddressById"
       consumes:
         - "application/json"
@@ -1800,6 +1804,8 @@ paths:
       tags:
         - "Admin - Place Address"
       summary: "Delete place address by address ID"
+      security:
+        - BearerAuth: [ ]
       operationId: "deletePlaceAddressById"
       parameters:
         - in: "header"
@@ -1832,3 +1838,398 @@ paths:
               message:
                 type: "string"
                 example: "Delete successful. Place address information has been deleted."
+  /admin/places/weather:
+    post:
+      tags:
+        - "Admin - Place Weather"
+      summary: "Create weather information for a place"
+      security:
+        - BearerAuth: [ ]
+      operationId: "createPlaceWeather"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Authorization"
+          description: "Bearer token"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Weather creation input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              place_id:
+                type: "string"
+      responses:
+        201:
+          description: "Weather information created successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 201
+              message:
+                type: "string"
+                example: "Create successful. Weather information has been created."
+              data:
+                type: "object"
+                properties:
+                  place_id:
+                    type: "string"
+                  place:
+                    type: "object"
+                    properties:
+                      name:
+                        type: "string"
+                      description:
+                        type: "string"
+                      longitude:
+                        type: "number"
+                      latitude:
+                        type: "number"
+                      map_image:
+                        type: "string"
+                  temperature:
+                    type: "number"
+                  wind_speed:
+                    type: "number"
+                  humidity:
+                    type: "number"
+                  condition:
+                    type: "string"
+                  recorded_at:
+                    type: "string"
+
+  /admin/places/{placeId}/weather:
+    put:
+      tags:
+        - "Admin - Place Weather"
+      summary: "Update weather information for a place by place ID"
+      operationId: "updatePlaceWeatherById"
+      security:
+        - BearerAuth: [ ]
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "header"
+          name: "Authorization"
+          description: "Bearer token"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "placeId"
+          description: "Place ID"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Weather update input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              temperature:
+                type: "number"
+              wind_speed:
+                type: "number"
+              humidity:
+                type: "number"
+              condition:
+                type: "string"
+              recorded_at:
+                type: "string"
+      responses:
+        200:
+          description: "Weather information updated successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Update successful. Weather information has been updated."
+              data:
+                type: "object"
+                properties:
+                  place:
+                    type: "object"
+                    properties:
+                      id:
+                        type: "string"
+                      name:
+                        type: "string"
+                      description:
+                        type: "string"
+                      longitude:
+                        type: "number"
+                      latitude:
+                        type: "number"
+                      map_image:
+                        type: "string"
+                  temperature:
+                    type: "number"
+                  wind_speed:
+                    type: "number"
+                  humidity:
+                    type: "number"
+                  condition:
+                    type: "string"
+                  recorded_at:
+                    type: "string"
+
+    delete:
+      tags:
+        - "Admin - Place Weather"
+      summary: "Delete weather information for a place by place ID"
+      operationId: "deletePlaceWeatherById"
+      security:
+        - BearerAuth: [ ]
+      parameters:
+        - in: "header"
+          name: "Authorization"
+          description: "Bearer token"
+          required: true
+          type: "string"
+        - in: "path"
+          name: "placeId"
+          description: "Place ID"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Weather information deleted successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "Delete successful. Weather information has been deleted."
+  /admin/auth/login:
+    post:
+      tags:
+        - "Admin Authentication"
+      summary: "Login admin"
+      operationId: "login Admin"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User login input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              email:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        200:
+          description: "User logged in successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "You have successfully logged in"
+              data:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    example: "string"
+                  fullname:
+                    type: "string"
+                    example: "string"
+                  access_token:
+                    type: "string"
+                    example: "string"
+  /admin/auth/logout:
+    delete:
+      tags:
+        - "Admin Authentication"
+      summary: "Logout admin"
+      operationId: "logoutAdmin"
+      responses:
+        200:
+          description: "User logged out successfully"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "You have been successfully logged out."
+
+  /admin/auth/token:
+    get:
+      tags:
+        - "Admin Authentication"
+      summary: "Get new access token"
+      operationId: "getAccessTokenAdmin"
+      responses:
+        200:
+          description: "New access token obtained"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "boolean"
+                example: true
+              status_code:
+                type: "integer"
+                example: 200
+              message:
+                type: "string"
+                example: "New access token has been obtained"
+              data:
+                type: "object"
+                properties:
+                  Token:
+                    type: "string"
+                    example: "string"
+  /chatbot:
+    post:
+      tags:
+        - "Chatbot"
+      summary: "Send a message to the chatbot and get a responsen"
+      operationId: "chatbot"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Chatbot Input"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              text:
+                type: "string"
+
+      responses:
+        200:
+          description: "Successful response from the chatbot"
+
+definitions:
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+      status_code:
+        type: integer
+      message:
+        type: string
+      data:
+        type: object
+  PlaceWeatherResponse:
+    type: object
+    properties:
+      place:
+        $ref: '#/definitions/Place'
+      temperature:
+        type: number
+      wind_speed:
+        type: number
+      humidity:
+        type: number
+      condition:
+        type: string
+      recorded_at:
+        type: string
+  Place:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      longitude:
+        type: number
+      latitude:
+        type: number
+      map_image:
+        type: string
+  Address:
+    type: object
+    properties:
+      province:
+        type: string
+      city:
+        type: string
+      sub_district:
+        type: string
+      street_name:
+        type: string
+      zip_code:
+        type: string
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+      email:
+        type: string
+      fullname:
+        type: string
+      address:
+        $ref: '#/definitions/Address'
+      image:
+        type: string
+  Vote:
+    type: object
+    properties:
+      user_id:
+        type: string
+      place_id:
+        type: string
+  Comment:
+    type: object
+    properties:
+      comment_id:
+        type: string
+      user_id:
+        type: string
+      fullname:
+        type: string
+      body:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string

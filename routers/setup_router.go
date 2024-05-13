@@ -24,7 +24,7 @@ func SetupRouter(e *echo.Echo) {
 		comments := v1User.Group("/places")
 		user.CommentRouter(comments)
 
-		chatbot := v1User.Group("/ws/chatbot")
+		chatbot := v1User.Group("/chatbot")
 		user.ChatbotRouter(chatbot)
 	}
 
