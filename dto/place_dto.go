@@ -6,11 +6,12 @@ import (
 )
 
 type PlaceRequest struct {
-	Name        string  `json:"name" validate:"required,min=5"`
-	Description string  `json:"description" validate:"required"`
-	Longitude   float64 `json:"longitude" validate:"numeric"`
-	Latitude    float64 `json:"latitude" validate:"numeric"`
-	MapImage    *string `json:"map_image"`
+	Id          uuid.UUID `json:"id"`
+	Name        string    `json:"name" validate:"required,min=5"`
+	Description string    `json:"description" validate:"required"`
+	Longitude   float64   `json:"longitude" validate:"numeric"`
+	Latitude    float64   `json:"latitude" validate:"numeric"`
+	MapImage    *string   `json:"map_image"`
 }
 
 type PlaceResponse struct {

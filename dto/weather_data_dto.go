@@ -15,7 +15,6 @@ type WeatherDataRequest struct {
 }
 
 type WeatherDataResponse struct {
-	PlaceId     uuid.UUID    `json:"place_id"`
 	Place       PlaceRequest `json:"place"`
 	Temperature int          `json:"temperature"`
 	WindSpeed   float64      `json:"wind_speed"`
@@ -34,8 +33,8 @@ type WeatherDataPlace struct {
 
 func ToWeatherDataResponse(data *entities.WeatherData, place *entities.Place) *WeatherDataResponse {
 	return &WeatherDataResponse{
-		PlaceId: data.PlaceId,
 		Place: PlaceRequest{
+			Id:          place.Id,
 			Name:        place.Name,
 			Description: place.Description,
 			Longitude:   place.Longitude,
