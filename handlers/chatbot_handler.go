@@ -50,6 +50,7 @@ func (h *chatbotHandler) HandleWebSocket(c echo.Context) error {
 		}
 
 		chatHistory = append(chatHistory, dto.ChatHistory{PreviousMessages: string(msg)})
+
 		fmt.Println("msg:", string(msg))
 
 		recommendation, err := h.ChatbotUseCase.GetRecommendation(string(msg), chatHistory, allPlaces)
