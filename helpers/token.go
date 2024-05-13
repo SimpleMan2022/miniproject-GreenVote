@@ -3,6 +3,7 @@ package helpers
 import (
 	"errors"
 	"evoting/entities"
+	"fmt"
 	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
 	"github.com/spf13/viper"
@@ -114,6 +115,7 @@ func GenerateRefreshToken(user interface{}) (string, error) {
 
 func ParseJWT(tokenStr string) (*JWTClaims, error) {
 	accessTokenSecret := []byte(viper.GetString("ACCESS_TOKEN_SECRET"))
+	fmt.Println(accessTokenSecret)
 	token, err := jwt.ParseWithClaims(tokenStr, &JWTClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return accessTokenSecret, nil
 	})
