@@ -16,7 +16,7 @@ func StartScheduler() {
 		jakartaTime = time.UTC
 	}
 	s := gocron.NewScheduler(jakartaTime)
-	s.Every(1).Day().At("16:00").Do(updateAllPlaces)
+	s.Every(1).Day().At("16:02").Do(updateAllPlaces)
 	s.StartBlocking()
 }
 
