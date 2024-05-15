@@ -7,6 +7,7 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"log"
+	"time"
 )
 
 var DB *gorm.DB
@@ -21,6 +22,20 @@ func LoadDb() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	loc, err := time.LoadLocation("Asia/Jakarta")
+	if err != nil {
+		panic(err)
+	}
+
+	db.Callback().Create().Before("gorm:create").Register("update_time_stamp", func(db *gorm.DB) {
+		if _, ok := db.Statement.Schema.FieldsByName["CreatedAt"]; ok {
+			db.Statement.SetColumn("CreatedAt", time.Now().In(loc))
+		}
+		if _, ok := db.Statement.Schema.FieldsByName["UpdatedAt"]; ok {
+			db.Statement.SetColumn("UpdatedAt", time.Now().In(loc))
+		}
+	})
+
 	db.AutoMigrate(
 		mysql2.UserAddress{},
 		mysql2.User{},

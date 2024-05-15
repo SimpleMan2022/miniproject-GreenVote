@@ -26,11 +26,12 @@ func (uc *chatbotUsecase) GetRecommendation(query string, chatHistory []dto.Chat
 	messages = append(messages, dto.ChatHistory{PreviousMessages: query})
 
 	var prompt string
-	prompt = "You are assistant for give all information about the places. given the location data to be voted:"
+	prompt = "given the location data to be voted:"
 	for i, place := range *allPlaces {
 		prompt += fmt.Sprintf("%d. %s, description: %s, temperature: %d. ", i+1, place.Name, place.Description, place.Weather.Temperature)
 	}
 	prompt += fmt.Sprintf("question: %s", messages)
+	fmt.Println(prompt)
 
 	url := "https://wgpt-production.up.railway.app/v1/chat/completions"
 	payload := fmt.Sprintf(`{"model": "gpt-3.5-turbo", "messages": [{"role": "system", "content": "%s"}], "stream": false}`, prompt)
